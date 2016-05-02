@@ -2,6 +2,11 @@
     "name"       : "joomla-cms",
     "description": "The Joomla Content Management System",
     "license"    : "GPL-2.0+",
+    "config": {
+        "platform": {
+            "php": "5.5.33"
+        }
+    },
     "require"    : {
         "php": ">=5.3.10"
     },
