@@ -39,7 +39,7 @@
         "phpunit/dbunit": "~1.3",
         "squizlabs/php_codesniffer": "~1.5",
         "pear/cache_lite": "1.7.16",
-        "codeception/codeception": "2.2.0-RC2",
+        "codeception/codeception": "master@dev",
         "joomla-projects/joomla-browser": "v3.4.8.3",
         "joomla-projects/selenium-server-standalone": "v2.52.0",
         "codegyre/robo": "~0.6",
