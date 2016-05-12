@@ -23,7 +23,6 @@ tests/codeception/_output/*
 tests/codeception/vendor/*
 tests/codeception/testingsite*
 tests/codeception/tests/acceptance.suite.yml
-tests/codeception/tests/acceptance/*Tester.php
 tests/codeception/tests/functional/*Tester.php
 tests/codeception/tests/unit/*Tester.php
 
@@ -135,7 +134,6 @@ Desktop.ini
 
 # Test related files
 tests/acceptance.suite.yml
-tests/*/*Tester.php
 tests/_support/_generated/*TesterActions.php
 tests/joomla-cms3*
 tests/_output*
