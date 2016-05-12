@@ -1,37 +1,37 @@
-Feature: Content
-  In order to manage content articles in the web
+Feature: content
+  In order to manage content article in the web
   As an owner
-  I need to be able to create and modify content articles
+  I need to create modify delete and un public content article
 
   Background:
-    Given I am logged in at Joomla administrator as "admin" with password "admin"
-    And I open administrator dashboard page
+    Given There is an administrator link
+    When Login into Joomla administrator with username "admin" and password "admin"
+    Then I see administrator dashboard
 
-  Scenario: create featured content
-    Given there is a content article with title "My first Joomla Content"
-    When I feature the content with title "My first Joomla Content"
-    Then I should see the published article "My first Joomla Content" in the joomla home page
-
-  Scenario: Add New Article
+  Scenario: Feature an Article
     Given there is a content article with title "My first Joomla Article"
     When I feature the content with title "My first Joomla Article"
     Then I should see the published article "My first Joomla Article" in the joomla home page
 
-  Scenario: Edit Article
-    Given there is a list of  content article with title
-    And I select the content article for edit with title "My first Joomla Article"
-    When I feature the content with title "My first Joomla Article"
-    Then I should see the published article "My first Joomla Article" in the joomla home page
+    Scenario: Modify an article
+      Given I select the content article with title "My first Joomla Article"
+      And change the title "My Joomla Article"
+      When I try to post "My Joomla Article"
+      Then I should see the "Article successfully saved"
+      And published article "My Joomla Article" in the joomla home page
 
-  Scenario: Unpublish  Article
-    Given there is a list of  content article with title
-    And I select the content article for unpublish  with title "My first Joomla Article"
-    When I unpublished the content with title "My first Joomla Article"
-    Then I should not see the unpublished article "My first Joomla Article" in the joomla home page
+  Scenario: Unpublish an article
+      Given I have article with name "My Joomla Article"
+      When I un publish "My Joomla Article"
+      Then I can not see the article"My Joomla Article" in the joomla home page
 
-  Scenario: publish  Article
-    Given there is a list of  content article with title
-    And I select the content article which is unpublish  with title "My first Joomla Article"
-    When I published the content with title "My first Joomla Article"
-    Then I should see the published article "My first Joomla Article" in the joomla home page
+  Scenario: Remove an article
+      Given I have one content article which needs to be removed
+      When  I delete the article with name "My Joomla Article"
+      Then I should not see in joomla site frontend
 
+  Scenario: Registered user can not see or access article from site
+      Given I have article with title "My Joomla Article"
+      And  set access to registered
+      When I do login with registered user "prital" and password "patel"
+      Then I should see the registered article in the joomla home page
