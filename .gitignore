@@ -16,8 +16,8 @@
 
 # Test Related Files #
 /phpunit.xml
-/tests/system/webdriver/tests/logs/
-/tests/system/servers/configdef.php
+/tests-phpunit/system/webdriver/tests/logs/
+/tests-phpunit/system/servers/configdef.php
 codecept.phar
 tests/codeception/_output/*
 tests/codeception/vendor/*
@@ -52,8 +52,8 @@ Desktop.ini
 # Only apply this rule to the main repository's gitignore files
 !/.gitignore
 !/build/.gitignore
-!/tests/unit/suites/libraries/joomla/archive/.gitignore
-!/tests/unit/tmp/.gitignore
+!/tests-phpunit/unit/suites/libraries/joomla/archive/.gitignore
+!/tests-phpunit/unit/tmp/.gitignore
 
 # Extra files installed by Composer not needed in the CMS environment
 # This should only ignore files like unit testing or READMEs, production
@@ -128,3 +128,22 @@ Desktop.ini
 /libraries/vendor/symfony/yaml/composer.json
 /libraries/vendor/symfony/yaml/phpunit.xml.dist
 /libraries/vendor/symfony/yaml/README.md
+/libraries/vendor/codegyre
+/libraries/vendor/codeception
+/libraries/vendor/greencape
+/libraries/vendor/joomla-projects
+
+# Test related files
+tests/acceptance.suite.yml
+tests/*/*Tester.php
+tests/_support/_generated/*TesterActions.php
+tests/joomla-cms3*
+tests/_output*
+selenium-server-standalone.jar
+selenium.log
+tests/cache
+
+# Build related
+RoboFile.ini
+
+tests/_output/*
