@@ -4,7 +4,7 @@ Feature: content
   I need to create modify delete and Unpublish content article
 
   Background:
-    Given There is an administrator link
+    Given Joomla CMS is installed
     When Login into Joomla administrator with username "admin" and password "admin"
     Then I see administrator dashboard
 
