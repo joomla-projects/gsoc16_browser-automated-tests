@@ -1,7 +1,7 @@
 Feature: content
   In order to manage content article in the web
   As an owner
-  I need to create modify delete and Unpublish content article
+  I need to create modify trash publish and Unpublish content article
 
   Background:
     Given Joomla CMS is installed
@@ -13,32 +13,26 @@ Feature: content
     When I add the content with title "My_Article"
     And I add content body "This is my first article"
     And I save an article
-    Then I should see the article "My_Article" in the joomla frontend
+    Then I should see the "Article successfully saved." message
 
   Scenario: Feature an Article
-    Given there is a content article with title "My_Article"
+    Given I search and select content article with title "My_Article"
     When I feature the content with title "My_Article"
-    Then I should see the published article "My_Article" in the joomla home page
+    Then I save and see the "1 article featured." message
 
   Scenario: Modify an article
-    Given I select the content article with title "My first Joomla Article"
-    And change the title "My Joomla Article"
-    When I try to post "My Joomla Article"
-    Then I should see the "Article successfully saved"
-    And published article "My Joomla Article" in the joomla home page
+    Given I select the content article with title "My_Article"
+    And I set access level as a register
+    When I save the article "My_Article"
+    Then I should see the "Article successfully saved" message
 
   Scenario: Unpublish an article
-    Given I have article with name "My Joomla Article"
-    When I un publish "My Joomla Article"
-    Then I can not see the article "My Joomla Article" in the joomla home page
+    Given I have article with name "My_Article"
+    When I unpublish "My_Article"
+    Then I see article unpublish message "1 article unpublished."
 
-  Scenario: Remove an article
-    Given I have one content article which needs to be removed
-    When  I delete the article with name "My Joomla Article"
-    Then I should not see in joomla site frontend
+  Scenario: Trash an article
+    Given I have "My_Article" content article which needs to be Trash
+    When  I Trash the article with name "My_Article"
+    Then  I see article trash message "1 article trashed."
 
-  Scenario: Registered user can not see or access article from site
-    Given I have article with title "My Joomla Article"
-    And  set access to registered
-    When I do login with registered user "prital" and password "patel"
-    Then I should see the registered article in the joomla home page
