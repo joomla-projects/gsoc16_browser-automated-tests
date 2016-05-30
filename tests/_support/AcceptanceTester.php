@@ -33,13 +33,10 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @When Login into Joomla administrator with username :arg1 and password :arg1
 	 */
-	public function loginIntoJoomlaAdministratorWithUsernameAndPassword($username, $password)
+	public function loginIntoJoomlaAdministrator($username, $password)
 	{
 		$I = $this;
-		$I->amOnPage('administrator/');
-		$I->fillField('Username', $username);
-		$I->fillField('passwd', $password);
-		$I->click('Log in');
+		$I->doAdministratorLogin($username, $password);
 	}
 
 	/**
@@ -48,7 +45,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iSeeAdministratorDashboard()
 	{
 		$I = $this;
-		$I->see('Control Panel', 'h1');
+		$I->waitForPageTitle('Control Panel', 4);
 	}
 
 	/**
@@ -95,7 +92,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iShouldSeeTheMessage($arg1)
 	{
 		$I = $this;
-		$I->waitForText('Articles', 60, ['css' => '.page-title']);
+		$I->waitForPageTitle('Articles');
 		$I->see('Article successfully saved.', ['id' => 'system-message-container']);
 	}
 
@@ -117,7 +114,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iFeatureTheContentWithTitle($title)
 	{
 		$I = $this;
-		$I->click(['xpath' => "//div[@id='toolbar-featured']/button"]);
+		$I->clickToolbarButton('featured');
 	}
 
 	/**
@@ -126,7 +123,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iSaveAndSeeTheMessage($arg1)
 	{
 		$I = $this;
-		$I->waitForText('Articles', 60, ['css' => '.page-title']);
+		$I->waitForPageTitle('Articles');
 		$I->see('1 article featured.', ['id' => 'system-message-container']);
 	}
 
@@ -180,7 +177,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iUnpublish($title)
 	{
 		$I = $this;
-		$I->click(['xpath' => "//div[@id='toolbar-unpublish']/button"]);
+		$I->clickToolbarButton('unpublish');
 
 	}
 	/**
@@ -189,7 +186,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iSeeArticleUnpublishMessage($arg1)
 	{
 		$I = $this;
-		$I->waitForText('Articles', 60, ['css' => '.page-title']);
+		$I->waitForPageTitle('Articles');
 		$I->see('1 article unpublished.', ['id' => 'system-message-container']);
 	}
 
@@ -212,7 +209,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iTrashTheArticleWithName($title)
 	{
 		$I = $this;
-		$I->click(['xpath' => "//div[@id='toolbar-trash']/button"]);
+		$I->clickToolbarButton('trash');
 	}
 	/**
 	 * @Then I see article trash message :arg1
@@ -220,8 +217,202 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iSeeArticleTrashMessage($arg1)
 	{
 		$I = $this;
-		$I->waitForText('Articles', 60, ['css' => '.page-title']);
+		$I->waitForPageTitle('Articles');
 		$I->see('1 article trashed.', ['id' => 'system-message-container']);
 	}
+	/**
+	 * @Given There is a add user link
+	 */
+	public function thereIsAAddUserLink()
+	{
+		$I =$this;
+		$I->amOnPage('administrator/index.php?option=com_users&view=users');
+		$I->clickToolbarButton('New');
+	}
 
+	/**
+	 * @When I enter the Name :arg1
+	 */
+	public function iEnterTheName($name)
+	{
+		$I =$this;
+		$I->fillField('#jform_name', $name);
+	}
+
+	/**
+	 * @When I enter the Login Name :arg1
+	 */
+	public function iEnterTheLoginName($username)
+	{
+		$I = $this;
+		$I->fillField('#jform_username', $username);
+	}
+
+	/**
+	 * @When I enter the Password :arg1
+	 */
+	public function iEnterThePassword($password)
+	{
+		$I = $this;
+		$I->fillField('#jform_password', $password);
+	}
+
+	/**
+	 * @When I enter the Confirm Password :arg1
+	 */
+	public function iEnterTheConfirmPassword($Confirm_Password)
+	{
+		$I = $this;
+		$I->fillField('#jform_password2', $Confirm_Password);
+	}
+
+	/**
+	 * @When I enter the Email :arg1
+	 */
+	public function iEnterTheEmail($email)
+	{
+		$I = $this;
+		$I->fillField('#jform_email', $email);
+	}
+
+	/**
+	 * @Then I Save the  user
+	 */
+	public function iSaveTheUser()
+	{
+		$I = $this;
+		$I->clickToolbarButton('Save & Close');
+	}
+
+	/**
+	 * @Then I see the :arg1 message
+	 */
+	public function iSeeTheMessage($arg1)
+	{
+		$I = $this;
+		$I->waitForPageTitle('Users');
+		$I->see('User successfully saved.', ['id' => 'system-message-container']);
+	}
+
+	/**
+	 * @Given I search and select the user with user name :arg1
+	 */
+	public function iSearchAndSelectTheUserWithUserName($username)
+	{
+		$I = $this;
+		$I->amOnPage('administrator/index.php?option=com_users&view=users');
+		$I->fillField('#filter_search', $username);
+		$I->click('.icon-search');
+		$I->checkAllResults();
+		$I->clickToolbarButton('edit');
+	}
+
+	/**
+	 *  @When I set name as an :arg1 and User Group as :arg1
+	 */
+	public function iAssignedNameAndUserGroup($name, $username)
+	{
+		$I = $this;
+		$I->fillField('#jform_name',$name);
+		$I->click('Assigned User Groups');
+		$I->checkOption('#1group_4');
+	}
+	/**
+	 * @Then I should display the :arg1 message
+	 */
+	public function iShouldDisplayTheMessage($arg1)
+	{
+		$I = $this;
+		$I->clickToolbarButton('Save & Close');
+		$I->waitForPageTitle('Users');
+		$I->see('User successfully saved.', ['id' => 'system-message-container']);
+	}
+
+	/**
+	 * @Given I have a user with user name :arg1
+	 */
+	public function iHaveAUserWithUserName($username)
+	{
+		$I = $this;
+		$I->amOnPage('administrator/index.php?option=com_users&view=users');
+		$I->fillField('#filter_search', $username);
+		$I->click('.icon-search');
+		$I->checkAllResults();
+	}
+
+	/**
+	 * @When I block user name :arg1
+	 */
+	public function iBlockUserName($arg1)
+	{
+		$I = $this;
+		$I->clickToolbarButton('unpublish');
+	}
+
+	/**
+	 * @Then I should see the user block message :arg1
+	 */
+	public function iShouldSeeTheUserBlockMessage($arg1)
+	{
+		$I = $this;
+		$I->waitForPageTitle('Users');
+		$I->see('User blocked.', ['id' => 'system-message-container']);
+	}
+
+	/**
+	 * @Given I have a blocked user with user name :arg1
+	 */
+	public function iHaveABlockedUserWithUserName($username)
+	{
+		$I = $this;
+		$I->amOnPage('administrator/index.php?option=com_users&view=users');
+		$I->fillField('#filter_search', $username);
+		$I->click('.icon-search');
+		$I->checkAllResults();
+	}
+
+	/**
+	 * @When I unblock the user :arg1
+	 */
+	public function iUnblockTheUser($arg1)
+	{
+		$I = $this;
+		$I->waitForPageTitle('Users');
+		$I->clickToolbarButton('unblock');
+	}
+
+	/**
+	 * @Then I should see the user unblock message :arg1
+	 */
+	public function iShouldSeeTheUserUnblockMessage($arg1)
+	{
+		$I = $this;
+		$I->waitForPageTitle('Users');
+		$I->see('User enabled.', ['css' => '.alert-message']);
+	}
+
+	/**
+	 * @When I Delete the user :arg1
+	 */
+	public function iDeleteTheUser($username)
+	{
+		$I = $this;
+		$I->amOnPage('administrator/index.php?option=com_users&view=users');
+		$I->fillField('#filter_search', $username);
+		$I->click('.icon-search');
+		$I->checkAllResults();
+		$I->clickToolbarButton('empty trash');
+		$I->acceptPopup();
+	}
+
+	/**
+	 * @Then I conform the user :arg1 delete sucessfully
+	 */
+	public function iConformTheUserDeleteSucessfully($arg1)
+	{
+		$I = $this;
+		$I->checkForPhpNoticesOrWarnings();
+		$I->expectTo('see a success message and the user is deleted');
+		$I->see('User successfully deleted', ['id' => 'system-message-container']);
+	}
 }
