@@ -22,7 +22,7 @@ Feature: content
 
   Scenario: Modify an article
     Given I select the content article with title "My_Article"
-    And I set access level as a register
+    And I set access level as a "register"
     When I save the article "My_Article"
     Then I should see the "Article successfully saved" message
 

@@ -64,7 +64,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iAddTheContentWithTitle($title)
 	{
 		$I = $this;
-		$I->fillField('#jform_title', $title);
+		$I->fillField(['id' => 'jform_title'], $title);
 	}
 
 	/**
@@ -74,7 +74,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->click('Toggle editor');
-		$I->fillField('#jform_articletext', $body);
+		$I->fillField(['id' => 'jform_articletext'], $body);
 	}
 
 	/**
@@ -103,7 +103,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_content&view=articles');
-		$I->fillField('#filter_search', $title);
+		$I->fillField(['id' => 'filter_search'], $title);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 	}
@@ -134,20 +134,19 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_content&view=articles');
-		$I->fillField('#filter_search', $title);
+		$I->fillField(['id' => 'filter_search'], $title);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 		$I->click(['xpath' => "//div[@id='toolbar-edit']/button"]);
 	}
 
 	/**
-	 * @Given I set access level as a register
+	 * @Given I set access level as a :arg1
 	 */
-	public function iSetAccessLevelAsARegister()
+	public function iSetAccessLevelAsA($accessLevel)
 	{
 		$I = $this;
-		$I->selectOptionInChosenById('jform_access', 'Registered');
-
+		$I->selectOptionInChosenById(['id' => 'jform_access'], $accessLevel);
 	}
 
 	/**
@@ -166,7 +165,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_content&view=articles');
-		$I->fillField('#filter_search', $title);
+		$I->fillField(['id' => 'filter_search'], $title);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 	}
@@ -178,7 +177,6 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->clickToolbarButton('unpublish');
-
 	}
 	/**
 	 * @Then I see article unpublish message :arg1
@@ -198,7 +196,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_content&view=articles');
-		$I->fillField('#filter_search', $title);
+		$I->fillField(['id' => 'filter_search'], $title);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 	}
@@ -211,6 +209,7 @@ class AcceptanceTester extends \Codeception\Actor
 		$I = $this;
 		$I->clickToolbarButton('trash');
 	}
+
 	/**
 	 * @Then I see article trash message :arg1
 	 */
@@ -220,12 +219,13 @@ class AcceptanceTester extends \Codeception\Actor
 		$I->waitForPageTitle('Articles');
 		$I->see('1 article trashed.', ['id' => 'system-message-container']);
 	}
+
 	/**
 	 * @Given There is a add user link
 	 */
 	public function thereIsAAddUserLink()
 	{
-		$I =$this;
+		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_users&view=users');
 		$I->clickToolbarButton('New');
 	}
@@ -236,7 +236,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iEnterTheName($name)
 	{
 		$I =$this;
-		$I->fillField('#jform_name', $name);
+		$I->fillField(['id' => 'jform_name'], $name);
 	}
 
 	/**
@@ -245,7 +245,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iEnterTheLoginName($username)
 	{
 		$I = $this;
-		$I->fillField('#jform_username', $username);
+		$I->fillField(['id' => 'jform_username'], $username);
 	}
 
 	/**
@@ -254,7 +254,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iEnterThePassword($password)
 	{
 		$I = $this;
-		$I->fillField('#jform_password', $password);
+		$I->fillField(['id' => 'jform_password'], $password);
 	}
 
 	/**
@@ -263,7 +263,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iEnterTheConfirmPassword($Confirm_Password)
 	{
 		$I = $this;
-		$I->fillField('#jform_password2', $Confirm_Password);
+		$I->fillField(['id' => 'jform_password2'], $Confirm_Password);
 	}
 
 	/**
@@ -272,7 +272,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iEnterTheEmail($email)
 	{
 		$I = $this;
-		$I->fillField('#jform_email', $email);
+		$I->fillField(['id' => 'jform_email'], $email);
 	}
 
 	/**
@@ -301,7 +301,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_users&view=users');
-		$I->fillField('#filter_search', $username);
+		$I->fillField(['id' => 'filter_search'], $username);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 		$I->clickToolbarButton('edit');
@@ -313,9 +313,9 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iAssignedNameAndUserGroup($name, $username)
 	{
 		$I = $this;
-		$I->fillField('#jform_name',$name);
+		$I->fillField(['id' => 'jform_name'], $name);
 		$I->click('Assigned User Groups');
-		$I->checkOption('#1group_4');
+		$I->checkOption('1group_4');
 	}
 	/**
 	 * @Then I should display the :arg1 message
@@ -335,7 +335,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_users&view=users');
-		$I->fillField('#filter_search', $username);
+		$I->fillField(['id' => 'filter_search'], $username);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 	}
@@ -366,7 +366,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_users&view=users');
-		$I->fillField('#filter_search', $username);
+		$I->fillField(['id' => 'filter_search'], $username);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 	}
@@ -388,7 +388,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->see('User enabled.', ['css' => '.alert-message']);
+		$I->see('User enabled.', ['class' => '.alert-message']);
 	}
 
 	/**
@@ -398,7 +398,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->amOnPage('administrator/index.php?option=com_users&view=users');
-		$I->fillField('#filter_search', $username);
+		$I->fillField(['id' => 'filter_search'], $username);
 		$I->click('.icon-search');
 		$I->checkAllResults();
 		$I->clickToolbarButton('empty trash');
