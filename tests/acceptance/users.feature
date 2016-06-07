@@ -16,18 +16,18 @@ Feature: users
     And I enter the Confirm Password "register"
     And I enter the Email "bladhapiyu@gmail.com"
     Then I Save the  user
-    And I see the "User successfully saved" message
+    And I see the "User successfully saved." message
 
   Scenario: Edit user
     Given I search and select the user with user name "register"
     When I set name as an "Editor" and User Group as "Editor"
     Then I Save the  user
-    And I see the "User successfully saved" message
+    And I see the "User successfully saved." message
 
   Scenario: Block a User
     Given I have a user with user name "register"
-    When I block user name "register"
-    Then I should see the user block message "User blocked"
+    When I block the user
+    Then I should see the user block message "User blocked."
 
   Scenario: Unblock user
     Given I have a blocked user with user name "register"

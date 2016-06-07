@@ -23,16 +23,16 @@ Feature: content
   Scenario: Modify an article
     Given I select the content article with title "My_Article"
     And I set access level as a "Registered"
-    When I save the article "My_Article"
+    When I save the article
     Then I should see the "Article successfully saved" message
 
   Scenario: Unpublish an article
     Given I have article with name "My_Article"
-    When I unpublish "My_Article"
+    When I unpublish the article
     Then I see article unpublish message "1 article unpublished."
 
   Scenario: Trash an article
     Given I have "My_Article" content article which needs to be Trash
-    When  I Trash the article with name "My_Article"
+    When  I Trash the article
     Then  I see article trash message "1 article trashed."
 

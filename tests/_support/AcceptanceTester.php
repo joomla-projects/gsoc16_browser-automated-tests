@@ -89,11 +89,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I should see the :arg1 message
 	 */
-	public function iShouldSeeTheMessage($arg1)
+	public function iShouldSeeTheMessage($mesage)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see('Article successfully saved.', ['id' => 'system-message-container']);
+		$I->see($mesage, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -120,11 +120,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I save and see the :arg1 message
 	 */
-	public function iSaveAndSeeTheMessage($arg1)
+	public function iSaveAndSeeTheMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see('1 article featured.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -150,9 +150,9 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I save the article :arg1
+	 * @When I save the article
 	 */
-	public function iSaveTheArticle($arg1)
+	public function iSaveTheArticle()
 	{
 		$I = $this;
 		$I->clickToolbarButton('Save & Close');
@@ -171,9 +171,9 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I unpublish :arg1
+	 * @When I unpublish the article
 	 */
-	public function iUnpublish($title)
+	public function iUnpublish()
 	{
 		$I = $this;
 		$I->clickToolbarButton('unpublish');
@@ -181,11 +181,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I see article unpublish message :arg1
 	 */
-	public function iSeeArticleUnpublishMessage($arg1)
+	public function iSeeArticleUnpublishMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see('1 article unpublished.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 
@@ -202,9 +202,9 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I Trash the article with name :arg1
+	 * @When I Trash the article
 	 */
-	public function iTrashTheArticleWithName($title)
+	public function iTrashTheArticleWithName()
 	{
 		$I = $this;
 		$I->clickToolbarButton('trash');
@@ -213,11 +213,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I see article trash message :arg1
 	 */
-	public function iSeeArticleTrashMessage($arg1)
+	public function iSeeArticleTrashMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see('1 article trashed.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -287,11 +287,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I see the :arg1 message
 	 */
-	public function iSeeTheMessage($arg1)
+	public function iSeeTheMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->see('User successfully saved.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -310,22 +310,24 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 *  @When I set name as an :arg1 and User Group as :arg1
 	 */
-	public function iAssignedNameAndUserGroup($name, $username)
+	public function iAssignedNameAndUserGroup($name, $userGroup)
 	{
 		$I = $this;
 		$I->fillField(['id' => 'jform_name'], $name);
 		$I->click('Assigned User Groups');
+
+		// @todo use $userGroup variable to select user group dynamically 
 		$I->checkOption('#1group_4');
 	}
 	/**
 	 * @Then I should display the :arg1 message
 	 */
-	public function iShouldDisplayTheMessage($arg1)
+	public function iShouldDisplayTheMessage($message)
 	{
 		$I = $this;
 		$I->clickToolbarButton('Save & Close');
 		$I->waitForPageTitle('Users');
-		$I->see('User successfully saved.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -341,9 +343,9 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I block user name :arg1
+	 * @When I block the user
 	 */
-	public function iBlockUserName($arg1)
+	public function iBlockTheUser()
 	{
 		$I = $this;
 		$I->clickToolbarButton('unpublish');
@@ -352,11 +354,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I should see the user block message :arg1
 	 */
-	public function iShouldSeeTheUserBlockMessage($arg1)
+	public function iShouldSeeTheUserBlockMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->see('User blocked.', ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
