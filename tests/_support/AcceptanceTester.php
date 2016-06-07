@@ -146,7 +146,7 @@ class AcceptanceTester extends \Codeception\Actor
 	public function iSetAccessLevelAsA($accessLevel)
 	{
 		$I = $this;
-		$I->selectOptionInChosenById(['id' => 'jform_access'], $accessLevel);
+		$I->selectOptionInChosenById('jform_access', $accessLevel);
 	}
 
 	/**
@@ -315,7 +315,7 @@ class AcceptanceTester extends \Codeception\Actor
 		$I = $this;
 		$I->fillField(['id' => 'jform_name'], $name);
 		$I->click('Assigned User Groups');
-		$I->checkOption('1group_4');
+		$I->checkOption('#1group_4');
 	}
 	/**
 	 * @Then I should display the :arg1 message
@@ -378,17 +378,17 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->clickToolbarButton('unblock');
+		$I->clickToolbarButton('Unblock');
 	}
 
 	/**
 	 * @Then I should see the user unblock message :arg1
 	 */
-	public function iShouldSeeTheUserUnblockMessage($arg1)
+	public function iShouldSeeTheUserUnblockMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->see('User enabled.', ['class' => '.alert-message']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -406,13 +406,13 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @Then I conform the user :arg1 delete sucessfully
+	 * @Then I conform the user delete sucessfully by getting message :arg1
 	 */
-	public function iConformTheUserDeleteSucessfully($arg1)
+	public function iConformTheUserDeleteSucessfully($message)
 	{
 		$I = $this;
 		$I->checkForPhpNoticesOrWarnings();
 		$I->expectTo('see a success message and the user is deleted');
-		$I->see('User successfully deleted', ['id' => 'system-message-container']);
+		$I->see($message, ['class' => 'alert-message']);
 	}
 }

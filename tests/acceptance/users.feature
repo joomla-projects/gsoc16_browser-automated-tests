@@ -32,12 +32,12 @@ Feature: users
   Scenario: Unblock user
     Given I have a blocked user with user name "register"
     When I unblock the user "register"
-    Then I should see the user unblock message "User enable"
+    Then I should see the user unblock message "User enabled."
 
   Scenario: Delete user
     Given I have a user with user name "Editor"
     When I Delete the user "Editor"
-    Then I conform the user "Editor" delete sucessfully
+    Then I conform the user delete sucessfully by getting message "1 user successfully deleted."
 
 
 
