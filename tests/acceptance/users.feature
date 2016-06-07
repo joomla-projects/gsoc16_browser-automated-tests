@@ -31,7 +31,7 @@ Feature: users
 
   Scenario: Unblock user
     Given I have a blocked user with user name "register"
-    When I unblock the user "register"
+    When I unblock the user
     Then I should see the user unblock message "User enabled."
 
   Scenario: Delete user

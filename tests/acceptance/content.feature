@@ -17,7 +17,7 @@ Feature: content
 
   Scenario: Feature an Article
     Given I search and select content article with title "My_Article"
-    When I feature the content with title "My_Article"
+    When I featured the article
     Then I save and see the "1 article featured." message
 
   Scenario: Modify an article

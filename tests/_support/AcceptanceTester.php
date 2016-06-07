@@ -109,12 +109,12 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I feature the content with title :arg1
+	 * @When I featured the article
 	 */
-	public function iFeatureTheContentWithTitle($title)
+	public function iFeatureTheContentWithTitle()
 	{
 		$I = $this;
-		$I->clickToolbarButton('featured');
+		$I->click(['xpath' => "//div[@id='toolbar-featured']//button"]);
 	}
 
 	/**
@@ -372,13 +372,13 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @When I unblock the user :arg1
+	 * @When I unblock the user
 	 */
-	public function iUnblockTheUser($arg1)
+	public function iUnblockTheUser()
 	{
 		$I = $this;
 		$I->waitForPageTitle('Users');
-		$I->clickToolbarButton('Unblock');
+		$I->click(['xpath' => "//div[@id='toolbar-unblock']//button"]);
 	}
 
 	/**
@@ -414,5 +414,19 @@ class AcceptanceTester extends \Codeception\Actor
 		$I->checkForPhpNoticesOrWarnings();
 		$I->expectTo('see a success message and the user is deleted');
 		$I->see($message, ['class' => 'alert-message']);
+	}
+
+	/**
+	 * Method is to set Wait for page title
+	 *
+	 * @param   string   $title    Page Title text
+	 * @param   integer  $waiting  Waiting time
+	 *
+	 * @return  void
+	 */
+	public function waitForPageTitle($title, $timeout = 60)
+	{
+		$I = $this;
+		$I->waitForText($title, $timeout, ['class' => 'page-title']);
 	}
 }
