@@ -37,7 +37,7 @@ Feature: users
   Scenario: Delete user
     Given I have a user with user name "Editor"
     When I Delete the user "Editor"
-    Then I conform the user delete sucessfully by getting message "1 user successfully deleted."
+    Then I confirm the user should have been deleted by getting the message "1 user successfully deleted."
 
 
 
