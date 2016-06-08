@@ -89,11 +89,11 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * @Then I should see the :arg1 message
 	 */
-	public function iShouldSeeTheMessage($mesage)
+	public function iShouldSeeTheMessage($message)
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see($mesage, ['id' => 'system-message-container']);
+		$I->see($message, ['id' => 'system-message-container']);
 	}
 
 	/**
@@ -422,7 +422,7 @@ class AcceptanceTester extends \Codeception\Actor
 	 * Method is to set Wait for page title
 	 *
 	 * @param   string   $title    Page Title text
-	 * @param   integer  $waiting  Waiting time
+	 * @param   integer  $timeout  timeout time
 	 *
 	 * @return  void
 	 */
