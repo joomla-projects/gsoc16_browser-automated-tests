@@ -1,16 +1,16 @@
 <?php
-namespace Step\Administrator;
+namespace Step\Acceptance\Administrator;
 
-class LoginSteps
+class LoginSteps extends \AcceptanceTester
 {
 
-	private $usernameFieldId = "['id' => 'mod-login-username']";
+	private $usernameFieldId = ['id' => 'mod-login-username'];
 
-	private $passwordFieldId = "['id' => 'mod-login-password']";
+	private $passwordFieldId = ['id' => 'mod-login-password'];
 
-	private $pageTitleClass = "['class' => 'page-title']";
+	private $pageTitleClass = ['class' => 'page-title'];
 
-	private $loginButtonPath = '[\'xpath\' => "//button[contains(normalize-space(), \'Log in\')]"]';
+	private $loginButtonPath = ['xpath' => "//button[contains(normalize-space(), 'Log in')]"];
 
 	private $loginPageURL = "/administrator/index.php";
 

@@ -1,7 +1,7 @@
 <?php
-namespace Step\Administrator;
+namespace Step\Acceptance\Administrator;
 
-class ContentSteps
+class ContentSteps extends \AcceptanceTester
 {
 	/**
 	 * @Given There is a Add Content link
@@ -27,18 +27,15 @@ class ContentSteps
 			}
 			else
 			{
-				foreach ($row as $field => $value)
+				if ($row[0] == "title")
 				{
-					if ($field == "title")
-					{
-						$I->fillField(['id' => 'jform_title'], $value);
-					}
+					$I->fillField(['id' => 'jform_title'], $row[1]);
+				}
 
-					if ($field == "content")
-					{
-						$I->click('Toggle editor');
-						$I->fillField(['id' => 'jform_articletext'], $value);
-					}
+				if ($row[0] == "content")
+				{
+					$I->click('Toggle editor');
+					$I->fillField(['id' => 'jform_articletext'], $row[1]);
 				}
 			}
 		}

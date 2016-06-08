@@ -1,15 +1,16 @@
 <?php
-namespace Step\Administrator;
+namespace Step\Acceptance\Administrator;
 
-class JoomlaSteps
+class JoomlaSteps extends \AcceptanceTester
 {
+
+	private $systemMessageContainerId = ['id' => 'system-message-container'];
+
+	private $pageTitleClass = ['class' => 'page-title'];
+
 	/**
 	 * @Then I should see the :arg1 message
 	 */
-	private $systemMessageContainerId = "['id' => 'system-message-container']";
-
-	private $pageTitleClass = "['class' => 'page-title']";
-
 	public function iShouldSeeTheMessage($message)
 	{
 		$I = $this;
@@ -49,5 +50,4 @@ class JoomlaSteps
 		$I = $this;
 		$I->waitForText($title, $timeout, $this->pageTitleClass);
 	}
-
 }
