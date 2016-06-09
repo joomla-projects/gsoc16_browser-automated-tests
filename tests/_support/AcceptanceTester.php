@@ -408,9 +408,9 @@ class AcceptanceTester extends \Codeception\Actor
 	}
 
 	/**
-	 * @Then I conform the user delete sucessfully by getting message :arg1
+	 * @Then I confirm the user should have been deleted by getting the message :arg1
 	 */
-	public function iConformTheUserDeleteSucessfully($message)
+	public function iConfirmTheUserDeleteSucessfully($message)
 	{
 		$I = $this;
 		$I->checkForPhpNoticesOrWarnings();
