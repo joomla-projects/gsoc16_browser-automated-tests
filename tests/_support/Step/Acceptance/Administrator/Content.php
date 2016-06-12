@@ -14,22 +14,31 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @When I add the content with title :arg1
+	 * @When I fill mandatory fields for creating article
 	 */
-	public function iAddTheContentWithTitle($title)
+	public function iFillMandatoryFieldsForCreatingArticle(\Behat\Gherkin\Node\TableNode $fields)
 	{
-		$I = $this;
-		$I->fillField(['id' => 'jform_title'], $title);
-	}
 
-	/**
-	 * @When I add content body :arg1
-	 */
-	public function iAddContentBody($body)
-	{
 		$I = $this;
-		$I->click('Toggle editor');
-		$I->fillField(['id' => 'jform_articletext'], $body);
+		// iterate over all rows
+		foreach ($fields->getRows() as $index => $row) {
+			if ($index === 0) { // first row to define fields
+				$keys = $row;
+				continue;
+			}
+			else
+			{
+				if ($row[0] == "title")
+				{
+					$I->fillField(['id' => 'jform_title'], $row[1]);
+				}
+				if ($row[0] == "content")
+				{
+					$I->click('Toggle editor');
+					$I->fillField(['id' => 'jform_articletext'], $row[1]);
+				}
+			}
+		}
 	}
 
 	/**

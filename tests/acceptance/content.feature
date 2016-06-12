@@ -10,8 +10,10 @@ Feature: content
 
   Scenario: Create an Article
     Given There is a Add Content link
-    When I add the content with title "My_Article"
-    And I add content body "This is my first article"
+    When I fill mandatory fields for creating article
+      | field   | value                    |
+      | title   | My_Article               |
+      | content | This is my First Article |
     And I save an article
     Then I should see the "Article successfully saved." message
 

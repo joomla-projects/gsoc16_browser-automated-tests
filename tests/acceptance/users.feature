@@ -10,11 +10,13 @@ Feature: users
 
   Scenario: create a user
     Given There is a add user link
-    When I enter the Name "register"
-    And I enter the Login Name "register"
-    And I enter the Password "register"
-    And I enter the Confirm Password "register"
-    And I enter the Email "bladhapiyu@gmail.com"
+    When I fill mandatory fields for creating User
+      | field             | value                    |
+      | Name              | register                 |
+      | Login Name        | register                 |
+      | Password          | register                 |
+      | Confirm Password  | register                 |
+      | Email             | baldhapiyu@gmail.com     |
     Then I Save the  user
     And I see the "User successfully saved." message
 
@@ -38,10 +40,3 @@ Feature: users
     Given I have a user with user name "Editor"
     When I Delete the user "Editor"
     Then I confirm the user should have been deleted by getting the message "1 user successfully deleted."
-
-
-
-
-
-
-

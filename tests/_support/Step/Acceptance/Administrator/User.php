@@ -14,48 +14,43 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @When I enter the Name :arg1
+	 * @When I fill mandatory fields for creating User
 	 */
-	public function iEnterTheName($name)
-	{
-		$I =$this;
-		$I->fillField(['id' => 'jform_name'], $name);
-	}
-
-	/**
-	 * @When I enter the Login Name :arg1
-	 */
-	public function iEnterTheLoginName($username)
+	public function iFillMandatoryFieldsForCreatingUser(\Behat\Gherkin\Node\TableNode $fields)
 	{
 		$I = $this;
-		$I->fillField(['id' => 'jform_username'], $username);
-	}
-
-	/**
-	 * @When I enter the Password :arg1
-	 */
-	public function iEnterThePassword($password)
-	{
-		$I = $this;
-		$I->fillField(['id' => 'jform_password'], $password);
-	}
-
-	/**
-	 * @When I enter the Confirm Password :arg1
-	 */
-	public function iEnterTheConfirmPassword($Confirm_Password)
-	{
-		$I = $this;
-		$I->fillField(['id' => 'jform_password2'], $Confirm_Password);
-	}
-
-	/**
-	 * @When I enter the Email :arg1
-	 */
-	public function iEnterTheEmail($email)
-	{
-		$I = $this;
-		$I->fillField(['id' => 'jform_email'], $email);
+		// iterate over all rows
+		foreach ($fields->getRows() as $index => $row)
+		{
+			if ($index === 0)
+			{ // first row to define fields
+				$keys = $row;
+				continue;
+			}
+			else
+			{
+				if ($row[0] == "Name")
+				{
+					$I->fillField(['id' => 'jform_name'], $row[1]);
+				}
+				if ($row[0] == "Login Name")
+				{
+					$I->fillField(['id' => 'jform_username'], $row[1]);
+				}
+				if ($row[0] == "Password")
+				{
+					$I->fillField(['id' => 'jform_password'], $row[1]);
+				}
+				if ($row[0] == "Confirm Password")
+				{
+					$I->fillField(['id' => 'jform_password2'], $row[1]);
+				}
+				if ($row[0] == "Email")
+				{
+					$I->fillField(['id' => 'jform_email'], $row[1]);
+				}
+			}
+		}
 	}
 
 	/**
