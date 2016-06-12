@@ -1,4 +1,4 @@
-Feature: administrator login
+Feature: administrator
   In order to manage my web application
   As an administrator
   I need to have a control panel
