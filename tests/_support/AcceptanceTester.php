@@ -33,7 +33,7 @@ class AcceptanceTester extends \Codeception\Actor
 		$I = $this;
 		$I->waitForText($title, $timeout, ['class' => 'page-title']);
 	}
-	
+
 	/**
 	 * Function to check for PHP Notices or Warnings
 	 *
@@ -45,7 +45,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 
-		if($page)
+		if ($page)
 		{
 			$I->amOnPage($page);
 		}
