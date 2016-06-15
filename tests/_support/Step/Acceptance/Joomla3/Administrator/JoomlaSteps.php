@@ -1,13 +1,11 @@
 <?php
-namespace Step\Acceptance\Administrator;
+
+namespace Step\Acceptance\Joomla3\Administrator;
+
+use Page\Acceptance\Joomla3\Administrator\AdminPage;
 
 class JoomlaSteps extends \AcceptanceTester
 {
-
-	private $systemMessageContainerId = ['id' => 'system-message-container'];
-
-	private $pageTitleClass = ['class' => 'page-title'];
-
 	/**
 	 * @Then I should see the :arg1 message
 	 */
@@ -15,7 +13,7 @@ class JoomlaSteps extends \AcceptanceTester
 	{
 		$I = $this;
 		$I->waitForPageTitle('Articles');
-		$I->see($message, $this->systemMessageContainerId);
+		$I->see($message, AdminPage::$systemMessageContainer);
 
 	}
 
@@ -34,7 +32,7 @@ class JoomlaSteps extends \AcceptanceTester
 	public function iSeeAdministratorDashboard()
 	{
 		$I = $this;
-		$I->waitForText('Control Panel', 4, $this->pageTitleClass);
+		$I->waitForText(AdminPage::$controlPanelText, 4, AdminPage::$pageTitle);
 	}
 
 	/**
@@ -48,6 +46,6 @@ class JoomlaSteps extends \AcceptanceTester
 	private function waitForPageTitle($title, $timeout = 60)
 	{
 		$I = $this;
-		$I->waitForText($title, $timeout, $this->pageTitleClass);
+		$I->waitForText($title, $timeout, AdminPage::$pageTitle);
 	}
 }
