@@ -1,5 +1,7 @@
 <?php
+
 namespace Step\Acceptance\Administrator;
+use Page\Acceptance\Joomla3\Administrator\Login;
 
 class LoginSteps extends \AcceptanceTester
 {
