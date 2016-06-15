@@ -1,5 +1,8 @@
 <?php
-namespace Step\Acceptance\Administrator;
+
+namespace Step\Acceptance\Joomla3\Administrator;
+
+use Page\Acceptance\Joomla3\Administrator\ArticleManagerPage;
 
 class ContentSteps extends \AcceptanceTester
 {
@@ -9,7 +12,7 @@ class ContentSteps extends \AcceptanceTester
 	public function thereIsAAddContentLink()
 	{
 		$I = $this;
-		$I->amOnPage('administrator/index.php?option=com_content&view=articles');
+		$I->amOnPage(ArticleManagerPage::$pageURL);
 		$I->clickToolbarButton('New');
 	}
 
@@ -29,13 +32,13 @@ class ContentSteps extends \AcceptanceTester
 			{
 				if ($row[0] == "title")
 				{
-					$I->fillField(['id' => 'jform_title'], $row[1]);
+					$I->fillField(ArticleManagerPage::$articleTitleField, $row[1]);
 				}
 
 				if ($row[0] == "content")
 				{
-					$I->click('Toggle editor');
-					$I->fillField(['id' => 'jform_articletext'], $row[1]);
+					$I->click(ArticleManagerPage::$toggleEditor);
+					$I->fillField(ArticleManagerPage::$articleContentField, $row[1]);
 				}
 			}
 		}
