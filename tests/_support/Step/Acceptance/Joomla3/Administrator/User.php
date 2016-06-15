@@ -1,5 +1,5 @@
 <?php
-namespace Step\Acceptance\Administrator;
+namespace Step\Acceptance\Joomla3\Administrator;
 
 class User extends \AcceptanceTester
 {
