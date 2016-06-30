@@ -5,8 +5,8 @@ Feature: users
 
   Background:
     Given Joomla CMS is installed
-    When Login into Joomla administrator with username "admin" and password "admin"
-    Then I see administrator dashboard
+    When I Login into Joomla administrator with username "admin" and password "admin"
+    Then I should see the administrator dashboard
 
   Scenario: Verify available tabs in com_users
     Given There is an user link
