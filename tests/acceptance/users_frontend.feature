@@ -43,6 +43,4 @@ Feature: Users Frontend
   Scenario: Test last login date
     Given Needs to user "patel" logged in at least once
     When I login as a super admin from backend
-    And Go to user manager page in administrator
-    Then I search for "patel" username
-    And I should see his last login date
+    Then I should see last login date
