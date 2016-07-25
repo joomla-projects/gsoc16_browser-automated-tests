@@ -5,7 +5,7 @@ use Page\Acceptance\Administrator\AdminPage;
 
 class LoginPage extends AdminPage
 {
-    public static $pageURL = "/administrator/index.php";
+    public static $url = "/administrator/index.php";
 
     /**
      * @var   array  Locator for username login form textfield

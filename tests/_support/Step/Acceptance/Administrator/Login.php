@@ -12,7 +12,7 @@ class Login extends \AcceptanceTester
 	public function loginIntoJoomlaAdministrator($username, $password)
 	{
 		$I = $this;
-		$I->amOnPage('administrator/');
+		$I->amOnPage(LoginPage::$url);
 		$I->fillField(LoginPage::$usernameField, $username);
 		$I->fillField(LoginPage::$passwordField, $password);
 		$I->click(LoginPage::$loginButton);
