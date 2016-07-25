@@ -12,7 +12,7 @@ class Content extends \AcceptanceTester
 	public function thereIsAAddContentLink()
 	{
 		$I = $this;
-		$I->amOnPage(ArticleManagerPage::$pageURL);
+		$I->amOnPage(ArticleManagerPage::$url);
 		$I->clickToolbarButton('New');
 	}
 
@@ -37,12 +37,12 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I wait for the title :title and  see the message :message
+	 * @Then I should see the :arg1 message
 	 */
-	public function iShouldSeeTheMessage($title, $message)
+	public function iShouldSeeTheMessage($message)
 	{
 		$I = $this;
-		$I->waitForPageTitle($title);
+		$I->waitForText($message, TIMEOUT, AdminPage::$systemMessageContainer);
 		$I->see($message, AdminPage::$systemMessageContainer);
 	}
 
@@ -52,7 +52,7 @@ class Content extends \AcceptanceTester
 	public function iSearchAndSelectContentArticleWithTitle($title)
 	{
 		$I = $this;
-		$I->amOnPage(ArticleManagerPage::$pageURL);
+		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -68,22 +68,12 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I save and see the :arg1 message
-	 */
-	/*public function iSaveAndSeeTheMessage($message)
-	{
-		$I = $this;
-		$I->waitForPageTitle($message, AdminPage::$systemMessageContainer);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}*/
-
-	/**
 	 * @Given I select the content article with title :arg1
 	 */
 	public function iSelectTheContentArticleWithTitle($title)
 	{
 		$I = $this;
-		$I->amOnPage(ArticleManagerPage::$pageURL);
+		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -109,12 +99,12 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @Given I have article with name :arg1
+	 * @Given I have article with name :title
 	 */
 	public function iHaveArticleWithName($title)
 	{
 		$I = $this;
-		$I->amOnPage(ArticleManagerPage::$pageURL);
+		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -145,7 +135,7 @@ class Content extends \AcceptanceTester
 	public function iHaveContentArticleWhichNeedsToBeTrash($title)
 	{
 		$I = $this;
-		$I->amOnPage(ArticleManagerPage::$pageURL);
+		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
 		$I->checkAllResults();

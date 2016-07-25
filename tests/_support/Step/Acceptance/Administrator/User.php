@@ -15,7 +15,7 @@ class User extends \AcceptanceTester
 	public function thereIsAAddUserLink()
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 		$I->clickToolbarButton('New');
 	}
 
@@ -33,7 +33,7 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @When I Save the  user
+	 * @When I Save the user
 	 */
 	public function iSaveTheUser()
 	{
@@ -42,12 +42,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I should wait for the title :title and see the message :message
+	 * @Then I should see the :arg1 message
 	 */
-	public function iSeeTheMessage($title, $message)
+	public function iSeeTheMessage($message)
 	{
 		$I = $this;
-		$I->waitForPageTitle($title);
+		$I->waitForText($message, 60, AdminPage::$systemMessageContainer);
 		$I->see($message, AdminPage::$systemMessageContainer);
 	}
 
@@ -57,7 +57,7 @@ class User extends \AcceptanceTester
 	public function iSearchAndSelectTheUserWithUserName($username)
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $username);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -78,23 +78,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I should wait for :arg1 title and see the :arg2 message
-	 */
-	public function iShouldDisplayTheMessage($title, $message)
-	{
-		$I = $this;
-		$I->clickToolbarButton('Save & Close');
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given I have a user with user name :username
 	 */
 	public function iHaveAUserWithUserName($username)
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $username);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -110,22 +99,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I wait for the title :title and see the message :message
-	 */
-	public function iShouldSeeTheUserBlockMessage($title, $message)
-	{
-		$I = $this;
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given I have a blocked user with user name :username
 	 */
 	public function iHaveABlockedUserWithUserName($username)
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $username);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -137,19 +116,8 @@ class User extends \AcceptanceTester
 	public function iUnblockTheUser()
 	{
 		$I = $this;
-		$I->waitForPageTitle('Users');
 		$I->clickToolbarButton('unblock');
 	}
-
-	/**
-	 * @Then I should see the user unblock message :message
-	 */
-	/*public function iShouldSeeTheUserUnblockMessage($message)
-	{
-		$I = $this;
-		$I->waitForPageTitle($message, AdminPage::$systemMessageContainer);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}*/
 
 	/**
 	 * @When I Delete the user :username
@@ -157,7 +125,7 @@ class User extends \AcceptanceTester
 	public function iDeleteTheUser($username)
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $username);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -166,23 +134,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I confirm the user should have been deleted by getting the title :title and see the message :message
-	 */
-	public function iConfirmTheUserDeleteSucessfully($title, $message)
-	{
-		$I = $this;
-		$I->checkForPhpNoticesOrWarnings();
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given There is an user link
 	 */
 	public function thereIsAnUserLink()
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 	}
 
 	/**
@@ -226,7 +183,7 @@ class User extends \AcceptanceTester
 		$I->click('Assigned User Groups');
 		$I->checkOption('#1group_7');
 	}
-
+	
 	/**
 	 * @Then Login in backend with username :username and password :password
 	 */
@@ -276,7 +233,7 @@ class User extends \AcceptanceTester
 	public function thereIsAAddNewGroupLink()
 	{
 		$I = $this;
-		$I->amOnPage(UserGroupPage::$groupPageURL);
+		$I->amOnPage(UserGroupPage::$url);
 		$I->clickToolbarButton('New');
 	}
 
@@ -299,22 +256,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I should wait for :title title and see the message :message
-	 */
-	public function iShouldSeeTheMessage($title, $message)
-	{
-		$I = $this;
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given I search and select the Group with name :grouptitle
 	 */
 	public function iSearchAndSelectTheGroupWithName($GroupTitle)
 	{
 		$I = $this;
-		$I->amOnPage(UserGroupPage::$groupPageURL);
+		$I->amOnPage(UserGroupPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $GroupTitle);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -330,14 +277,13 @@ class User extends \AcceptanceTester
 		$I->fillField(UserManagerPage::$title, $GroupTitle);
 	}
 	
-
 	/**
 	 * @When I Delete the Group :arg1
 	 */
 	public function iDeleteTheGroup($GroupTitle)
 	{
 		$I = $this;
-		$I->amOnPage(UserGroupPage::$groupPageURL);
+		$I->amOnPage(UserGroupPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $GroupTitle);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -346,23 +292,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I confirm the group should have been deleted by getting the title :title and see the message :message
-	 */
-	public function iDeleteUserGroup($title, $message)
-	{
-		$I = $this;
-		$I->checkForPhpNoticesOrWarnings();
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given There is a add viewing access level link
 	 */
 	public function thereIsAAddViewingAccessLevelLink()
 	{
 		$I = $this;
-		$I->amOnPage(UserAclPage::$aclPageURL);
+		$I->amOnPage(UserAclPage::$url);
 		$I->clickToolbarButton('New');
 	}
 
@@ -386,22 +321,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I wait for the title :title see the message :message
-	 */
-	public function iShouldBeSeeTheMessage($title, $message)
-	{
-		$I = $this;
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * @Given I search and select the Access Level with name :leveltitle
 	 */
 	public function iSearchAndSelectTheAccessLevelWithName($LevelTitle)
 	{
 		$I = $this;
-		$I->amOnPage(UserAclPage::$aclPageURL);
+		$I->amOnPage(UserAclPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $LevelTitle);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -418,21 +343,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @When I save Access Level
-	 */
-	public function iSaveAccessLevel()
-	{
-		$I = $this;
-		$I->clickToolbarButton('Save & Close');
-	}
-
-	/**
 	 * @When I Delete the Access level :leveltitle
 	 */
 	public function iDeleteTheAccessLeVel($LevelTitle)
 	{
 		$I = $this;
-		$I->amOnPage(UserAclPage::$aclPageURL);
+		$I->amOnPage(UserAclPage::$url);
 		$I->fillField(UserManagerPage::$filterSearch, $LevelTitle);
 		$I->click(UserManagerPage::$iconSearch);
 		$I->checkAllResults();
@@ -441,22 +357,12 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I confirm the  Access Level have been deleted by getting the title :title and see the message :message
-	 */
-	public function iDeleteAccessLevel($title, $message)
-	{
-		$I = $this;
-		$I->checkForPhpNoticesOrWarnings();
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-	/**
 	 * @Given There is a User link
 	 */
 	public function thereIsAUserLink()
 	{
 		$I = $this;
-		$I->amOnPage(UserManagerPage::$pageURL);
+		$I->amOnPage(UserManagerPage::$url);
 	}
 
 	/**
@@ -496,6 +402,4 @@ class User extends \AcceptanceTester
 		$I = $this;
 		$I->click(['class' => 'brand visible-desktop visible-tablet']);
 	}
-
-
 }
