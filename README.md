@@ -141,7 +141,13 @@ $ tests/vendor/bin/robo run:tests
 $ tests/vendor/bin/robo run:test
 ```
 
-_If you want to see steps then you can use `--steps` option of codeception. Check [full codecept command list here](http://codeception.com/docs/reference/Commands#Run)_
+Or you can manually run them using codecept command. Check the following example:
+
+```bash
+$ tests/vendor/bin/codecept run tests/acceptance/users.feature
+```
+
+If you want to see steps then you can use `--steps` option of codeception. Check [full codecept command list here](http://codeception.com/docs/reference/Commands#Run)_
 
 **Note**:You can modify the timeout time by setting the value of **TIMEOUT** constant lower for fast machines and higher for slow computers. The constant located in the file `tests/acceptance/_bootstrap.php`
 
