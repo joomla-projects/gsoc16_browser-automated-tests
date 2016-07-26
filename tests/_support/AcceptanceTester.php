@@ -128,6 +128,9 @@ class AcceptanceTester extends \Codeception\Actor
 			case "archive":
 				$I->click(['xpath' => "//div[@id='toolbar-archive']//button"]);
 				break;
+			case "unarchive":
+				$I->click(['xpath' => "//div[@id='toolbar-unarchive']//button"]);
+				break;
 			case "check-in":
 				$I->click(['xpath' => "//div[@id='toolbar-checkin']//button"]);
 				break;
