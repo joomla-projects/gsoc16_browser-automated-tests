@@ -29,7 +29,7 @@ git submodule update --init --recursive
 sudo service apache2 restart
 
 # Xvfb
-sudo /etc/init.d/xvfb start
+sudo bash /etc/init.d/xvfb start
 sleep 1 # give xvfb some time to start
 
 # Fluxbox
