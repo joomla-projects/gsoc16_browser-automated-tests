@@ -7,9 +7,9 @@ BASE="$1"
 
 cd $BASE
 
-# New system test related changes
 sudo apt-get update -qq
-sudo apt-get install -y --force-yes apache2 libapache2-mod-fastcgi php5-curl php5-mysql php5-intl php5-gd > /dev/null
+sudo apt-get install -y --force-yes apache2 libapache2-mod-fastcgi php5-curl php5-mysql php5-intl php5-gd fluxbox > /dev/null
+
 sudo mkdir $BASE/.run
 
 sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
@@ -27,14 +27,12 @@ sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-availa
 git submodule update --init --recursive
 
 sudo service apache2 restart
-sudo service apache2 status
 
 # Xvfb
 sh -e /etc/init.d/xvfb start
 sleep 1 # give xvfb some time to start
 
 # Fluxbox
-sudo apt-get install -y --force-yes fluxbox > /dev/null
 fluxbox &
 sleep 3 # give fluxbox some time to start
 
