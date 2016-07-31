@@ -5,6 +5,8 @@ set -e
 
 BASE="$1"
 
+cd $BASE
+
 # New system test related changes
 sudo apt-get update -qq
 sudo apt-get install -y --force-yes apache2 libapache2-mod-fastcgi php5-curl php5-mysql php5-intl php5-gd > /dev/null
