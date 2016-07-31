@@ -30,6 +30,7 @@ matrix:
       dist: trusty
       group: edge # until the next update
       addons:
+        firefox: "47.0.1"
         apt:
           packages:
             - mysql-server-5.6
