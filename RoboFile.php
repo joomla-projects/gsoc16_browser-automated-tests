@@ -149,8 +149,7 @@ class RoboFile extends \Robo\Tasks
 			$this->_exec('sed -e "s,# RewriteBase /,RewriteBase /tests/joomla-cms3/,g" -in-place tests/joomla-cms3/.htaccess');
 		}
 
-		$check = $this->_exec('curl -I http://localhost/tests/joomla-cms3');
-		$this->say('Curl: ' . $check);
+		$this->taskExec('curl -I http://localhost/tests/joomla-cms3')->printed(true);
 	}
 
 	/**
