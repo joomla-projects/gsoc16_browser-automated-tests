@@ -23,7 +23,7 @@ sudo sed -e "s,group = nobody,;group = $USER,g" --in-place ~/.phpenv/versions/$(
 sudo a2enmod rewrite actions fastcgi alias
 echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 sudo cp -f tests/travis-ci-apache.conf /etc/apache2/sites-available/default
-sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
+sudo sed -e "s?%TRAVIS_BUILD_DIR%?$BASE?g" --in-place /etc/apache2/sites-available/default
 git submodule update --init --recursive
 
 sudo service apache2 restart
@@ -43,6 +43,3 @@ cd $BASE
 
 sudo cp RoboFile.dist.ini RoboFile.ini
 sudo cp tests/acceptance.suite.dist.yml tests/acceptance.suite.yml
-
-ls
-ls tests/
