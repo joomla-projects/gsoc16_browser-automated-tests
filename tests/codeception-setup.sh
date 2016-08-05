@@ -43,5 +43,3 @@ cd $BASE
 
 sudo cp RoboFile.dist.ini RoboFile.ini
 sudo cp tests/acceptance.suite.dist.yml tests/acceptance.suite.yml
-
-ls -al

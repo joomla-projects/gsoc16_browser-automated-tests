@@ -150,6 +150,8 @@ class RoboFile extends \Robo\Tasks
 		}
 
 		$this->taskExec('curl http://localhost/tests/joomla-cms3/')->printed(true)->run();
+		$this->taskExec('ls -al tests/joomla-cms3')->printed(true)->run();
+
 	}
 
 	/**
