@@ -1,8 +1,22 @@
 <?php
+/**
+ * @package     Joomla.Test
+ * @subpackage  AcceptanceTester
+ *
+ * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE
+ */
+
 use Page\Acceptance\Administrator\LoginPage;
 use Page\Acceptance\Administrator\AdminPage;
 
 /**
+ * Acceptance Tester global class for entry point
+ *
+ * @package     Joomla.Test
+ * @subpackage  AcceptanceTester
+ * @since       3.7
+ *
  * Inherited Methods
  * @method void wantToTest($text)
  * @method void wantTo($text)
@@ -22,10 +36,11 @@ class AcceptanceTester extends \Codeception\Actor
 	use _generated\AcceptanceTesterActions;
 
 	/**
-	 * Method is to set Wait for page title
+	 * Method is to Wait for page title untill default timeout.
 	 *
-	 * @param   string   $title    Page Title text
-	 * @param   integer  $timeout  timeout time
+	 * @param   string  $title  Page Title text
+	 *
+	 * @since   3.7
 	 *
 	 * @return  void
 	 */
@@ -38,9 +53,12 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * Function to check for PHP Notices or Warnings
 	 *
-	 * @param string $page Optional, if not given checks will be done in the current page
+	 * @param   string  $page  Optional, if not given checks will be done in the current page
 	 *
-	 * @note: doAdminLogin() before
+	 * @note:   doAdminLogin() before
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function checkForPhpNoticesOrWarnings($page = null)
 	{
@@ -63,17 +81,17 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * Function to select Toolbar buttons in Joomla! Admin Toolbar Panel
 	 *
-	 * @param   string  $button  The full name of the button
+	 * @param   string $button The full name of the button
 	 *
 	 * @return  void
 	 */
 	public function clickToolbarButton($button)
 	{
-		$I = $this;
+		$I     = $this;
 		$input = strtolower($button);
 
 		$suiteConfiguration = $I->getSuiteConfiguration();
-		$screenWidth = explode("x", $suiteConfiguration['modules']['config']['JoomlaBrowser']['window_size']);
+		$screenWidth        = explode("x", $suiteConfiguration['modules']['config']['JoomlaBrowser']['window_size']);
 
 		if ($screenWidth[0] <= 480)
 		{
@@ -156,8 +174,8 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * Selects an option in a Chosen Selector based on its id
 	 *
-	 * @param   string  $selectId  The id of the <select> element
-	 * @param   string  $option    The text in the <option> to be selected in the chosen selector
+	 * @param   string $selectId The id of the <select> element
+	 * @param   string $option   The text in the <option> to be selected in the chosen selector
 	 *
 	 * @return void
 	 */
@@ -174,8 +192,8 @@ class AcceptanceTester extends \Codeception\Actor
 	/**
 	 * Function to Verify the Tabs on a Joomla! screen
 	 *
-	 * @param  Array  $expectedTabs   Expected Tabs on the Page
-	 * @param  Mixed  $tabsLocator    Locator for the Tabs in Edit View
+	 * @param  Array $expectedTabs Expected Tabs on the Page
+	 * @param  Mixed $tabsLocator  Locator for the Tabs in Edit View
 	 *
 	 * @return void
 	 */
@@ -188,6 +206,7 @@ class AcceptanceTester extends \Codeception\Actor
 		$I->assertEquals($expectedTabs, $actualArrayOfTabs, "Tab Labels do not match on edit view of" . $url);
 		$I->comment('Verify the Tabs');
 	}
+
 	/**
 	 * Function to Logout from Administrator Panel in Joomla!
 	 *
@@ -214,7 +233,7 @@ class AcceptanceTester extends \Codeception\Actor
 	{
 		$I = $this;
 		$I->comment("Trying to select the $option from the $label");
-		$label = $webDriver->findField(['xpath' => "//label[contains(normalize-space(string(.)), '" . $label . "')]"]);
+		$label   = $webDriver->findField(['xpath' => "//label[contains(normalize-space(string(.)), '" . $label . "')]"]);
 		$radioId = $label->getAttribute('for');
 		$I->click(['xpath' => "//fieldset[@id='$radioId']/label[contains(normalize-space(string(.)), '$option')]"]);
 	}
