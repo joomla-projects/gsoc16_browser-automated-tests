@@ -200,6 +200,7 @@ class UsersFrontend extends \AcceptanceTester
 	public function userIsCreated()
 	{
 		$I = $this;
+		$I->comment('User is created');
 	}
 
 	/**
