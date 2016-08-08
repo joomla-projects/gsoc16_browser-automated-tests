@@ -9,6 +9,7 @@
 
 namespace Step\Acceptance\Administrator;
 
+use Behat\Gherkin\Node\TableNode;
 use Page\Acceptance\Administrator\CategoryManagerPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
@@ -80,7 +81,7 @@ class Category extends \AcceptanceTester
 	/**
 	 * Fill mandatory fields in category form
 	 *
-	 * @param   \Behat\Gherkin\Node\TableNode  $title  An array of the category title
+	 * @param   TableNode  $title  An array of the category title
 	 *
 	 * @When I fill mandatory fields for creating Category
 	 *
@@ -88,7 +89,7 @@ class Category extends \AcceptanceTester
 	 *
 	 * @return  void
 	 */
-	public function iFillMandatoryFieldsForCreatingCategory(\Behat\Gherkin\Node\TableNode $title)
+	public function iFillMandatoryFieldsForCreatingCategory(TableNode $title)
 	{
 		$I = $this;
 

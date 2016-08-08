@@ -1,4 +1,12 @@
 <?php
+/**
+ * @package     Joomla.Test
+ * @subpackage  AcceptanceTester.Step
+ *
+ * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
 namespace Step\Acceptance\Administrator;
 
 use \Codeception\Util\Locator;
@@ -8,14 +16,28 @@ use Page\Acceptance\Administrator\UserAclPage;
 use Page\Acceptance\Administrator\UserGroupPage;
 use Page\Acceptance\Administrator\UserManagerPage;
 
+/**
+ * Acceptance Step object class contains suits for User Manager.
+ *
+ * @package  Step\Acceptance\Administrator
+ *
+ * @since    3.7
+ */
 class User extends \AcceptanceTester
 {
 	/**
+	 * Method to goto user management
+	 *
 	 * @Given There is a add user link
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function thereIsAAddUserLink()
 	{
 		$I = $this;
+
 		$I->amOnPage(UserManagerPage::$url);
 		$I->clickToolbarButton('New');
 	}
@@ -184,7 +206,7 @@ class User extends \AcceptanceTester
 		$I->click('Assigned User Groups');
 		$I->checkOption('#1group_7');
 	}
-	
+
 	/**
 	 * @Then Login in backend with username :username and password :password
 	 */
@@ -277,7 +299,7 @@ class User extends \AcceptanceTester
 		$I = $this;
 		$I->fillField(UserManagerPage::$title, $GroupTitle);
 	}
-	
+
 	/**
 	 * @When I Delete the Group :arg1
 	 */
