@@ -1,39 +1,78 @@
 <?php
+/**
+ * @package     Joomla.Test
+ * @subpackage  AcceptanceTester.Step
+ *
+ * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
 namespace Step\Acceptance\Administrator;
 
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 
+/**
+ * Acceptance Step object class contains suits for Content Manager.
+ *
+ * @package  Step\Acceptance\Administrator
+ *
+ * @since    3.7
+ */
 class Content extends \AcceptanceTester
 {
 	/**
-	 * @Given There is a add content link
+	 * Method to click toolbar button new from article manager listing page.
+	 *
+	 * @Given   There is a add content link
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function thereIsAAddContentLink()
 	{
 		$I = $this;
+
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->clickToolbarButton('New');
 	}
 
 	/**
-	 * @When I create new content with field title as :title and content as a :content
+	 * Method to create new article
+	 *
+	 * @When    I create new content with field title as :title and content as a :content
+	 *
+	 * @param   string  $title    The article title
+	 * @param   string  $content  The article content
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iCreateNewContent($title, $content)
 	{
 		$I = $this;
+
 		$I->fillField(ArticleManagerPage::$title, $title);
 		$I->click(ArticleManagerPage::$toggleEditor);
 		$I->fillField(ArticleManagerPage::$content, $content);
 	}
 
 	/**
+	 * Method to save an article
+	 *
 	 * @When I save an article
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSaveAnArticle()
 	{
 		$I = $this;
-        $I->clickToolbarButton('Save');
+
+		$I->clickToolbarButton('Save');
 	}
 
 	/**
@@ -42,6 +81,7 @@ class Content extends \AcceptanceTester
 	public function iShouldSeeTheMessage($message)
 	{
 		$I = $this;
+
 		$I->waitForText($message, TIMEOUT, AdminPage::$systemMessageContainer);
 		$I->see($message, AdminPage::$systemMessageContainer);
 	}
@@ -118,6 +158,7 @@ class Content extends \AcceptanceTester
 		$I = $this;
 		$I->clickToolbarButton('unpublish');
 	}
+
 	/**
 	 * @Then I wait for title :title and see the unpublish message :message
 	 */
