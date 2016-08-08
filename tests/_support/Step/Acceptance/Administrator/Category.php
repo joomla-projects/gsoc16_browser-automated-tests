@@ -102,7 +102,7 @@ class Category extends \AcceptanceTester
 		{
 			if ($index !== 0)
 			{
-				$I->fillField(CategoryManagerPage::$categoryTitleField, $row[0]);
+				$I->fillField(CategoryManagerPage::$name, $row[0]);
 
 				if ($index == $lastIndex)
 				{
@@ -169,7 +169,7 @@ class Category extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->fillField(CategoryManagerPage::$categoryTitleField, $title);
+		$I->fillField(CategoryManagerPage::$name, $title);
 	}
 
 	/**
