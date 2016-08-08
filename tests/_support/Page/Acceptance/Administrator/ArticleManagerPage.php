@@ -26,7 +26,7 @@ class ArticleManagerPage extends AdminPage
 	 * @var array
 	 * @since 3.7
 	 */
-	public static $articleTitleField = ['id' => 'jform_title'];
+	public static $title = ['id' => 'jform_title'];
 
 	/**
 	 * Page object for content body editor field.
@@ -34,7 +34,7 @@ class ArticleManagerPage extends AdminPage
 	 * @var array
 	 * @since version
 	 */
-	public static $articleContentField = ['id' => 'jform_articletext'];
+	public static $content = ['id' => 'jform_articletext'];
 
 	/**
 	 * Page object for the toggle button.

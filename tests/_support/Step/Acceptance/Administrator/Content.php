@@ -22,9 +22,9 @@ class Content extends \AcceptanceTester
 	public function iCreateNewContent($title, $content)
 	{
 		$I = $this;
-		$I->fillField(ArticleManagerPage::$articleTitleField, $title);
+		$I->fillField(ArticleManagerPage::$title, $title);
 		$I->click(ArticleManagerPage::$toggleEditor);
-		$I->fillField(ArticleManagerPage::$articleContentField, $content);
+		$I->fillField(ArticleManagerPage::$content, $content);
 	}
 
 	/**
