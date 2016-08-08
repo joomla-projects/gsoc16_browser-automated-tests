@@ -41,10 +41,10 @@ class Content extends \AcceptanceTester
 	/**
 	 * Method to create new article
 	 *
-	 * @When    I create new content with field title as :title and content as a :content
-	 *
 	 * @param   string  $title    The article title
 	 * @param   string  $content  The article content
+	 *
+	 * @When    I create new content with field title as :title and content as a :content
 	 *
 	 * @since   3.7
 	 *
@@ -76,7 +76,15 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @Then I should see the :arg1 message
+	 * Method to confirm message appear
+	 *
+	 * @param   string  $message  The message to be confirm
+	 *
+	 * @Then I should see the :message message
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iShouldSeeTheMessage($message)
 	{
@@ -87,11 +95,20 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @Given I search and select content article with title :arg1
+	 * Method to search and select article
+	 *
+	 * @param   string  $title  The title of the article which should be searched
+	 *
+	 * @Given I search and select content article with title :title
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSearchAndSelectContentArticleWithTitle($title)
 	{
 		$I = $this;
+
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
@@ -99,20 +116,36 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
+	 * Method to featured an article
+	 *
 	 * @When I featured the article
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iFeatureTheContentWithTitle()
 	{
 		$I = $this;
+
 		$I->clickToolbarButton('featured');
 	}
 
 	/**
+	 * Method to select an article
+	 *
+	 * @param   string  $title  The article title which should be select
+	 *
 	 * @Given I select the content article with title :arg1
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSelectTheContentArticleWithTitle($title)
 	{
 		$I = $this;
+
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
@@ -121,29 +154,54 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * @When I set access level as a :arg1
+	 * Method to set access level
+	 *
+	 * @param   string  $accessLevel  The name of access level which needs to be set
+	 *
+	 * @When I set access level as a :accessLevel
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSetAccessLevelAsA($accessLevel)
 	{
 		$I = $this;
+
 		$I->selectOptionInChosenById('jform_access', $accessLevel);
 	}
 
 	/**
+	 * Method to save an article
+	 *
 	 * @When I save the article
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSaveTheArticle()
 	{
 		$I = $this;
+
 		$I->clickToolbarButton('Save & Close');
 	}
 
 	/**
+	 * Method to get an article
+	 *
+	 * @param   string  $title  The title of the article.
+	 *
 	 * @Given I have article with name :title
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iHaveArticleWithName($title)
 	{
 		$I = $this;
+
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
@@ -151,31 +209,56 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
+	 * Method to unpublish an article
+	 *
 	 * @When I unpublish the article
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iUnpublish()
 	{
 		$I = $this;
+
 		$I->clickToolbarButton('unpublish');
 	}
 
 	/**
+	 * Confirm the article unpublish message
+	 *
+	 * @param   string  $title    The webpage title
+	 * @param   string  $message  The unpublish successful message
+	 *
 	 * @Then I wait for title :title and see the unpublish message :message
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSeeArticleUnpublishMessage($title, $message)
 	{
 		$I = $this;
+
 		$I->waitForPageTitle($title);
 		$I->see($message, AdminPage::$systemMessageContainer);
 	}
 
-
 	/**
-	 * @Given I have :arg1 content article which needs to be Trash
+	 * Method to trash an article
+	 *
+	 * @param   string  $title  The article title
+	 *
+	 * @Given I have :title content article which needs to be Trash
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iHaveContentArticleWhichNeedsToBeTrash($title)
 	{
 		$I = $this;
+
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
@@ -183,20 +266,37 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
+	 * Click button to trash an article
+	 *
 	 * @When I Trash the article
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iTrashTheArticleWithName()
 	{
 		$I = $this;
+
 		$I->clickToolbarButton('trash');
 	}
 
 	/**
+	 * Assure the article is trashed.
+	 *
+	 * @param   string  $title    The webpage title.
+	 * @param   string  $message  The article trashed successful message
+	 *
 	 * @Then I wait for the title :title and see article trash message :message
+	 *
+	 * @since   3.7
+	 *
+	 * @return  void
 	 */
 	public function iSeeArticleTrashMessage($title, $message)
 	{
 		$I = $this;
+
 		$I->waitForPageTitle($title);
 		$I->see($message, AdminPage::$systemMessageContainer);
 	}
