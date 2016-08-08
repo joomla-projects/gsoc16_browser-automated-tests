@@ -58,7 +58,7 @@ class Login extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->waitForPageTitle(ControlPanelPage::$pageTitle, 60, AdminPage::$pageTitle);
+		$I->waitForPageTitle(ControlPanelPage::$pageTitle);
 		$I->see(ControlPanelPage::$pageTitle, AdminPage::$pageTitle);
 	}
 }
