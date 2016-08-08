@@ -21,16 +21,16 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * The element id which contains system messages.
 	 *
-	 * @var array
-	 * @since 3.7
+	 * @var    array
+	 * @since  3.7
 	 */
 	public static $systemMessageContainer = ['id' => 'system-message-container'];
 
 	/**
 	 * The element id which contains page title in administrator header.
 	 *
-	 * @var array
-	 * @since 3.7
+	 * @var    array
+	 * @since  3.7
 	 */
 	public static $pageTitle = ['class' => 'page-title'];
 }

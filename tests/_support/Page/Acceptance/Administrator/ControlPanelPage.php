@@ -21,16 +21,16 @@ class ControlPanelPage extends AdminPage
 	/**
 	 * Link to the administrator control panel url.
 	 *
-	 * @var   string
-	 * @since 3.7
+	 * @var    string
+	 * @since  3.7
 	 */
 	public static $url = "/administrator/index.php";
 
 	/**
 	 * Name of the text to identify the control panel.
 	 *
-	 * @var string
-	 * @since 3.7
+	 * @var    string
+	 * @since  3.7
 	 */
 	public static $pageTitle = 'Control Panel';
 }
