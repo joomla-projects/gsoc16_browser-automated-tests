@@ -3,8 +3,8 @@ namespace Step\Acceptance\Site;
 
 use \Codeception\Util\Locator;
 use Page\Acceptance\Administrator\UserManagerPage;
-use Page\Acceptance\Site\Frontpage;
-use Page\Acceptance\Site\Frontendlogin;
+use Page\Acceptance\Site\FrontPage;
+use Page\Acceptance\Site\FrontendLogin;
 
 
 class UsersFrontend extends \AcceptanceTester
@@ -42,7 +42,7 @@ class UsersFrontend extends \AcceptanceTester
     public function iPressOnTheLink($CreateAccount)
     {
         $I = $this;
-        $I->amOnPage(Frontpage::$url);
+        $I->amOnPage(FrontPage::$url);
         $I->click($CreateAccount);
         $I->waitForText('User Registration', TIMEOUT);
     }
@@ -76,7 +76,7 @@ class UsersFrontend extends \AcceptanceTester
     public function iShouldSeeMessage($message)
     {
         $I = $this;
-        $I->see($message, Frontpage::$alertMessage);
+        $I->see($message, FrontPage::$alertMessage);
     }
 
     /**
@@ -136,8 +136,8 @@ class UsersFrontend extends \AcceptanceTester
     public function iAmOnAFrontendPageWithALoginModule()
     {
         $I = $this;
-        $I->amOnPage(Frontpage::$url);
-        $I->see('Login Form', Frontendlogin::$mdlLogin);
+        $I->amOnPage(FrontPage::$url);
+        $I->see('Login Form', FrontendLogin::$moduleTitle);
     }
 
     /**
@@ -146,8 +146,8 @@ class UsersFrontend extends \AcceptanceTester
     public function iEnterUsernameAndPasswordIntoTheLoginModule($username, $password)
     {
         $I = $this;
-        $I->fillField(Frontendlogin::$modlgnUsername, $username);
-        $I->fillField(Frontendlogin::$modlgnPasswd, $password);
+        $I->fillField(FrontendLogin::$moduleUsername, $username);
+        $I->fillField(FrontendLogin::$modulePassword, $password);
     }
 
     /**
@@ -165,7 +165,7 @@ class UsersFrontend extends \AcceptanceTester
     public function iShouldSeeTheWarning($warning)
     {
         $I = $this;
-        $I->see($warning, Frontpage::$alertMessage);
+        $I->see($warning, FrontPage::$alertMessage);
     }
 
     /**
@@ -198,9 +198,9 @@ class UsersFrontend extends \AcceptanceTester
     public function iLoginWithUserWithPasswordInFrontend($username, $password)
     {
         $I = $this;
-        $I->amOnPage(Frontpage::$url);
-        $I->fillField(Frontendlogin::$modlgnUsername, $username);
-        $I->fillField(Frontendlogin::$modlgnPasswd, $password);
+        $I->amOnPage(FrontPage::$url);
+        $I->fillField(FrontendLogin::$moduleUsername, $username);
+        $I->fillField(FrontendLogin::$modulePassword, $password);
         $I->click('Log in');
     }
 
@@ -210,7 +210,7 @@ class UsersFrontend extends \AcceptanceTester
     public function iShouldSeeTheMessage($message)
     {
         $I = $this;
-        $I->see($message, Frontpage::$loginGreeting);
+        $I->see($message, FrontPage::$loginGreeting);
     }
 
     /**
@@ -219,9 +219,9 @@ class UsersFrontend extends \AcceptanceTester
     public function iAmLoggedInIntoTheFrontendAsUser($username, $password)
     {
         $I = $this;
-        $I->amOnPage(Frontpage::$url);
-        $I->fillField(Frontendlogin::$modlgnUsername, $username);
-        $I->fillField(Frontendlogin::$modlgnPasswd, $password);
+        $I->amOnPage(FrontPage::$url);
+        $I->fillField(FrontendLogin::$moduleUsername, $username);
+        $I->fillField(FrontendLogin::$modulePassword, $password);
         $I->click('Log in');
     }
 
@@ -231,7 +231,7 @@ class UsersFrontend extends \AcceptanceTester
     public function iPressOnTheButton($editProfile)
     {
         $I = $this;
-        $I->amOnPage(Frontendlogin::$profile);
+        $I->amOnPage(FrontendLogin::$profile);
         $I->click($editProfile);
     }
 
