@@ -1,6 +1,7 @@
 <?php
 namespace Step\Acceptance\Administrator;
 
+use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\LoginPage;
 use Page\Acceptance\Administrator\ControlPanelPage;
 
@@ -25,7 +26,7 @@ class Login extends \AcceptanceTester
 	public function iShouldSeeTheAdministratorDashboard()
 	{
 		$I = $this;
-		$I->waitForPageTitle(ControlPanelPage::$pageTitle, 60, ControlPanelPage::$pageTitleContext);
-		$I->see(ControlPanelPage::$pageTitle, ControlPanelPage::$pageTitleContext);
+		$I->waitForPageTitle(ControlPanelPage::$pageTitle, 60, AdminPage::$pageTitle);
+		$I->see(ControlPanelPage::$pageTitle, AdminPage::$pageTitle);
 	}
 }

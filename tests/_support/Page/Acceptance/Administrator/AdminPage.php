@@ -33,12 +33,4 @@ class AdminPage extends \AcceptanceTester
 	 * @since 3.7
 	 */
 	public static $pageTitle = ['class' => 'page-title'];
-
-	/**
-	 * Name of the text to identify the control panel.
-	 *
-	 * @var string
-	 * @since 3.7
-	 */
-	public static $controlPanelText = "Control Panel";
 }
