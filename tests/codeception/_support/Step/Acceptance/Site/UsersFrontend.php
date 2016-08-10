@@ -491,7 +491,7 @@ class UsersFrontend extends \AcceptanceTester
 	 *
 	 * @param   string  $name  The name of the user
 	 *
-	 * @Given Needs to user :arg1 logged in at least once
+	 * @When    I Needs to user :arg1 logged in at least once
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
