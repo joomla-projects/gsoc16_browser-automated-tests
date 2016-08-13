@@ -26,6 +26,30 @@ use Page\Acceptance\Administrator\UserManagerPage;
 class User extends \AcceptanceTester
 {
 	/**
+	 * User Manager Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userManagerPage = null;
+
+	/**
+	 * User constructor.
+	 *
+	 * @param   Scenario  $scenario  Scenario object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function __construct(Scenario $scenario)
+	{
+		parent::__construct($scenario);
+
+		// Initialize User Manager Page Object
+		$this->userManagerPage = new UserManagerPage($scenario);
+	}
+
+	/**
 	 * Method to goto user management
 	 *
 	 * @Given There is a add user link
@@ -59,10 +83,7 @@ class User extends \AcceptanceTester
 	 */
 	public function iCreateNewUser($name, $username, $password, $email)
 	{
-		$I = $this;
-
-		$userManagerPage = new UserManagerPage($I->scenario);
-		$userManagerPage->fillUserForm($name, $username, $password, $email);
+		$this->userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
 	/**
@@ -158,12 +179,7 @@ class User extends \AcceptanceTester
 	 */
 	public function iHaveAUserWithUserName($username)
 	{
-		$I = $this;
-
-		$I->amOnPage(UserManagerPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->userManagerPage->haveUserWithUserName($username);
 	}
 
 	/**
@@ -195,12 +211,7 @@ class User extends \AcceptanceTester
 	 */
 	public function iHaveABlockedUserWithUserName($username)
 	{
-		$I = $this;
-
-		$I->amOnPage(UserManagerPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->userManagerPage->haveUserWithUserName($username);
 	}
 
 	/**
