@@ -36,11 +36,12 @@ class MenuManagerPage extends AdminPage
 
 	/**
 	 * Locator to choose article title
+	 * Must be initialized using MenuManagerPage::setChooseArticle($text) method.
 	 *
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
 	 */
-	public static $chooseArticle = ['link' => 'Test_article'];
+	public static $chooseArticle = [];
 
 	/**
 	 * Locator for article link for menu item
@@ -49,4 +50,18 @@ class MenuManagerPage extends AdminPage
 	 * @since  __DEPLOY_VERSION__
 	 */
 	public static $article = ['link' => 'Article'];
+
+	/**
+	 * This method is to set page object to choose an article dynamically.
+	 *
+	 * @param   string  $text  Text of the link to be choosen.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public static function setChooseArticle($text)
+	{
+		self::$chooseArticle = ['link' => $text];
+	}
 }

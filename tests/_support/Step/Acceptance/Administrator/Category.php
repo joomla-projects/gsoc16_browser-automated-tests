@@ -342,10 +342,16 @@ class Category extends \AcceptanceTester
 		$I = $this;
 
 		$I->click(MenuManagerPage::$selectArticle);
+
 		$I->switchToIFrame("Select or Change article");
+
+		// Setting page object to choose article title
+		MenuManagerPage::setChooseArticle($title);
+
 		$I->waitForElement(MenuManagerPage::$chooseArticle, 60);
 		$I->checkForPhpNoticesOrWarnings();
 		$I->click(MenuManagerPage::$chooseArticle);
+
 		$I->switchToIFrame();
 
 		// Waiting to close the iframe properly
