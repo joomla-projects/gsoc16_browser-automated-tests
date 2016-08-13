@@ -50,6 +50,7 @@ class User extends \AcceptanceTester
 	 * @param   string  $password  User's password
 	 * @param   string  $email     User's email
 	 *
+	 * @Given I fill a super admin with fields Name :name, Login Name :username, Password :password, and Email :email
 	 * @When I create new user with fields Name :name, Login Name :username, Password :password and Email :email
 	 *
 	 * @since   __DEPLOY_VERSION__
@@ -58,7 +59,9 @@ class User extends \AcceptanceTester
 	 */
 	public function iCreateNewUser($name, $username, $password, $email)
 	{
-		$userManagerPage = new UserManagerPage;
+		$I = $this;
+
+		$userManagerPage = new UserManagerPage($I->scenario);
 		$userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
@@ -290,26 +293,6 @@ class User extends \AcceptanceTester
 		$I = $this;
 
 		$I->verifyAvailableTabs([$tab1, $tab2, $tab3]);
-	}
-
-	/**
-	 * Method to prepare form to create super admin
-	 *
-	 * @param   string  $name      The name of super admin
-	 * @param   string  $username  The username of super admin
-	 * @param   string  $password  The password of super admin
-	 * @param   string  $email     The email of super admin
-	 *
-	 * @Given I fill a super admin with fields Name :name, Login Name :username, Password :password, and Email :email
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iCreateASuperAdmin($name, $username, $password, $email)
-	{
-		$userManagerPage = new UserManagerPage;
-		$userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
 	/**
