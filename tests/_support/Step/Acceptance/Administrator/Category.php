@@ -25,6 +25,30 @@ use Page\Acceptance\Site\FrontPage;
 class Category extends \AcceptanceTester
 {
 	/**
+	 * Category Manager Page Object for this class
+	 *
+	 * @var     null|CategoryManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $categoryManagerPage = null;
+
+	/**
+	 * Category Step constructor.
+	 *
+	 * @param   Scenario  $scenario  Scenario object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function __construct(Scenario $scenario)
+	{
+		parent::__construct($scenario);
+
+		// Initialize Category Manager Page Object
+		$this->categoryManagerPage = new CategoryManagerPage($scenario);
+	}
+
+	/**
 	 * Category link
 	 *
 	 * @Given There is an article category link
@@ -186,12 +210,7 @@ class Category extends \AcceptanceTester
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeUnpublish($title)
 	{
-		$I = $this;
-
-		$I->amOnPage(CategoryManagerPage::$url);
-		$I->fillField(CategoryManagerPage::$filterSearch, $title);
-		$I->click(CategoryManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->categoryManagerPage->haveCategoryWithTitle($title);
 	}
 
 	/**
@@ -223,12 +242,7 @@ class Category extends \AcceptanceTester
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeTrash($title)
 	{
-		$I = $this;
-
-		$I->amOnPage(CategoryManagerPage::$url);
-		$I->fillField(CategoryManagerPage::$filterSearch, $title);
-		$I->click(CategoryManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->categoryManagerPage->haveCategoryWithTitle($title);
 	}
 
 	/**
