@@ -494,7 +494,7 @@ class Category extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->waitForText('Test_article');
+		$I->waitForText($title);
 	}
 
 	/**
