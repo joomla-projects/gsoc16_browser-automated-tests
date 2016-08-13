@@ -58,13 +58,8 @@ class User extends \AcceptanceTester
 	 */
 	public function iCreateNewUser($name, $username, $password, $email)
 	{
-		$I = $this;
-
-		$I->fillField(UserManagerPage::$nameField, $name);
-		$I->fillField(UserManagerPage::$usernameField, $username);
-		$I->fillField(UserManagerPage::$passwordField, $password);
-		$I->fillField(UserManagerPage::$password2Field, $password);
-		$I->fillField(UserManagerPage::$emailField, $email);
+		$userManagerPage = new UserManagerPage;
+		$userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
 	/**
@@ -313,13 +308,8 @@ class User extends \AcceptanceTester
 	 */
 	public function iCreateASuperAdmin($name, $username, $password, $email)
 	{
-		$I = $this;
-
-		$I->fillField(UserManagerPage::$nameField, $name);
-		$I->fillField(UserManagerPage::$usernameField, $username);
-		$I->fillField(UserManagerPage::$passwordField, $password);
-		$I->fillField(UserManagerPage::$password2Field, $password);
-		$I->fillField(UserManagerPage::$emailField, $email);
+		$userManagerPage = new UserManagerPage;
+		$userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
 	/**
