@@ -118,22 +118,6 @@ class Category extends \AcceptanceTester
 	}
 
 	/**
-	 * Save category form
-	 *
-	 * @When I save the category
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iSaveTheCategory()
-	{
-		$I = $this;
-
-		$I->clickToolbarButton('Save');
-	}
-
-	/**
 	 * Search to select category with given title
 	 *
 	 * @param   string  $title  The category title
@@ -488,7 +472,7 @@ class Category extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->waitForText('Test_article');
+		$I->waitForText($title);
 	}
 
 	/**

@@ -698,22 +698,6 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to save the user setting
-	 *
-	 * @When I save the setting
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iSaveTheSetting()
-	{
-		$I = $this;
-
-		$I->clickToolbarButton('Save');
-	}
-
-	/**
 	 * Method to see create account link in frontend
 	 *
 	 * @Then I should be see the link Create an account in frontend

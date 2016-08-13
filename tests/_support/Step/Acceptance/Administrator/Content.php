@@ -63,12 +63,14 @@ class Content extends \AcceptanceTester
 	 * Method to save an article
 	 *
 	 * @When I save an article
+	 * @When I save the category
+	 * @When I save the setting
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iSaveAnArticle()
+	public function clickSave()
 	{
 		$I = $this;
 
