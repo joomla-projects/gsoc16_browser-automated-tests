@@ -363,13 +363,14 @@ class UsersFrontend extends \AcceptanceTester
 	 * @param   string  $username  The username for login
 	 * @param   string  $password  The password for login
 	 *
+	 * @Given I am logged in into the frontend as user :arg1 with password :arg2
 	 * @When I login with user :arg1 with password :arg1 in frontend
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iLoginWithUserWithPasswordInFrontend($username, $password)
+	public function loginInFrontend($username, $password)
 	{
 		$I = $this;
 
@@ -395,28 +396,6 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->see($message, FrontPage::$loginGreeting);
-	}
-
-	/**
-	 * Method to login into frontend as a user
-	 *
-	 * @param   string  $username  The username for frontend user
-	 * @param   string  $password  The password for frontend user
-	 *
-	 * @Given I am logged in into the frontend as user :arg1 with password :arg2
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iAmLoggedInIntoTheFrontendAsUser($username, $password)
-	{
-		$I = $this;
-
-		$I->amOnPage(FrontPage::$url);
-		$I->fillField(FrontendLogin::$moduleUsername, $username);
-		$I->fillField(FrontendLogin::$modulePassword, $password);
-		$I->click('Log in');
 	}
 
 	/**
