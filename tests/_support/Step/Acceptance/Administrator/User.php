@@ -9,7 +9,8 @@
 
 namespace Step\Acceptance\Administrator;
 
-use \Codeception\Util\Locator;
+use Codeception\Scenario;
+use Codeception\Util\Locator;
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\LoginPage;
 use Page\Acceptance\Administrator\UserAclPage;
@@ -35,6 +36,24 @@ class User extends \AcceptanceTester
 	protected $userManagerPage = null;
 
 	/**
+	 * User Group Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userGroupPage = null;
+
+	/**
+	 * User ACL Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userAclPage = null;
+
+	/**
 	 * User constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -45,8 +64,10 @@ class User extends \AcceptanceTester
 	{
 		parent::__construct($scenario);
 
-		// Initialize User Manager Page Object
+		// Initialize User Page Objects
 		$this->userManagerPage = new UserManagerPage($scenario);
+		$this->userGroupPage   = new UserGroupPage($scenario);
+		$this->userAclPage     = new UserAclPage($scenario);
 	}
 
 	/**
@@ -136,10 +157,7 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserManagerPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userManagerPage->haveItemUsingSearch($username);
 		$I->clickToolbarButton('edit');
 	}
 
@@ -245,10 +263,8 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserManagerPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userManagerPage->haveItemUsingSearch($username);
+
 		$I->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}
@@ -470,10 +486,7 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserGroupPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $groupTitle);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userGroupPage->haveItemUsingSearch($groupTitle);
 		$I->clickToolbarButton('edit');
 	}
 
@@ -510,10 +523,7 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserGroupPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $groupTitle);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userGroupPage->haveItemUsingSearch($groupTitle);
 		$I->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}
@@ -585,10 +595,7 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserAclPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $levelTitle);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userAclPage->haveItemUsingSearch($levelTitle);
 		$I->clickToolbarButton('edit');
 	}
 
@@ -625,10 +632,8 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->amOnPage(UserAclPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $levelTitle);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userAclPage->haveItemUsingSearch($levelTitle);
+
 		$I->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}

@@ -9,6 +9,7 @@
 
 namespace Step\Acceptance\Administrator;
 
+use Codeception\Scenario;
 use Behat\Gherkin\Node\TableNode;
 use Page\Acceptance\Administrator\CategoryManagerPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;

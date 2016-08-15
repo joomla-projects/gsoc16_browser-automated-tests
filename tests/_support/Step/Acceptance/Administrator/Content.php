@@ -9,6 +9,7 @@
 
 namespace Step\Acceptance\Administrator;
 
+use Codeception\Scenario;
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 
