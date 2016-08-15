@@ -210,7 +210,7 @@ class Category extends \AcceptanceTester
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeUnpublish($title)
 	{
-		$this->categoryManagerPage->haveCategoryWithTitle($title);
+		$this->categoryManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -242,7 +242,7 @@ class Category extends \AcceptanceTester
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeTrash($title)
 	{
-		$this->categoryManagerPage->haveCategoryWithTitle($title);
+		$this->categoryManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**

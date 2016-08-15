@@ -33,4 +33,39 @@ class AdminPage extends \AcceptanceTester
 	 * @since  __DEPLOY_VERSION__
 	 */
 	public static $pageTitle = ['class' => 'page-title'];
+
+	/**
+	 * Locator for user's search input field
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $filterSearch = ['id' => 'filter_search'];
+
+	/**
+	 * Locator for user's search button icon
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $iconSearch = ['class' => 'icon-search'];
+
+	/**
+	 * Method to search user with username
+	 *
+	 * @param   string  $keyword  The username of user
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void  Checkbox for given username will be checked.
+	 */
+	public function haveItemUsingSearch($keyword)
+	{
+		$I = $this;
+
+		$I->amOnPage(static::$url);
+		$I->fillField(static::$filterSearch, $keyword);
+		$I->click(static::$iconSearch);
+		$I->checkAllResults();
+	}
 }

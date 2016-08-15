@@ -99,22 +99,6 @@ class UserManagerPage extends AdminPage
 	public static $email2Field = ['id' => 'jform_email2'];
 
 	/**
-	 * Locator for user's search input field
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $filterSearch = ['id' => 'filter_search'];
-
-	/**
-	 * Locator for user's search button icon
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $iconSearch = ['class' => 'icon-search'];
-
-	/**
 	 * Locator for user's page title
 	 *
 	 * @var    array
@@ -167,24 +151,5 @@ class UserManagerPage extends AdminPage
 		$I->fillField(self::$passwordField, $password);
 		$I->fillField(self::$password2Field, $password);
 		$I->fillField(self::$emailField, $email);
-	}
-
-	/**
-	 * Method to search user with username
-	 *
-	 * @param   string  $username  The username of user
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void  Checkbox for given username will be checked.
-	 */
-	public function haveUserWithUserName($username)
-	{
-		$I = $this;
-
-		$I->amOnPage(self::$url);
-		$I->fillField(self::$filterSearch, $username);
-		$I->click(self::$iconSearch);
-		$I->checkAllResults();
 	}
 }

@@ -131,7 +131,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iSearchAndSelectContentArticleWithTitle($title)
 	{
-		$this->articleManagerPage->haveArticleWithTitle($title);
+		$this->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -219,7 +219,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iHaveArticleWithName($title)
 	{
-		$this->articleManagerPage->haveArticleWithTitle($title);
+		$this->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -271,7 +271,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iHaveContentArticleWhichNeedsToBeTrash($title)
 	{
-		$this->articleManagerPage->haveArticleWithTitle($title);
+		$this->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**

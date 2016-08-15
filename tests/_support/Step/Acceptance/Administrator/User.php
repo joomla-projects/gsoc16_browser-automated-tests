@@ -179,7 +179,7 @@ class User extends \AcceptanceTester
 	 */
 	public function iHaveAUserWithUserName($username)
 	{
-		$this->userManagerPage->haveUserWithUserName($username);
+		$this->userManagerPage->haveItemUsingSearch($username);
 	}
 
 	/**
@@ -211,7 +211,7 @@ class User extends \AcceptanceTester
 	 */
 	public function iHaveABlockedUserWithUserName($username)
 	{
-		$this->userManagerPage->haveUserWithUserName($username);
+		$this->userManagerPage->haveItemUsingSearch($username);
 	}
 
 	/**
