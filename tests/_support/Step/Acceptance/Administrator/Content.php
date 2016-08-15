@@ -97,25 +97,6 @@ class Content extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to confirm message appear
-	 *
-	 * @param   string  $message  The message to be confirm
-	 *
-	 * @Then I should see the :message message
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iShouldSeeTheMessage($message)
-	{
-		$I = $this;
-
-		$I->waitForText($message, TIMEOUT, AdminPage::$systemMessageContainer);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * Method to search and select article
 	 *
 	 * @param   string  $title  The title of the article which should be searched

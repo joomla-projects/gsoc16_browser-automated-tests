@@ -124,25 +124,6 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to see success message
-	 *
-	 * @param   string  $message  The system message for user saved.
-	 *
-	 * @Then I should see the :arg1 message
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iSeeTheMessage($message)
-	{
-		$I = $this;
-
-		$I->waitForText($message, TIMEOUT, AdminPage::$systemMessageContainer);
-		$I->see($message, AdminPage::$systemMessageContainer);
-	}
-
-	/**
 	 * Method to search and select user with username
 	 *
 	 * @param   string  $username  The username of user
