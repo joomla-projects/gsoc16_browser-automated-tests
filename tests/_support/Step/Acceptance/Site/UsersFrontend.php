@@ -9,7 +9,8 @@
 
 namespace Step\Acceptance\Site;
 
-use \Codeception\Util\Locator;
+use Codeception\Scenario;
+use Codeception\Util\Locator;
 use Page\Acceptance\Administrator\UserManagerPage;
 use Page\Acceptance\Site\FrontPage;
 use Page\Acceptance\Site\FrontendLogin;
@@ -23,6 +24,30 @@ use Page\Acceptance\Site\FrontendLogin;
  */
 class UsersFrontend extends \AcceptanceTester
 {
+	/**
+	 * User Manager Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userManagerPage = null;
+
+	/**
+	 * User constructor.
+	 *
+	 * @param   Scenario  $scenario  Scenario object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function __construct(Scenario $scenario)
+	{
+		parent::__construct($scenario);
+
+		// Initialize User Page Objects
+		$this->userManagerPage = new UserManagerPage($scenario);
+	}
+
 	/**
 	 * Method to enable user registration
 	 *
@@ -330,9 +355,7 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userManagerPage->haveItemUsingSearch($username);
 		$I->clickToolbarButton('unblock');
 	}
 
@@ -351,9 +374,7 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$I->userManagerPage->haveItemUsingSearch($username);
 		$I->clickToolbarButton('publish');
 	}
 
