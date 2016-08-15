@@ -35,6 +35,15 @@ class Category extends \AcceptanceTester
 	protected $categoryManagerPage = null;
 
 	/**
+	 * Article Manager Page Object for this class
+	 *
+	 * @var     null|ArticleManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $articleManagerPage = null;
+
+	/**
 	 * Category Step constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -47,6 +56,7 @@ class Category extends \AcceptanceTester
 
 		// Initialize Category Manager Page Object
 		$this->categoryManagerPage = new CategoryManagerPage($scenario);
+		$this->articleManagerPage  = new ArticleManagerPage($scenario);
 	}
 
 	/**
@@ -313,11 +323,7 @@ class Category extends \AcceptanceTester
 	 */
 	public function iCreateANewArticleWithContentAsA($title, $content)
 	{
-		$I = $this;
-
-		$I->fillField(ArticleManagerPage::$title, $title);
-		$I->click(ArticleManagerPage::$toggleEditor);
-		$I->fillField(ArticleManagerPage::$content, $content);
+		$this->articleManagerPage->fillContentCreateForm($title, $content);
 	}
 
 	/**

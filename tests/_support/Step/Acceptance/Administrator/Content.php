@@ -77,11 +77,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iCreateNewContent($title, $content)
 	{
-		$I = $this;
-
-		$I->fillField(ArticleManagerPage::$title, $title);
-		$I->click(ArticleManagerPage::$toggleEditor);
-		$I->fillField(ArticleManagerPage::$content, $content);
+		$this->articleManagerPage->fillContentCreateForm($title, $content);
 	}
 
 	/**
