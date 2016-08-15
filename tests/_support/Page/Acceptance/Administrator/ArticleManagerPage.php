@@ -65,4 +65,23 @@ class ArticleManagerPage extends AdminPage
 	 * @since  __DEPLOY_VERSION__
 	 */
 	public static $url = "/administrator/index.php?option=com_content&view=articles";
+
+	/**
+	 * Method to search and select article
+	 *
+	 * @param   string  $title  The title of the article which should be searched
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function haveArticleWithTitle($title)
+	{
+		$I = $this;
+
+		$I->amOnPage(self::$url);
+		$I->fillField(self::$filterSearch, $title);
+		$I->click(self::$iconSearch);
+		$I->checkAllResults();
+	}
 }

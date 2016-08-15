@@ -22,6 +22,30 @@ use Page\Acceptance\Administrator\ArticleManagerPage;
 class Content extends \AcceptanceTester
 {
 	/**
+	 * Article Manager Page Object for this class
+	 *
+	 * @var     null|ArticleManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $articleManagerPage = null;
+
+	/**
+	 * Category Step constructor.
+	 *
+	 * @param   Scenario  $scenario  Scenario object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function __construct(Scenario $scenario)
+	{
+		parent::__construct($scenario);
+
+		// Initialize Category Manager Page Object
+		$this->articleManagerPage = new ArticleManagerPage($scenario);
+	}
+
+	/**
 	 * Method to click toolbar button new from article manager listing page.
 	 *
 	 * @Given   There is a add content link
@@ -107,12 +131,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iSearchAndSelectContentArticleWithTitle($title)
 	{
-		$I = $this;
-
-		$I->amOnPage(ArticleManagerPage::$url);
-		$I->fillField(ArticleManagerPage::$filterSearch, $title);
-		$I->click(ArticleManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->articleManagerPage->haveArticleWithTitle($title);
 	}
 
 	/**
@@ -200,12 +219,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iHaveArticleWithName($title)
 	{
-		$I = $this;
-
-		$I->amOnPage(ArticleManagerPage::$url);
-		$I->fillField(ArticleManagerPage::$filterSearch, $title);
-		$I->click(ArticleManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->articleManagerPage->haveArticleWithTitle($title);
 	}
 
 	/**
@@ -257,12 +271,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iHaveContentArticleWhichNeedsToBeTrash($title)
 	{
-		$I = $this;
-
-		$I->amOnPage(ArticleManagerPage::$url);
-		$I->fillField(ArticleManagerPage::$filterSearch, $title);
-		$I->click(ArticleManagerPage::$iconSearch);
-		$I->checkAllResults();
+		$this->articleManagerPage->haveArticleWithTitle($title);
 	}
 
 	/**
