@@ -32,6 +32,15 @@ class Content extends \AcceptanceTester
 	protected $articleManagerPage = null;
 
 	/**
+	 * Admin Page Object for this class
+	 *
+	 * @var     null|ArticleManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $adminPage = null;
+
+	/**
 	 * Category Step constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -44,6 +53,7 @@ class Content extends \AcceptanceTester
 
 		// Initialize Category Manager Page Object
 		$this->articleManagerPage = new ArticleManagerPage($scenario);
+		$this->adminPage          = new AdminPage($scenario);
 	}
 
 	/**
@@ -230,10 +240,7 @@ class Content extends \AcceptanceTester
 	 */
 	public function iSeeArticleUnpublishMessage($title, $message)
 	{
-		$I = $this;
-
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
+		$this->adminPage->seeSystemMessage($title, $message);
 	}
 
 	/**
@@ -282,9 +289,6 @@ class Content extends \AcceptanceTester
 	 */
 	public function iSeeArticleTrashMessage($title, $message)
 	{
-		$I = $this;
-
-		$I->waitForPageTitle($title);
-		$I->see($message, AdminPage::$systemMessageContainer);
+		$this->adminPage->seeSystemMessage($title, $message);
 	}
 }

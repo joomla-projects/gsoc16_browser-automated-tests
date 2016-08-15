@@ -68,4 +68,22 @@ class AdminPage extends \AcceptanceTester
 		$I->click(static::$iconSearch);
 		$I->checkAllResults();
 	}
+
+	/**
+	 * Method is used to see system message after waiting for page title.
+	 *
+	 * @param   string  $title    The webpage title
+	 * @param   string  $message  The unpublish successful message
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeSystemMessage($title, $message)
+	{
+		$I = $this;
+
+		$I->waitForPageTitle($title);
+		$I->see($message, self::$systemMessageContainer);
+	}
 }
