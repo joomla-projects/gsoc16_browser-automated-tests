@@ -11,6 +11,7 @@ namespace Step\Acceptance\Site;
 
 use Codeception\Scenario;
 use Codeception\Util\Locator;
+use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\UserManagerPage;
 use Page\Acceptance\Site\FrontPage;
 use Page\Acceptance\Site\FrontendLogin;
@@ -34,6 +35,15 @@ class UsersFrontend extends \AcceptanceTester
 	protected $userManagerPage = null;
 
 	/**
+	 * Admin Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $adminPage = null;
+
+	/**
 	 * User constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -46,6 +56,7 @@ class UsersFrontend extends \AcceptanceTester
 
 		// Initialize User Page Objects
 		$this->userManagerPage = new UserManagerPage($scenario);
+		$this->adminPage       = new AdminPage($scenario);
 	}
 
 	/**
@@ -84,12 +95,13 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->amOnPage(UserManagerPage::$url);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
+
+		// Looking for username
+		$I->adminPage->search($username);
 		$I->see('No Matching Results');
 
-		$I->fillField(UserManagerPage::$filterSearch, $email);
-		$I->click(UserManagerPage::$iconSearch);
+		// Looking for email
+		$I->adminPage->search($email);
 		$I->see('No Matching Results');
 	}
 
@@ -488,10 +500,7 @@ class UsersFrontend extends \AcceptanceTester
 	 */
 	public function iSearchTheUserWithName($name)
 	{
-		$I = $this;
-
-		$I->fillField(UserManagerPage::$filterSearch, $name);
-		$I->click(UserManagerPage::$iconSearch);
+		$this->adminPage->search($name);
 	}
 
 	/**
@@ -560,9 +569,7 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		$I = $this;
 
-		// @TODO needs to create common function to use search.
-		$I->fillField(UserManagerPage::$filterSearch, $name);
-		$I->click(UserManagerPage::$iconSearch);
+		$I->adminPage->search($name);
 
 		// Just make sure that we don't see "Never".
 		$I->dontSee('Never', UserManagerPage::$lastLoginDate);

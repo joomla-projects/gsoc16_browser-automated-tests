@@ -51,6 +51,23 @@ class AdminPage extends \AcceptanceTester
 	public static $iconSearch = ['class' => 'icon-search'];
 
 	/**
+	 * Method to search using user's name
+	 *
+	 * @param   string  $keyword  The keyword to search
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function search($keyword)
+	{
+		$I = $this;
+
+		$I->fillField(static::$filterSearch, $keyword);
+		$I->click(static::$iconSearch);
+	}
+
+	/**
 	 * Method to search user with username
 	 *
 	 * @param   string  $keyword  The username of user
@@ -64,8 +81,7 @@ class AdminPage extends \AcceptanceTester
 		$I = $this;
 
 		$I->amOnPage(static::$url);
-		$I->fillField(static::$filterSearch, $keyword);
-		$I->click(static::$iconSearch);
+		$I->search($keyword);
 		$I->checkAllResults();
 	}
 

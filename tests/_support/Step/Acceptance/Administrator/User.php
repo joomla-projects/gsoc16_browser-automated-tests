@@ -423,6 +423,7 @@ class User extends \AcceptanceTester
 	 *
 	 * @param   string  $groupTitle  Group title
 	 *
+	 * @Given I set group Title as a :grouptitle
 	 * @When I fill Group Title as a :grouptitle
 	 *
 	 * @since   __DEPLOY_VERSION__
@@ -469,24 +470,6 @@ class User extends \AcceptanceTester
 
 		$I->userGroupPage->haveItemUsingSearch($groupTitle);
 		$I->clickToolbarButton('edit');
-	}
-
-	/**
-	 * Method to set group title
-	 *
-	 * @param   string  $groupTitle  The group title
-	 *
-	 * @Given I set group Title as a :grouptitle
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iSetGroupTitleAsA($groupTitle)
-	{
-		$I = $this;
-
-		$I->fillField(UserManagerPage::$title, $groupTitle);
 	}
 
 	/**
