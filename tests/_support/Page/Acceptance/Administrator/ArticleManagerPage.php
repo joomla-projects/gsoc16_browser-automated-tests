@@ -43,22 +43,6 @@ class ArticleManagerPage extends AdminPage
 	public static $toggleEditor = "Toggle editor";
 
 	/**
-	 * Page object for search filter element of article listing page.
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $filterSearch = ['id' => 'filter_search'];
-
-	/**
-	 * Page object for search icon button of article listing page.
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $iconSearch = ['class' => 'icon-search'];
-
-	/**
 	 * Link to the article listing page.
 	 *
 	 * @var    string
