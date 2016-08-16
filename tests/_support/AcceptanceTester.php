@@ -144,13 +144,11 @@ class AcceptanceTester extends \Codeception\Actor
 				$I->click(['xpath' => "//div[@id='toolbar-options']//button"]);
 				break;
 			case "empty trash":
+			case "delete":
 				$I->click(['xpath' => "//div[@id='toolbar-delete']//button"]);
 				break;
 			case "unblock":
 				$I->click(['xpath' => "//div[@id='toolbar-unblock']//button"]);
-				break;
-			case "delete":
-				$I->click(['xpath' => "//div[@id='toolbar-delete']//button"]);
 				break;
 			case "featured":
 				$I->click(['xpath' => "//div[@id='toolbar-featured']//button"]);
