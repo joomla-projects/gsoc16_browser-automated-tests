@@ -9,7 +9,6 @@
 
 namespace Step\Acceptance\Administrator;
 
-use Codeception\Scenario;
 use Codeception\Util\Locator;
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\LoginPage;
@@ -24,52 +23,8 @@ use Page\Acceptance\Administrator\UserManagerPage;
  *
  * @since    __DEPLOY_VERSION__
  */
-class User extends \AcceptanceTester
+class User extends Admin
 {
-	/**
-	 * User Manager Page Object for this class
-	 *
-	 * @var     null|UserManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $userManagerPage = null;
-
-	/**
-	 * User Group Page Object for this class
-	 *
-	 * @var     null|UserManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $userGroupPage = null;
-
-	/**
-	 * User ACL Page Object for this class
-	 *
-	 * @var     null|UserManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $userAclPage = null;
-
-	/**
-	 * User constructor.
-	 *
-	 * @param   Scenario  $scenario  Scenario object
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	public function __construct(Scenario $scenario)
-	{
-		parent::__construct($scenario);
-
-		// Initialize User Page Objects
-		$this->userManagerPage = new UserManagerPage($scenario);
-		$this->userGroupPage   = new UserGroupPage($scenario);
-		$this->userAclPage     = new UserAclPage($scenario);
-	}
-
 	/**
 	 * Method to goto user management
 	 *
@@ -280,7 +235,7 @@ class User extends \AcceptanceTester
 		$I = $this;
 
 		$I->clickToolbarButton('New');
-		$I->waitForPageTitle('Users');
+		$I->adminPage->waitForPageTitle('Users');
 	}
 
 	/**
@@ -380,7 +335,7 @@ class User extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->waitForPageTitle($title);
+		$I->adminPage->waitForPageTitle($title);
 	}
 
 	/**

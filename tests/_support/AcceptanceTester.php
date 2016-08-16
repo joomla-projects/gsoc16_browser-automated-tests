@@ -35,21 +35,6 @@ class AcceptanceTester extends \Codeception\Actor
 	use _generated\AcceptanceTesterActions;
 
 	/**
-	 * Method is to Wait for page title untill default timeout.
-	 *
-	 * @param   string  $title  Page Title text
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function waitForPageTitle($title)
-	{
-		$I = $this;
-		$I->waitForText($title, TIMEOUT, AdminPage::$pageTitle);
-	}
-
-	/**
 	 * Function to check for PHP Notices or Warnings
 	 *
 	 * @param   string  $page  Optional, if not given checks will be done in the current page

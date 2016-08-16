@@ -9,7 +9,13 @@
 
 namespace Step\Acceptance\Administrator;
 
+use Codeception\Scenario;
 use Page\Acceptance\Administrator\AdminPage;
+use Page\Acceptance\Administrator\ArticleManagerPage;
+use Page\Acceptance\Administrator\CategoryManagerPage;
+use Page\Acceptance\Administrator\UserAclPage;
+use Page\Acceptance\Administrator\UserGroupPage;
+use Page\Acceptance\Administrator\UserManagerPage;
 
 /**
  * Acceptance Step object class for admin steps.
@@ -20,6 +26,80 @@ use Page\Acceptance\Administrator\AdminPage;
  */
 class Admin extends \AcceptanceTester
 {
+	/**
+	 * Admin Page Object for this class
+	 *
+	 * @var     null|ArticleManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $adminPage = null;
+
+	/**
+	 * Article Manager Page Object for this class
+	 *
+	 * @var     null|ArticleManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $articleManagerPage = null;
+
+	/**
+	 * Category Manager Page Object for this class
+	 *
+	 * @var     null|CategoryManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $categoryManagerPage = null;
+
+	/**
+	 * User Manager Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userManagerPage = null;
+
+	/**
+	 * User Group Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userGroupPage = null;
+
+	/**
+	 * User ACL Page Object for this class
+	 *
+	 * @var     null|UserManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $userAclPage = null;
+
+	/**
+	 * User constructor.
+	 *
+	 * @param   Scenario  $scenario  Scenario object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	public function __construct(Scenario $scenario)
+	{
+		parent::__construct($scenario);
+
+		// Initialize Page Objects
+		$this->adminPage           = new AdminPage($scenario);
+		$this->articleManagerPage  = new ArticleManagerPage($scenario);
+		$this->categoryManagerPage = new CategoryManagerPage($scenario);
+		$this->userManagerPage     = new UserManagerPage($scenario);
+		$this->userGroupPage       = new UserGroupPage($scenario);
+		$this->userAclPage         = new UserAclPage($scenario);
+	}
+
 	/**
 	 * Method to confirm message appear
 	 *

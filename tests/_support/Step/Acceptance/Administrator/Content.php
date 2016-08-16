@@ -9,8 +9,6 @@
 
 namespace Step\Acceptance\Administrator;
 
-use Codeception\Scenario;
-use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 
 /**
@@ -20,42 +18,8 @@ use Page\Acceptance\Administrator\ArticleManagerPage;
  *
  * @since    __DEPLOY_VERSION__
  */
-class Content extends \AcceptanceTester
+class Content extends Admin
 {
-	/**
-	 * Article Manager Page Object for this class
-	 *
-	 * @var     null|ArticleManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $articleManagerPage = null;
-
-	/**
-	 * Admin Page Object for this class
-	 *
-	 * @var     null|ArticleManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $adminPage = null;
-
-	/**
-	 * Category Step constructor.
-	 *
-	 * @param   Scenario  $scenario  Scenario object
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	public function __construct(Scenario $scenario)
-	{
-		parent::__construct($scenario);
-
-		// Initialize Category Manager Page Object
-		$this->articleManagerPage = new ArticleManagerPage($scenario);
-		$this->adminPage          = new AdminPage($scenario);
-	}
-
 	/**
 	 * Method to click toolbar button new from article manager listing page.
 	 *

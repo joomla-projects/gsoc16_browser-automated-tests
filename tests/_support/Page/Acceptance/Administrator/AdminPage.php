@@ -102,4 +102,19 @@ class AdminPage extends \AcceptanceTester
 		$I->waitForPageTitle($title);
 		$I->see($message, self::$systemMessageContainer);
 	}
+
+	/**
+	 * Method is to Wait for page title untill default timeout.
+	 *
+	 * @param   string  $title  Page Title text
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function waitForPageTitle($title)
+	{
+		$I = $this;
+		$I->waitForText($title, TIMEOUT, self::$pageTitle);
+	}
 }

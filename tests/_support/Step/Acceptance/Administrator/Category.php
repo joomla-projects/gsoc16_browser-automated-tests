@@ -9,10 +9,8 @@
 
 namespace Step\Acceptance\Administrator;
 
-use Codeception\Scenario;
 use Behat\Gherkin\Node\TableNode;
 use Page\Acceptance\Administrator\CategoryManagerPage;
-use Page\Acceptance\Administrator\ArticleManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Site\FrontPage;
 
@@ -23,42 +21,8 @@ use Page\Acceptance\Site\FrontPage;
  *
  * @since    __DEPLOY_VERSION__
  */
-class Category extends \AcceptanceTester
+class Category extends Admin
 {
-	/**
-	 * Category Manager Page Object for this class
-	 *
-	 * @var     null|CategoryManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $categoryManagerPage = null;
-
-	/**
-	 * Article Manager Page Object for this class
-	 *
-	 * @var     null|ArticleManagerPage
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	protected $articleManagerPage = null;
-
-	/**
-	 * Category Step constructor.
-	 *
-	 * @param   Scenario  $scenario  Scenario object
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 */
-	public function __construct(Scenario $scenario)
-	{
-		parent::__construct($scenario);
-
-		// Initialize Category Manager Page Object
-		$this->categoryManagerPage = new CategoryManagerPage($scenario);
-		$this->articleManagerPage  = new ArticleManagerPage($scenario);
-	}
-
 	/**
 	 * Category link
 	 *
@@ -408,7 +372,7 @@ class Category extends \AcceptanceTester
 	{
 		$I = $this;
 
-		$I->waitForPageTitle('Menus: New Item');
+		$I->adminPage->waitForPageTitle('Menus: New Item');
 		$I->clickToolbarButton('Save');
 	}
 
