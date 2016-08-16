@@ -19,14 +19,6 @@ namespace Page\Acceptance\Administrator;
 class ArticleManagerPage extends AdminPage
 {
 	/**
-	 * Page object for article title field.
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $title = ['id' => 'jform_title'];
-
-	/**
 	 * Page object for content body editor field.
 	 *
 	 * @var array

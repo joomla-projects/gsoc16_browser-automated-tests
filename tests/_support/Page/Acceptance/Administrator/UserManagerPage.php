@@ -99,14 +99,6 @@ class UserManagerPage extends AdminPage
 	public static $email2Field = ['id' => 'jform_email2'];
 
 	/**
-	 * Locator for user's page title
-	 *
-	 * @var    array
-	 * @since  __DEPLOY_VERSION__
-	 */
-	public static $title = ['id' => 'jform_title'];
-
-	/**
 	 * Locator for user's username field in frontend
 	 *
 	 * @var    array

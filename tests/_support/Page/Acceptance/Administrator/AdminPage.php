@@ -35,6 +35,14 @@ class AdminPage extends \AcceptanceTester
 	public static $pageTitle = ['class' => 'page-title'];
 
 	/**
+	 * Locator for user's page title
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $title = ['id' => 'jform_title'];
+
+	/**
 	 * Locator for user's search input field
 	 *
 	 * @var    array

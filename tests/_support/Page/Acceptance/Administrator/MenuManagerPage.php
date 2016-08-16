@@ -90,7 +90,7 @@ class MenuManagerPage extends AdminPage
 		$I->click("New");
 		$I->waitForText('Menus: New Item', '60', ['css' => 'h1']);
 		$I->checkForPhpNoticesOrWarnings();
-		$I->fillField(['id' => 'jform_title'], $title);
+		$I->fillField(self::$title, $title);
 	}
 
 	/**

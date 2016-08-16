@@ -102,7 +102,7 @@ class Category extends Admin
 		{
 			if ($index !== 0)
 			{
-				$I->fillField(CategoryManagerPage::$name, $row[0]);
+				$I->fillField(CategoryManagerPage::$title, $row[0]);
 
 				if ($index == $lastIndex)
 				{
@@ -169,7 +169,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->fillField(CategoryManagerPage::$name, $title);
+		$I->fillField(CategoryManagerPage::$title, $title);
 	}
 
 	/**
