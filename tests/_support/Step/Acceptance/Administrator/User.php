@@ -603,22 +603,6 @@ class User extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to goto user manage listing page.
-	 *
-	 * @Given There is a User link
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function thereIsAUserLink()
-	{
-		$I = $this;
-
-		$I->amOnPage(UserManagerPage::$url);
-	}
-
-	/**
 	 * Method to goto user settings
 	 *
 	 * @Given I goto the option setting

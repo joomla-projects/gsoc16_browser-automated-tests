@@ -206,6 +206,7 @@ class UsersFrontend extends \AcceptanceTester
 	 * Method to goto user manager page
 	 *
 	 * @Given I am on the User Manager page
+	 * @When I login as a super admin from backend
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -234,8 +235,7 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->waitForText('Users', TIMEOUT);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
+		$I->adminPage->search($username);
 	}
 
 	/**
@@ -273,8 +273,8 @@ class UsersFrontend extends \AcceptanceTester
 
 		$I->amOnPage(UserManagerPage::$url);
 		$I->waitForText(UserManagerPage::$pageTitleText, 60, UserManagerPage::$pageTitle);
-		$I->fillField(UserManagerPage::$filterSearch, $username);
-		$I->click(UserManagerPage::$iconSearch);
+
+		$I->adminPage->search($username);
 		$I->waitForElement(['link' => $username], 60);
 		$I->see($username, UserManagerPage::$seeName);
 	}
@@ -314,24 +314,6 @@ class UsersFrontend extends \AcceptanceTester
 
 		$I->fillField(FrontendLogin::$moduleUsername, $username);
 		$I->fillField(FrontendLogin::$modulePassword, $password);
-	}
-
-	/**
-	 * Method to click login button from login module
-	 *
-	 * @param   string  $login  Login button name
-	 *
-	 * @When I press on :arg1
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iPressOnButton($login)
-	{
-		$I = $this;
-
-		$I->click($login);
 	}
 
 	/**
@@ -470,24 +452,6 @@ class UsersFrontend extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to click edit profile button
-	 *
-	 * @param   string  $submit  The text of the submit button
-	 *
-	 * @When I press on :arg1 button
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iPressOn($submit)
-	{
-		$I = $this;
-
-		$I->click($submit);
-	}
-
-	/**
 	 * Method to search using user's name
 	 *
 	 * @param   string  $name  The name of user to search
@@ -536,22 +500,6 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		// Do nothing as user will be already logged in previous tests.
 		$I = $this;
-	}
-
-	/**
-	 * Method to login as a super admin in backend
-	 *
-	 * @When I login as a super admin from backend
-	 *
-	 * @since   __DEPLOY_VERSION__
-	 *
-	 * @return  void
-	 */
-	public function iLoginAsASuperAdminFromBackend()
-	{
-		$I = $this;
-
-		$I->amOnPage(UserManagerPage::$url);
 	}
 
 	/**
