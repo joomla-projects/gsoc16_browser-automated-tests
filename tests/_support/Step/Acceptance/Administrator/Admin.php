@@ -13,6 +13,7 @@ use Codeception\Scenario;
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 use Page\Acceptance\Administrator\CategoryManagerPage;
+use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Administrator\UserAclPage;
 use Page\Acceptance\Administrator\UserGroupPage;
 use Page\Acceptance\Administrator\UserManagerPage;
@@ -81,6 +82,15 @@ class Admin extends \AcceptanceTester
 	protected $userAclPage = null;
 
 	/**
+	 * Menu Manager Page Object for this class
+	 *
+	 * @var     null|MenuManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $menuManagerPage = null;
+
+	/**
 	 * User constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -98,6 +108,7 @@ class Admin extends \AcceptanceTester
 		$this->userManagerPage     = new UserManagerPage($scenario);
 		$this->userGroupPage       = new UserGroupPage($scenario);
 		$this->userAclPage         = new UserAclPage($scenario);
+		$this->menuManagerPage     = new MenuManagerPage($scenario);
 	}
 
 	/**

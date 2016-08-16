@@ -34,7 +34,7 @@ class Content extends Admin
 		$I = $this;
 
 		$I->amOnPage(ArticleManagerPage::$url);
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 	}
 
 	/**
@@ -67,7 +67,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('featured');
+		$I->adminPage->clickToolbarButton('featured');
 	}
 
 	/**
@@ -120,8 +120,8 @@ class Content extends Admin
 		$I->amOnPage(ArticleManagerPage::$url);
 		$I->fillField(ArticleManagerPage::$filterSearch, $title);
 		$I->click(ArticleManagerPage::$iconSearch);
-		$I->checkAllResults();
-		$I->clickToolbarButton('edit');
+		$I->adminPage->checkAllResults();
+		$I->adminPage->clickToolbarButton('edit');
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->selectOptionInChosenById('jform_access', $accessLevel);
+		$I->adminPage->selectOptionInChosenById('jform_access', $accessLevel);
 	}
 
 	/**
@@ -155,7 +155,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save & Close');
+		$I->adminPage->clickToolbarButton('Save & Close');
 	}
 
 	/**
@@ -187,7 +187,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('unpublish');
+		$I->adminPage->clickToolbarButton('unpublish');
 	}
 
 	/**
@@ -236,7 +236,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('trash');
+		$I->adminPage->clickToolbarButton('trash');
 	}
 
 	/**

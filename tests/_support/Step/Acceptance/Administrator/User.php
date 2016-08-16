@@ -39,7 +39,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->amOnPage(UserManagerPage::$url);
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 	}
 
 	/**
@@ -75,7 +75,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save & Close');
+		$I->adminPage->clickToolbarButton('Save & Close');
 	}
 
 	/**
@@ -94,7 +94,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->userManagerPage->haveItemUsingSearch($username);
-		$I->clickToolbarButton('edit');
+		$I->adminPage->clickToolbarButton('edit');
 	}
 
 	/**
@@ -149,7 +149,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('unpublish');
+		$I->adminPage->clickToolbarButton('unpublish');
 	}
 
 	/**
@@ -181,7 +181,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('unblock');
+		$I->adminPage->clickToolbarButton('unblock');
 	}
 
 	/**
@@ -201,7 +201,7 @@ class User extends Admin
 
 		$I->userManagerPage->haveItemUsingSearch($username);
 
-		$I->clickToolbarButton('delete');
+		$I->adminPage->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}
 
@@ -234,7 +234,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 		$I->adminPage->waitForPageTitle('Users');
 	}
 
@@ -255,7 +255,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->verifyAvailableTabs([$tab1, $tab2, $tab3]);
+		$I->adminPage->verifyAvailableTabs([$tab1, $tab2, $tab3]);
 	}
 
 	/**
@@ -291,7 +291,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->doAdministratorLogout();
+		$I->adminPage->doAdministratorLogout();
 		$I->fillField(LoginPage::$usernameField, $username);
 		$I->fillField(LoginPage::$passwordField, $password);
 		$I->click('Log in');
@@ -370,7 +370,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->amOnPage(UserGroupPage::$url);
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 	}
 
 	/**
@@ -405,7 +405,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save & Close');
+		$I->adminPage->clickToolbarButton('Save & Close');
 	}
 
 	/**
@@ -424,7 +424,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->userGroupPage->haveItemUsingSearch($groupTitle);
-		$I->clickToolbarButton('edit');
+		$I->adminPage->clickToolbarButton('edit');
 	}
 
 	/**
@@ -443,7 +443,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->userGroupPage->haveItemUsingSearch($groupTitle);
-		$I->clickToolbarButton('delete');
+		$I->adminPage->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}
 
@@ -461,7 +461,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->amOnPage(UserAclPage::$url);
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 	}
 
 	/**
@@ -496,7 +496,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save & Close');
+		$I->adminPage->clickToolbarButton('Save & Close');
 	}
 
 	/**
@@ -515,7 +515,7 @@ class User extends Admin
 		$I = $this;
 
 		$I->userAclPage->haveItemUsingSearch($levelTitle);
-		$I->clickToolbarButton('edit');
+		$I->adminPage->clickToolbarButton('edit');
 	}
 
 	/**
@@ -553,7 +553,7 @@ class User extends Admin
 
 		$I->userAclPage->haveItemUsingSearch($levelTitle);
 
-		$I->clickToolbarButton('delete');
+		$I->adminPage->clickToolbarButton('delete');
 		$I->acceptPopup();
 	}
 
@@ -570,7 +570,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('options');
+		$I->adminPage->clickToolbarButton('options');
 	}
 
 	/**
@@ -602,7 +602,7 @@ class User extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**

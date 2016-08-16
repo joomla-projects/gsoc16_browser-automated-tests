@@ -73,9 +73,9 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->amOnPage(UserManagerPage::$url);
-		$I->clickToolbarButton('options');
+		$I->adminPage->clickToolbarButton('options');
 		$I->click(Locator::contains('label', 'Yes'));
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**
@@ -350,7 +350,7 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->userManagerPage->haveItemUsingSearch($username);
-		$I->clickToolbarButton('unblock');
+		$I->adminPage->clickToolbarButton('unblock');
 	}
 
 	/**
@@ -369,7 +369,7 @@ class UsersFrontend extends \AcceptanceTester
 		$I = $this;
 
 		$I->userManagerPage->haveItemUsingSearch($username);
-		$I->clickToolbarButton('publish');
+		$I->adminPage->clickToolbarButton('publish');
 	}
 
 	/**

@@ -52,7 +52,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 		$I->waitForText('Articles: New Category');
 	}
 
@@ -74,7 +74,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->verifyAvailableTabs([$tab1, $tab2, $tab3, $tab4]);
+		$I->adminPage->verifyAvailableTabs([$tab1, $tab2, $tab3, $tab4]);
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
 
 		$totalRows = count($title->getRows());
 		$lastIndex = ($totalRows - 1);
@@ -106,11 +106,11 @@ class Category extends Admin
 
 				if ($index == $lastIndex)
 				{
-					$I->clickToolbarButton('Save');
+					$I->adminPage->clickToolbarButton('Save');
 				}
 				else
 				{
-					$I->clickToolbarButton('Save & New');
+					$I->adminPage->clickToolbarButton('Save & New');
 				}
 			}
 		}
@@ -129,7 +129,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**
@@ -150,8 +150,8 @@ class Category extends Admin
 		$I->amOnPage(CategoryManagerPage::$url);
 		$I->fillField(CategoryManagerPage::$filterSearch, $title);
 		$I->click(CategoryManagerPage::$iconSearch);
-		$I->checkAllResults();
-		$I->clickToolbarButton('edit');
+		$I->adminPage->checkAllResults();
+		$I->adminPage->clickToolbarButton('edit');
 	}
 
 	/**
@@ -201,7 +201,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('unpublish');
+		$I->adminPage->clickToolbarButton('unpublish');
 	}
 
 	/**
@@ -233,7 +233,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->clickToolbarButton('trash');
+		$I->adminPage->clickToolbarButton('trash');
 	}
 
 	/**
@@ -250,9 +250,10 @@ class Category extends Admin
 		$I = $this;
 
 		$I->amOnPage(CategoryManagerPage::$url);
-		$I->clickToolbarButton('New');
+		$I->adminPage->clickToolbarButton('New');
+
 		$I->waitForText('Articles: New Category');
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**
@@ -305,7 +306,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->prepareMenuItemCreate($title);
+		$I->menuManagerPage->prepareMenuItemCreate($title);
 	}
 
 	/**
@@ -324,7 +325,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->selectMenuItemType($title, $menuItem);
+		$I->menuManagerPage->selectMenuItemType($title, $menuItem);
 	}
 
 	/**
@@ -373,7 +374,7 @@ class Category extends Admin
 		$I = $this;
 
 		$I->adminPage->waitForPageTitle('Menus: New Item');
-		$I->clickToolbarButton('Save');
+		$I->adminPage->clickToolbarButton('Save');
 	}
 
 	/**
@@ -391,7 +392,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->selectOptionInChosenById('jform_catid', $name);
+		$I->adminPage->selectOptionInChosenById('jform_catid', $name);
 	}
 
 	/**
@@ -409,7 +410,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->selectOptionInChosenById('jform_request_id', $name);
+		$I->adminPage->selectOptionInChosenById('jform_request_id', $name);
 	}
 
 	/**
@@ -427,7 +428,7 @@ class Category extends Admin
 	{
 		$I = $this;
 
-		$I->selectOptionInChosenById('jform_language', $name);
+		$I->adminPage->selectOptionInChosenById('jform_language', $name);
 	}
 
 	/**
