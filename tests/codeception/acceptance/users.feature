@@ -41,50 +41,50 @@ Feature: users
 
   Scenario: Create super admin and login into the backend
     Given There is a add user link
-    And  I fill a super admin with fields Name "prital", Login Name "prital", Password "prital", and Email "prital@gmail.com"
+    And  I fill a super admin with fields Name "user1", Login Name "user1", Password "user1", and Email "user1@gmail.com"
     When I set assigned user group as an Administrator
     And I Save the user
-    Then Login in backend with username "prital" and password "prital"
+    Then Login in backend with username "user1" and password "user1"
 
   Scenario: Create User without username fails
     Given There is a add user link
-    When I don't fill Login Name but fulfill remaining mandatory fields: Name "piyu", Password "piyu" and Email "piyu@gmail.com"
+    When I don't fill Login Name but fulfill remaining mandatory fields: Name "user2", Password "user2" and Email "user2@gmail.com"
     And I Save the user
     Then I see the title "Users: New"
     But I see the alert error "Invalid field:  Login Name"
 
   Scenario: Create group
     Given There is a add new group link
-    When I fill Group Title as a "Gsoc"
+    When I fill Group Title as a "Group1"
     And I save the Group
     Then I should see the "Group successfully saved." message
 
   Scenario: Edit group
-    Given I search and select the Group with name "Gsoc"
-    And I set group Title as a "Gsoc_admin"
+    Given I search and select the Group with name "Group1"
+    And I set group Title as a "Group2"
     When I save the Group
     Then I should see the "Group successfully saved." message
 
   Scenario: Delete Group
-    Given I search and select the Group with name "Gsoc_admin"
-    When I Delete the Group "Gsoc_admin"
+    Given I search and select the Group with name "Group2"
+    When I Delete the Group "Group2"
     Then I should see the "1 User Group successfully deleted." message
 
   Scenario: Create ACL level
     Given There is a add viewing access level link
-    When I fill Level Title as a "joomla" and set Access as a public
+    When I fill Level Title as a "Acl1" and set Access as a public
     And I save the Access Level
     Then I should see the "Access level successfully saved." message
 
   Scenario: Edit ACL
-    Given I search and select the Access Level with name "joomla"
-    And I set Access Level title as a "Gsoc_joomla"
+    Given I search and select the Access Level with name "Acl1"
+    And I set Access Level title as a "Acl2"
     When I save the Access Level
     Then I should see the "Access level successfully saved." message
 
   Scenario: Delete ACL
-    Given I search and select the Access Level with name "Gsoc_joomla"
-    When I Delete the Access level "Gsoc_joomla"
+    Given I search and select the Access Level with name "Acl2"
+    When I Delete the Access level "Acl2"
     Then I should see the "1 View Access Level successfully removed." message
 
   Scenario: User settings (Allow user registration)
