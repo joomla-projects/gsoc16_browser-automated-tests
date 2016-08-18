@@ -14,7 +14,7 @@ Feature: users
 
   Scenario: Create a add new user
     Given There is a add user link
-    When I create new user with fields Name "register", Login Name "register", Password "register" and Email "register@gmail.com"
+    When I create new user with fields Name "register", Login Name "register", Password "register" and Email "register@example.com"
     And I Save the user
     Then I should see the "User successfully saved." message
 
@@ -41,14 +41,14 @@ Feature: users
 
   Scenario: Create super admin and login into the backend
     Given There is a add user link
-    And  I fill a super admin with fields Name "User One", Login Name "User One", Password "pass1", and Email "UserOne@gmail.com"
+    And  I fill a super admin with fields Name "User One", Login Name "user1", Password "pass1", and Email "user1@example.com"
     When I set assigned user group as an Administrator
     And I Save the user
     Then Login in backend with username "User One" and password "pass1"
 
   Scenario: Create User without username fails
     Given There is a add user link
-    When I don't fill Login Name but fulfill remaining mandatory fields: Name "User Two", Password "pass2" and Email "UserTwo@gmail.com"
+    When I don't fill Login Name but fulfill remaining mandatory fields: Name "User Two", Password "pass2" and Email "user2@example.com"
     And I Save the user
     Then I see the title "Users: New"
     But I see the alert error "Invalid field:  Login Name"
