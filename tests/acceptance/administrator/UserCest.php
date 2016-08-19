@@ -3,8 +3,8 @@
  * @package		 Joomla
  * @subpackage	tests
  *
- * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
- * @license     GNU General Public License version 2 or later; see LICENSE.txt
+ * @copyright		Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
+ * @license			GNU General Public License version 2 or later; see LICENSE.txt
  */
 class UserCest
 {
@@ -32,7 +32,7 @@ class UserCest
 		$I->amGoingTo('try to save a user with a filled name, email, username and password');
 		$I->clickToolbarButton('New');
 
-		$I->waitForText('Users: New', 30, ['class' => 'page-title']);
+		$I->waitForText('Users: New', TIMEOUT, ['class' => 'page-title']);
 		$I->checkForPhpNoticesOrWarnings();
 
 		$I->fillField(['id' => 'jform_name'], $this->name);
@@ -43,7 +43,7 @@ class UserCest
 
 		$I->clickToolbarButton('Save & Close');
 
-		$I->waitForText('Users', 30, ['class' => 'page-title']);
+		$I->waitForText('Users', TIMEOUT, ['class' => 'page-title']);
 		$I->expectTo('see a success message and the user added after saving the user');
 		$I->see('User successfully saved', ['id' => 'system-message-container']);
 	}
@@ -61,17 +61,17 @@ class UserCest
 		$I->checkForPhpNoticesOrWarnings();
 		$I->click($this->name);
 		$I->checkForPhpNoticesOrWarnings();
-		$I->waitForText('Users: Edit', 30, ['class' => 'page-title']);
+		$I->waitForText('Users: Edit', TIMEOUT, ['class' => 'page-title']);
 		$I->fillField(['id' => 'jform_name'], $this->name . '-edited');
 		$I->fillField(['id' => 'jform_username'], $this->username. '-edited');
 		$I->fillField(['id' => 'jform_email'], 'edited-' . $this->email);
 		$I->click('Save & Close');
-		$I->waitForText('Users', 30, ['class' => 'page-title']);
+		$I->waitForText('Users', TIMEOUT, ['class' => 'page-title']);
 		$I->checkForPhpNoticesOrWarnings();
 		$I->expectTo('see a success message and the user has been updated');
 		$I->see('User successfully saved', ['id' => 'system-message-container']);
 		$I->searchForItem($this->name . '-edited');
-		$I->waitForText('Users', 30, ['class' => 'page-title']);
+		$I->waitForText('Users', TIMEOUT, ['class' => 'page-title']);
 		$I->checkForPhpNoticesOrWarnings();
 		$I->expectTo('see the edited username is listed');
 		$I->waitForText($this->name);
@@ -129,11 +129,11 @@ class UserCest
 		$I->checkForPhpNoticesOrWarnings();
 
 		$I->searchForItem($this->name);
-		$I->waitForText('Users', 30, ['class' => 'page-title']);
+		$I->waitForText('Users', TIMEOUT, ['class' => 'page-title']);
 		$I->click(['id' => 'cb0']);
 		$I->click('Delete');
 		$I->acceptPopup();
-		$I->waitForText('Users', 30, ['class' => 'page-title']);
+		$I->waitForText('Users', TIMEOUT, ['class' => 'page-title']);
 		$I->checkForPhpNoticesOrWarnings();
 		$I->expectTo('see a success message and the user is deleted');
 		$I->see('User successfully deleted', ['id' => 'system-message-container']);
