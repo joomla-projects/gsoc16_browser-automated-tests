@@ -1,164 +1,92 @@
-[Browser Automated Tests for Joomla! CMS(covering Users and Content features - GSoC 16)](https://summerofcode.withgoogle.com/projects/#5724182314745856)
-===
+Joomla! CMS™ [![Analytics](https://ga-beacon.appspot.com/UA-544070-3/joomla-cms/readme)](https://github.com/igrigorik/ga-beacon)
+====================
 
-Abstract
----
-System development nowadays more than ever starts to look for automated test methods. There are several main drivers for this trend,
-+ Need for faster design‐develop‐test‐analysis cycle
-+ Push for higher quality
-+ Increasing complexity of systems and their integration and last but not least
-+ Ever‐rising costs of manual testing
- 
-Automation Testing means using an automation tool to execute test case suite. The automation software can also enter test data into the System Under Test, compare expected and actual results and generate detailed test reports.
+Build Status
+---------------------
+Travis-CI: [![Build Status](https://travis-ci.org/joomla/joomla-cms.svg?branch=staging)](https://travis-ci.org/joomla/joomla-cms)
+Jenkins: [![Build Status](http://build.joomla.org/job/cms/badge/icon)](http://build.joomla.org/job/cms/)
 
-Test Automation demands considerable investments of money and resources. Successive development cycles will require execution of same test suite repeatedly. Using a test automation tool it's possible to record this test suite and re-play it as required. Once the test suite is automated, no human intervention is required.
+What is this?
+---------------------
+* This is a Joomla! 3.x installation/upgrade package.
+* Joomla's [Official website](https://www.joomla.org).
+* Joomla! 3.6 [version history](https://docs.joomla.org/Joomla_3.6_version_history).
+* Detailed changes are in the [changelog](https://github.com/joomla/joomla-cms/commits/master).
 
-BDD Testing with Gherkin and Codeception
----
+What is Joomla?
+---------------------
+* [Joomla](https://www.joomla.org/about-joomla.html) is a **Content Management System** (CMS) which enables you to build websites and powerful online applications.
+* It is a simple and powerful web server application which requires a server with PHP and either MySQL, PostgreSQL or SQL Server to run. You can find [full technical requirements here](https://www.joomla.org/about-joomla/technical-requirements.html).
+* Joomla is **free and OpenSource software** distributed under the GNU General Public License version 2 or later.
 
-### What is Gherkin – BDD Language?
+Is Joomla! for you?
+---------------------
+* Joomla is [the right solution for most content web projects](https://docs.joomla.org/Portal:Learn_More).
+* View Joomla's [core features here](https://www.joomla.org/core-features.html).
+* Try it out for yourself in our [online demo](https://demo.joomla.org).
 
-* Gherkin is a **human-readable** language for system behaviour description.
-* Gherkin is a _natural_ language for testing that **Codeception** uses to define test cases.
-* The test is written in plain `English` which is common to all the domains of project team.
-* Test cases were designed to be **non-technical** and **human readable**, and **collectively describes**.
-* This test is structured that makes it capable of being read in an automated way. 
-* Gherkin file have a `.feature` extention.
+How to find a Joomla! translation?
+---------------------
+* Repository of [accredited language packs](https://community.joomla.org/translations.html).
+* You can also [add languages](https://docs.joomla.org/J3.x:Setup_a_Multilingual_Site/Installing_New_Language) directly to your website via your Joomla! administration panel.
+* Learn how to [setup a Multilingual Joomla! Site](https://docs.joomla.org/J3.x:Setup_a_Multilingual_Site)
 
-### Benefits of Gherkin?
+Learn Joomla!
+---------------------
+* Read ['Getting Started with Joomla!'](https://docs.joomla.org/J3.x:Getting_Started_with_Joomla!) to learn the basics.
+* Before installing, read the ['Beginners' Guide'](https://docs.joomla.org/Portal:Beginners).
 
-### Main Keywords In Gherkin
+What are the benefits of Joomla?
+---------------------
+* The functionality of a Joomla website can be extended by installing extensions that you can create (or download) to suit your needs.
+* There are many ready-made extensions that you can download and install.
+* Check out the [Joomla! Extensions Directory (JED)](http://extensions.joomla.org).
 
-* Feature
-* Scenario
-* Given, When, Then, And, But (Steps)
-* Background
-* Scenario outline
-* Examples
+Is it easy to change the layout display?
+---------------------
+* The layout is controlled by templates that you can edit.
+* There are a lot of ready-made professional templates that you can download.
+* Template management information is [available here](https://docs.joomla.org/Portal:Template_Management).
 
+Ready to install Joomla?
+---------------------
+* Check the [minimum requirements](https://www.joomla.org/about-joomla/technical-requirements.html). 
+* How do you [install Joomla](https://docs.joomla.org/J3.x:Installing_Joomla)?
+* You could start your Joomla! experience by [building your site on a local test server](https://docs.joomla.org/Installing_Joomla_locally).
+When ready, it can be moved to an online hosting account of your choice.
 
-### Example
-Create a .feature using command `tests/vendor/bin/codecept generate:feature acceptance content`
+Updates are free!
+---------------------
+* Always use the [latest version](https://www.joomla.org/download.html).
 
-File `content.feature` contains,
+Where can you get support and help?
+---------------------
+* [The Joomla! Documentation](https://docs.joomla.org/Main_Page);
+* [Frequently Asked Questions](https://docs.joomla.org/Category:FAQ) (FAQ);
+* Find the [information you need](https://docs.joomla.org/Start_here);
+* Find [help and other users](https://www.joomla.org/about-joomla/create-and-share.html);
+* Post questions at [our forums](http://forum.joomla.org);
+* [Joomla Resources Directory](http://resources.joomla.org/) (JRD).
 
-```gherkin
-Feature: content
-  In order to manage content article in the web
-  As an owner
-  I need to create modify trash publish and Unpublish content article
+Do you already have a Joomla! site that isn't built with Joomla! 3.x?
+---------------------
+* What's [new in Joomla! 3.x](https://www.joomla.org/3)?
+* What are the [main differences between 2.5 and 3.x](https://docs.joomla.org/What_are_the_major_differences_between_Joomla!_2.5_and_3.x%3F)?
+* How to [migrate from 2.5.x to 3.x](https://docs.joomla.org/Joomla_2.5_to_3.x_Step_by_Step_Migration).
+* How to [migrate from 1.5.x to 3.x](https://docs.joomla.org/Joomla_1.5_to_3.x_Step_by_Step_Migration).
 
-  Background:
-    Given Joomla CMS is installed
-    When Login into Joomla administrator with username "admin" and password "admin"
-    Then I see administrator dashboard
+Do you want to improve Joomla?
+--------------------
+* Where to [request a feature](https://issues.joomla.org/)?
+* How do you [report a bug](https://docs.joomla.org/Filing_bugs_and_issues) on the [Issue Tracker](https://issues.joomla.org/)?
+* Get Involved: Joomla! is community developed software. [Join the community](https://volunteers.joomla.org/).
+* Documentation for [Developers](https://docs.joomla.org/Portal:Developers).
+* Documentation for [Web designers](https://docs.joomla.org/Web_designers).
 
-  Scenario: Create an Article
-    Given There is a add content link
-    When I create new content with field title as "My_Article" and content as a "This is my first article"
-    And I save an article
-    Then I should see the "Article successfully saved." message
-```
-Generate snippets of .featuer file using command `tests/vendor/bin/codecept gherkin:snippets acceptance`
-
-```snippets
-/**
-     * @Given There is a add content link
-     */
-     public function thereIsAAddContentLink()
-     {
-        throw new \Codeception\Exception\Incomplete("Step `There is a add content link` is not defined");
-     }
-     
-    /**
-     * @When I create new content with field title as :arg1 and content as a :arg2
-     */
-     public function iCreateNewContentWithFieldTitleAsAndContentAsA($arg1, $arg2)
-     {
-        throw new \Codeception\Exception\Incomplete("Step `I create new content with field title as :arg1 and content as a :arg2` is not defined");
-     }
-     
-    /**
-     * @When I save an article
-     */
-     public function iSaveAnArticle()
-     {
-        throw new \Codeception\Exception\Incomplete("Step `I save an article` is not defined");
-     }
-     
-```
-Copy the all snippets and put in stepobject file
-
-Create a stepobject file using command `tests/vendor/bin/codecept generate:stepobject acceptance Administrator/content`
-
-Define your step file path in `acceptance.suit.yml file` 
-
-For Example `- Step\Acceptance\Administrator\Content`
-
-### Installation
-
-1. Clone this repository using command below or download source from [here](https://github.com/joomla-projects/gsoc16_browser-automated-tests/archive/staging.zip)
-
-    ```bash
-    $ git clone git@github.com:joomla-projects/gsoc16_browser-automated-tests.git
-    ```
-
-2. Install `composer` in your system. Read more about [how to install composer](https://getcomposer.org/doc/00-intro.md) here.
-
-3. Install composer packages using following steps from root directory of this project.
-_We are using `composer.json` file for `tests` folder, so that you will have to run composer install from tests directory._
-
-    ```bash
-    $ cd tests && composer install
-    ```
-
-4. Copy `tests/acceptance.suite.dist.yml` to `tests/acceptance.suite.yml` and change settings according to your webserver.
-
-    ```
-    $ cp acceptance.suite.dist.yml acceptance.suite.yml
-    ```
-
-5. Get back to project root direcoty using `$ cd ..`
-
-### Run tests
-
-To run the tests please execute the following commands. We are using [Robo.li](http://robo.li/) to execute [PhpUnit](https://phpunit.de/) based [Codeception](http://codeception.com/for/joomla) test suits.
-
-#### To execute all the test features you should use.
-
-```bash
-$ tests/vendor/bin/robo run:tests
-```
-
-#### You can individual run `feature` using following command.
-
-```bash
-$ tests/vendor/bin/robo run:test
-```
-
-Or you can manually run them using codecept command. Check the following example:
-
-```bash
-$ tests/vendor/bin/codecept run tests/acceptance/users.feature
-```
-
-If you want to see steps then you can use `--steps` option of codeception. Check [full codecept command list here](http://codeception.com/docs/reference/Commands#Run)_
-
-**Note**:You can modify the timeout time by setting the value of **TIMEOUT** constant lower for fast machines and higher for slow computers. The constant located in the file `tests/acceptance/_bootstrap.php`
-
-Do you have suggestions?
----
-Please create an issue here https://github.com/joomla-projects/gsoc16_browser-automated-tests/issues we will be happy to discuss and improve project.
-
-Mentors
----
-+ Javier Gomez
-+ Yves Hoppe
-+ Niels Braczek
- 
 Copyright
 ---------------------
 * Copyright (C) 2005 - 2016 Open Source Matters. All rights reserved.
 * [Special Thanks](https://docs.joomla.org/Joomla!_Credits_and_Thanks)
 * Distributed under the GNU General Public License version 2 or later
 * See [License details](https://docs.joomla.org/Joomla_Licenses)
+
