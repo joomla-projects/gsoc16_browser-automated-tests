@@ -191,15 +191,24 @@ class UsersFrontend extends \AcceptanceTester
 	/**
 	 * Method to declare user is created
 	 *
-	 * @Then user is created
+	 * @param   string  $username  The username to look for.
+	 *
+	 * @Then user :username is created
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function userIsCreated()
+	public function userIsCreated($username)
 	{
 		$I = $this;
+
+		$I->amOnPage(UserManagerPage::$url);
+
+		// Looking for username
+		$I->adminPage->search($username);
+		$I->see($username, UserManagerPage::$seeName);
+
 		$I->comment('User is created');
 	}
 

@@ -14,7 +14,7 @@ Feature: Users Frontend
     And I create a user with fields Name "User Two", Username "user2", Password "pass2" and Email "user2@example.com"
     And I press the "Register" button
     Then I should see "Could not instantiate mail function." message
-    And user is created
+    And user "User Two" is created
 
   Scenario: check the created user in the backend
     Given I am on the User Manager page
