@@ -500,13 +500,13 @@ class UsersFrontend extends \AcceptanceTester
 	 *
 	 * @param   string  $name  The name of the user
 	 *
-	 * @When    I Needs to user :arg1 logged in at least once
+	 * @Given User :arg1 did login at least once
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function needsToUserLoggedInAtLeastOnce($name)
+	public function UserLogInAtLeastOnce($name)
 	{
 		// Do nothing as user will be already logged in previous tests.
 		$I = $this;

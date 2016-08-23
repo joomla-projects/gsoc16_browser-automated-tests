@@ -47,6 +47,6 @@ Feature: Users Frontend
 
   Scenario: Test last login date
     Given I am on the User Manager page
-    When I Needs to user "User Two" logged in at least once
-    And I login as a super admin from backend
+    And User "User Three" did login at least once
+    When I login as a super admin from backend
     Then I should see last login date for "User Three"
