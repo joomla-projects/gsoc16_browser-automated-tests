@@ -22,7 +22,7 @@ Feature: content
     Given I select the content article with title "Article One"
     When I set access level as a "Registered"
     And I save the article
-    Then I should see the "Registered" as the access level
+    Then I should see the "Registered" as article access level
 
   Scenario: Unpublish an article
     Given I have article with name "Article One"

@@ -67,7 +67,7 @@ class ArticleManagerPage extends AdminPage
 	public static $seeAccessLevel = ['xpath' => "//table[@id='articleList']//tr[1]//td[5]"];
 
 	/**
-	 * Locator for article's featured icon
+	 * Locator for article's unpublish icon
 	 *
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__

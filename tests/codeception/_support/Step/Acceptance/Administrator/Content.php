@@ -73,19 +73,19 @@ class Content extends Admin
 	/**
 	 * Method to save an article
 	 *
-	 * @param   string  $text  The article Name
+	 * @param   string  $article  The article Name
 	 *
-	 * @Then I should see the article :text is created
+	 * @Then I should see the article :article is created
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function seeTheArticleIsCreated($text)
+	public function seeTheArticleIsCreated($article)
 	{
 		$I = $this;
 
-		$I->articleManagerPage->seeItemIsCreated($text);
+		$I->articleManagerPage->seeItemIsCreated($article);
 	}
 
 	/**
@@ -194,13 +194,13 @@ class Content extends Admin
 	 *
 	 * @param   string  $accessLevel  The name of access level which needs to be verify
 	 *
-	 * @Then I should see the :accessLevel as the access level
+	 * @Then I should see the :accessLevel as article access level
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iShouldSeeTheAsTheAccessLevel($accessLevel)
+	public function iShouldSeeTheArticleAsTheAccessLevel($accessLevel)
 	{
 		$I = $this;
 
