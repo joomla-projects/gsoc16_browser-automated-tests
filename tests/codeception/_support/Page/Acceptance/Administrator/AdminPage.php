@@ -116,6 +116,7 @@ class AdminPage extends \AcceptanceTester
 		$I->amOnPage(static::$url);
 		$I->search($keyword);
 		$I->checkAllResults();
+		$I->wait(1);
 	}
 
 	/**

@@ -79,6 +79,24 @@ class User extends Admin
 	}
 
 	/**
+	 * Method to see user is saved
+	 *
+	 * @param   string  $name  The user's Name
+	 *
+	 * @Then I should see the user :name is created
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeTheUserIsCreated($name)
+	{
+		$I = $this;
+
+		$I->userManagerPage->seeItemIsCreated($name);
+	}
+
+	/**
 	 * Method to search and select user with username
 	 *
 	 * @param   string  $username  The username of user
@@ -185,6 +203,40 @@ class User extends Admin
 	}
 
 	/**
+	 * Confirm the user is blocked
+	 *
+	 * @Then I should see the user is now blocked
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheUserIsNowBlocked()
+	{
+		$I = $this;
+
+		$I->adminPage->waitForPageTitle('Users');
+		$I->seeNumberOfElements(UserManagerPage::$seeBlocked, 1);
+	}
+
+	/**
+	 * Confirm the user is unblocked
+	 *
+	 * @Then I should see the user is now unblocked
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheUserIsNowUnblocked()
+	{
+		$I = $this;
+
+		$I->adminPage->waitForPageTitle('Users');
+		$I->seeNumberOfElements(UserManagerPage::$seeUnblocked, 1);
+	}
+
+	/**
 	 * Method to delete user
 	 *
 	 * @param   string  $username  The username of user to delete
@@ -203,6 +255,25 @@ class User extends Admin
 
 		$I->adminPage->clickToolbarButton('delete');
 		$I->acceptPopup();
+	}
+
+	/**
+	 * Confirm the user is now deleted
+	 *
+	 * @param   string  $message  The message for no item in list
+	 *
+	 * @Then I should see :message for deleted user
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheUserIsNowDeleted($message)
+	{
+		$I = $this;
+
+		$I->wait(1);
+		$I->see($message, UserManagerPage::$noItems);
 	}
 
 	/**
@@ -273,6 +344,24 @@ class User extends Admin
 
 		$I->click('Assigned User Groups');
 		$I->checkOption('#1group_7');
+	}
+
+	/**
+	 * Method to check group is created
+	 *
+	 * @param   string  $name  The group Name
+	 *
+	 * @Then I should see the group :name is created
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeTheUserGroupIsCreated($name)
+	{
+		$I = $this;
+
+		$I->userGroupPage->seeItemIsCreated($name);
 	}
 
 	/**
@@ -497,6 +586,24 @@ class User extends Admin
 		$I = $this;
 
 		$I->adminPage->clickToolbarButton('Save & Close');
+	}
+
+	/**
+	 * Method to check access level is created
+	 *
+	 * @param   string  $name  The access level Name
+	 *
+	 * @Then I should see the access level :name is created
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeTheUserAclIsCreated($name)
+	{
+		$I = $this;
+
+		$I->userAclPage->seeItemIsCreated($name);
 	}
 
 	/**

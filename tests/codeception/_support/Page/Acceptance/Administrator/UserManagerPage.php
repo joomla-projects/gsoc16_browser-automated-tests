@@ -123,6 +123,30 @@ class UserManagerPage extends AdminPage
 	public static $lastLoginDate = ['xpath' => "//table[@id='userList']//tr[1]/td[8]"];
 
 	/**
+	 * Locator for user is blocked
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $seeBlocked = ['xpath' => "//table[@id='userList']//*//td[4]//span[@class='icon-unpublish']"];
+
+	/**
+	 * Locator for user is unblocked
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $seeUnblocked = ['xpath' => "//table[@id='userList']//*//td[4]//span[@class='icon-publish']"];
+
+	/**
+	 * Locator for user is deleted and not found
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $noItems = ['class' => 'alert-no-items'];
+
+	/**
 	 * Method is a page object to fill user form with given information and prepare to save user.
 	 *
 	 * @param   string  $name      User's name
