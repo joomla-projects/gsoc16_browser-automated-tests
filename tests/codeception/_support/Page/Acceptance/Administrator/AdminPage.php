@@ -313,7 +313,7 @@ class AdminPage extends \AcceptanceTester
 	 *
 	 * @return  void
 	 */
-	public function verifyAvailableTabs($expectedTabs, $tabsLocator = NULL)
+	public function verifyAvailableTabs($expectedTabs, $tabsLocator = null)
 	{
 		$I = $this;
 
@@ -329,5 +329,44 @@ class AdminPage extends \AcceptanceTester
 		);
 
 		$I->comment('Verify the Tabs');
+	}
+
+	/**
+	 * Method to see that item is saved
+	 *
+	 * @param   string  $item  The item Name
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeItemIsCreated($item)
+	{
+		$I = $this;
+
+		$I->amOnPage(static::$url);
+		$I->search($item);
+		$I->see($item, static::$seeName);
+	}
+
+	/**
+	 * Assure the item is trashed.
+	 *
+	 * @param   string  $item       The item name
+	 * @param   string  $pageTitle  The page title
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeItemInTrash($item, $pageTitle)
+	{
+		$I = $this;
+
+		$I->click('Search Tools');
+		$I->wait(2);
+		$I->selectOptionInChosenById(static::$filterPublished, 'Trashed');
+		$I->waitForPageTitle($pageTitle);
+		$I->see($item, static::$seeName);
 	}
 }

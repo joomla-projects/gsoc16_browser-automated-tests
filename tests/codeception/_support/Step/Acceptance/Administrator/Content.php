@@ -75,19 +75,17 @@ class Content extends Admin
 	 *
 	 * @param   string  $text  The article Name
 	 *
-	 * @Then I should see the :text is created
+	 * @Then I should see the article :text is created
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iShouldSeeTheIsCreated($text)
+	public function seeTheArticleIsCreated($text)
 	{
 		$I = $this;
 
-		$I->amOnPage(ArticleManagerPage::$url);
-		$I->adminPage->search($text);
-		$I->see($text, ArticleManagerPage::$seeName);
+		$I->articleManagerPage->seeItemIsCreated($text);
 	}
 
 	/**
@@ -294,7 +292,7 @@ class Content extends Admin
 	 *
 	 * @param   string  $article  The article name
 	 *
-	 * @Then I should see the :article in trash
+	 * @Then I should see the article :article in trash
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -304,10 +302,6 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->click('Search Tools');
-		$I->wait(2);
-		$I->adminPage->selectOptionInChosenById(ArticleManagerPage::$filterPublished, 'Trashed');
-		$I->articleManagerPage->waitForPageTitle('Articles');
-		$I->see($article, ArticleManagerPage::$seeName);
+		$I->articleManagerPage->seeItemInTrash($article, 'Articles');
 	}
 }
