@@ -71,6 +71,26 @@ class Content extends Admin
 	}
 
 	/**
+	 * Method to save an article
+	 *
+	 * @param   string  $text  The article Name
+	 *
+	 * @Then I should see the :text is created
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheIsCreated($text)
+	{
+		$I = $this;
+
+		$I->amOnPage(ArticleManagerPage::$url);
+		$I->adminPage->search($text);
+		$I->see($text, ArticleManagerPage::$seeName);
+	}
+
+	/**
 	 * Method to search and select article
 	 *
 	 * @param   string  $title  The title of the article which should be searched
@@ -103,6 +123,22 @@ class Content extends Admin
 	}
 
 	/**
+	 * Method to assure that article is featured
+	 *
+	 * @Then I should see the article is now featured
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheArticleIsFeatured()
+	{
+		$I = $this;
+
+		$I->seeNumberOfElements(ArticleManagerPage::$seeFeatured, 1);
+	}
+
+	/**
 	 * Method to select an article
 	 *
 	 * @param   string  $title  The article title which should be select
@@ -117,10 +153,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->amOnPage(ArticleManagerPage::$url);
-		$I->fillField(ArticleManagerPage::$filterSearch, $title);
-		$I->click(ArticleManagerPage::$iconSearch);
-		$I->adminPage->checkAllResults();
+		$I->articleManagerPage->haveItemUsingSearch($title);
 		$I->adminPage->clickToolbarButton('edit');
 	}
 
@@ -159,6 +192,24 @@ class Content extends Admin
 	}
 
 	/**
+	 * Method to set access level
+	 *
+	 * @param   string  $accessLevel  The name of access level which needs to be verify
+	 *
+	 * @Then I should see the :accessLevel as the access level
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iShouldSeeTheAsTheAccessLevel($accessLevel)
+	{
+		$I = $this;
+
+		$I->see($accessLevel, ArticleManagerPage::$seeAccessLevel);
+	}
+
+	/**
 	 * Method to get an article
 	 *
 	 * @param   string  $title  The title of the article.
@@ -191,20 +242,19 @@ class Content extends Admin
 	}
 
 	/**
-	 * Confirm the article unpublish message
+	 * Confirm the article is unpublished
 	 *
-	 * @param   string  $title    The webpage title
-	 * @param   string  $message  The unpublish successful message
-	 *
-	 * @Then I wait for title :title and see the unpublish message :message
+	 * @Then I should see the article is now unpublished
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iSeeArticleUnpublishMessage($title, $message)
+	public function iShouldSeeTheArticleIsNowUnpublished()
 	{
-		$this->adminPage->seeSystemMessage($title, $message);
+		$I = $this;
+
+		$I->seeNumberOfElements(ArticleManagerPage::$seeUnpublished, 1);
 	}
 
 	/**
@@ -242,17 +292,22 @@ class Content extends Admin
 	/**
 	 * Assure the article is trashed.
 	 *
-	 * @param   string  $title    The webpage title.
-	 * @param   string  $message  The article trashed successful message
+	 * @param   string  $article  The article name
 	 *
-	 * @Then I wait for the title :title and see article trash message :message
+	 * @Then I should see the :article in trash
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iSeeArticleTrashMessage($title, $message)
+	public function iShouldSeeTheInTrash($article)
 	{
-		$this->adminPage->seeSystemMessage($title, $message);
+		$I = $this;
+
+		$I->click('Search Tools');
+		$I->wait(2);
+		$I->adminPage->selectOptionInChosenById(ArticleManagerPage::$filterPublished, 'Trashed');
+		$I->articleManagerPage->waitForPageTitle('Articles');
+		$I->see($article, ArticleManagerPage::$seeName);
 	}
 }

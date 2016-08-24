@@ -99,7 +99,7 @@ class UserManagerPage extends AdminPage
 	public static $email2Field = ['id' => 'jform_email2'];
 
 	/**
-	 * Locator for user's username field in frontend
+	 * Locator for user's username field
 	 *
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
@@ -107,7 +107,7 @@ class UserManagerPage extends AdminPage
 	public static $seeUserName = ['xpath' => "//table[@id='userList']//tr[1]/td[3]"];
 
 	/**
-	 * Locator for user's name field in frontend
+	 * Locator for user's name field
 	 *
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
