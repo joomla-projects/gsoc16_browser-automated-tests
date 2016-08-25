@@ -205,34 +205,40 @@ class User extends Admin
 	/**
 	 * Confirm the user is blocked
 	 *
-	 * @Then I should see the user is now blocked
+	 * @param   string  $name  The user name to be assured
+	 *
+	 * @Then I should see the user :name is now blocked
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iShouldSeeTheUserIsNowBlocked()
+	public function iShouldSeeTheUserIsNowBlocked($name)
 	{
 		$I = $this;
 
 		$I->adminPage->waitForPageTitle('Users');
+		$I->userManagerPage->search($name);
 		$I->seeNumberOfElements(UserManagerPage::$seeBlocked, 1);
 	}
 
 	/**
 	 * Confirm the user is unblocked
 	 *
-	 * @Then I should see the user is now unblocked
+	 * @param   string  $name  The user name to be assured
+	 *
+	 * @Then I should see the user :name is now unblocked
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iShouldSeeTheUserIsNowUnblocked()
+	public function iShouldSeeTheUserIsNowUnblocked($name)
 	{
 		$I = $this;
 
 		$I->adminPage->waitForPageTitle('Users');
+		$I->userManagerPage->search($name);
 		$I->seeNumberOfElements(UserManagerPage::$seeUnblocked, 1);
 	}
 
@@ -261,18 +267,20 @@ class User extends Admin
 	 * Confirm the user is now deleted
 	 *
 	 * @param   string  $message  The message for no item in list
+	 * @param   string  $name     The user name to be assured
 	 *
-	 * @Then I should see :message for deleted user
+	 * @Then I should see :message for deleted user :name
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  void
 	 */
-	public function iShouldSeeTheUserIsNowDeleted($message)
+	public function iShouldSeeTheUserIsNowDeleted($message, $name)
 	{
 		$I = $this;
 
 		$I->wait(1);
+		$I->userManagerPage->search($name);
 		$I->see($message, UserManagerPage::$noItems);
 	}
 

@@ -27,17 +27,17 @@ Feature: users
   Scenario: Block a User
     Given I have a user with user name "register"
     When I block the user
-    Then I should see the user is now blocked
+    Then I should see the user "register" is now blocked
 
   Scenario: Unblock user
     Given I have a blocked user with user name "register"
     When I unblock the user
-    Then I should see the user is now unblocked
+    Then I should see the user "register" is now unblocked
 
   Scenario: Delete user
     Given I have a user with user name "Editor"
     When I Delete the user "Editor"
-    Then I should see "No Matching Results" for deleted user
+    Then I should see "No Matching Results" for deleted user "Editor"
 
   Scenario: Create super admin and login into the backend
     Given There is a add user link
@@ -68,7 +68,7 @@ Feature: users
   Scenario: Delete Group
     Given I search and select the Group with name "Group Two"
     When I Delete the Group "Group Two"
-    Then I should see "No Matching Results" for deleted user
+    Then I should see "No Matching Results" for deleted user "Group Two"
 
   Scenario: Create ACL level
     Given There is a add viewing access level link
@@ -85,7 +85,7 @@ Feature: users
   Scenario: Delete ACL
     Given I search and select the Access Level with name "Acl Two"
     When I Delete the Access level "Acl Two"
-    Then I should see "No Matching Results" for deleted user
+    Then I should see "No Matching Results" for deleted user "Acl Two"
 
   Scenario: User settings (Allow user registration)
     Given There is an user link
