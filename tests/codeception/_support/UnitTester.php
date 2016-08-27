@@ -24,7 +24,7 @@
  * @SuppressWarnings(PHPMD)
  *
  * @package     Joomla.Test
- * @subpackage  FunctionalTester
+ * @subpackage  UnitTester
  *
  * @since       __DEPLOY_VERSION__
  */
@@ -33,6 +33,6 @@ class UnitTester extends \Codeception\Actor
 	use _generated\UnitTesterActions;
 
 	/**
-    * Define custom actions here
-    */
+	 * Define custom actions here
+	 */
 }

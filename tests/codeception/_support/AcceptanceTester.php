@@ -10,9 +10,7 @@
 /**
  * Acceptance Tester global class for entry point
  *
- * @package     Joomla.Test
- * @subpackage  AcceptanceTester
- * @since       __DEPLOY_VERSION__
+ * @since  __DEPLOY_VERSION__
  *
  * Inherited Methods
  * @method void wantToTest($text)

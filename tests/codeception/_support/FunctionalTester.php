@@ -10,10 +10,7 @@
 /**
  * Inherited Methods
  *
- * @package     Joomla.Test
- * @subpackage  FunctionalTester
- *
- * @since       __DEPLOY_VERSION__
+ * @since  __DEPLOY_VERSION__
  *
  * @method void wantToTest($text)
  * @method void wantTo($text)
@@ -33,6 +30,6 @@ class FunctionalTester extends \Codeception\Actor
 	use _generated\FunctionalTesterActions;
 
 	/**
-    * Define custom actions here
-    */
+	* Define custom actions here
+	*/
 }
