@@ -54,9 +54,12 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		parent::__construct($scenario);
 
+		$I = $this;
+
 		// Initialize User Page Objects
-		$this->userManagerPage = new UserManagerPage($scenario);
-		$this->adminPage       = new AdminPage($scenario);
+
+		$I->userManagerPage = new UserManagerPage($scenario);
+		$I->adminPage       = new AdminPage($scenario);
 	}
 
 	/**
@@ -474,7 +477,9 @@ class UsersFrontend extends \AcceptanceTester
 	 */
 	public function iSearchTheUserWithName($name)
 	{
-		$this->adminPage->search($name);
+		$I = $this;
+
+		$I->adminPage->search($name);
 	}
 
 	/**

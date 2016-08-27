@@ -11,11 +11,13 @@ class UserCest
 {
 	public function __construct()
 	{
-		$this->faker = Faker\Factory::create();
-		$this->name  = 'User' . $this->faker->randomNumber();
-		$this->username  = 'uname' . $this->faker->randomNumber();
-		$this->email = 'test@joomla.org';
-		$this->password = 'test';
+		$I = $this;
+
+		$I->faker = Faker\Factory::create();
+		$I->name  = 'User' . $I->faker->randomNumber();
+		$I->username  = 'uname' . $I->faker->randomNumber();
+		$I->email = 'test@joomla.org';
+		$I->password = 'test';
 	}
 
 	public function administratorCreateUser(\AcceptanceTester $I)

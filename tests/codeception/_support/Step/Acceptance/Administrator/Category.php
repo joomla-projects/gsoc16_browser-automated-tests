@@ -200,7 +200,9 @@ class Category extends Admin
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeUnpublish($title)
 	{
-		$this->categoryManagerPage->haveItemUsingSearch($title);
+		$I = $this;
+
+		$I->categoryManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -248,7 +250,9 @@ class Category extends Admin
 	 */
 	public function iHaveACategoryWithTitleWhichNeedsToBeTrash($title)
 	{
-		$this->categoryManagerPage->haveItemUsingSearch($title);
+		$I = $this;
+
+		$I->categoryManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -337,7 +341,9 @@ class Category extends Admin
 	 */
 	public function iCreateANewArticleWithContentAsA($title, $content)
 	{
-		$this->articleManagerPage->fillContentCreateForm($title, $content);
+		$I = $this;
+
+		$I->articleManagerPage->fillContentCreateForm($title, $content);
 	}
 
 	/**

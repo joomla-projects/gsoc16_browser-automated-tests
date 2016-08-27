@@ -59,7 +59,9 @@ class User extends Admin
 	 */
 	public function iCreateNewUser($name, $username, $password, $email)
 	{
-		$this->userManagerPage->fillUserForm($name, $username, $password, $email);
+		$I = $this;
+
+		$I->userManagerPage->fillUserForm($name, $username, $password, $email);
 	}
 
 	/**
@@ -151,7 +153,9 @@ class User extends Admin
 	 */
 	public function iHaveAUserWithUserName($username)
 	{
-		$this->userManagerPage->haveItemUsingSearch($username);
+		$I = $this;
+
+		$I->userManagerPage->haveItemUsingSearch($username);
 	}
 
 	/**
@@ -183,7 +187,9 @@ class User extends Admin
 	 */
 	public function iHaveABlockedUserWithUserName($username)
 	{
-		$this->userManagerPage->haveItemUsingSearch($username);
+		$I = $this;
+
+		$I->userManagerPage->haveItemUsingSearch($username);
 	}
 
 	/**
