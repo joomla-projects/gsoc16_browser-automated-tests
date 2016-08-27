@@ -8,9 +8,9 @@
  */
 
 /**
- * Inherited Methods
+ * Functional Tester global class for entry point
  *
- * @since  __DEPLOY_VERSION__
+ * Inherited Methods
  *
  * @method void wantToTest($text)
  * @method void wantTo($text)
@@ -24,12 +24,14 @@
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
+ *
+ * @since  __DEPLOY_VERSION__
  */
 class FunctionalTester extends \Codeception\Actor
 {
 	use _generated\FunctionalTesterActions;
 
 	/**
-	* Define custom actions here
-	*/
+	 * Define custom actions here
+	 */
 }
