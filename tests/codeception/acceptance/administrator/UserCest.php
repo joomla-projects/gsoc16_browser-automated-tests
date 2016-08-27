@@ -1,25 +1,38 @@
-
 <?php
 /**
- * @package     Joomla
- * @subpackage  tests
+ * @package     Joomla.Tests
+ * @subpackage  Acceptance.tests
  *
  * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 class UserCest
 {
+	/**
+	 * Constructor to set up the new User infos
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
 	public function __construct()
 	{
-		$I = $this;
-
-		$I->faker = Faker\Factory::create();
-		$I->name  = 'User' . $I->faker->randomNumber();
-		$I->username  = 'uname' . $I->faker->randomNumber();
-		$I->email = 'test@joomla.org';
-		$I->password = 'test';
+		$this->faker    = Faker\Factory::create();
+		$this->name     = 'User' . $this->faker->randomNumber();
+		$this->username = 'uname' . $this->faker->randomNumber();
+		$this->email    = 'test@joomla.org';
+		$this->password = 'test';
 	}
 
+	/**
+	 * Create User in the Backend
+	 *
+	 * @param   AcceptanceTester  $I  The AcceptanceTester Object
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
 	public function administratorCreateUser(\AcceptanceTester $I)
 	{
 		$I->am('Administrator');

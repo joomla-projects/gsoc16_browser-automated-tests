@@ -54,12 +54,9 @@ class UsersFrontend extends \AcceptanceTester
 	{
 		parent::__construct($scenario);
 
-		$I = $this;
-
 		// Initialize User Page Objects
-
-		$I->userManagerPage = new UserManagerPage($scenario);
-		$I->adminPage       = new AdminPage($scenario);
+		$this->userManagerPage = new UserManagerPage($scenario);
+		$this->adminPage       = new AdminPage($scenario);
 	}
 
 	/**

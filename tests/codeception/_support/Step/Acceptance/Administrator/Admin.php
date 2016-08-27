@@ -101,16 +101,14 @@ class Admin extends \AcceptanceTester
 	{
 		parent::__construct($scenario);
 
-		$I = $this;
-
 		// Initialize Page Objects
-		$I->adminPage           = new AdminPage($scenario);
-		$I->articleManagerPage  = new ArticleManagerPage($scenario);
-		$I->categoryManagerPage = new CategoryManagerPage($scenario);
-		$I->userManagerPage     = new UserManagerPage($scenario);
-		$I->userGroupPage       = new UserGroupPage($scenario);
-		$I->userAclPage         = new UserAclPage($scenario);
-		$I->menuManagerPage     = new MenuManagerPage($scenario);
+		$this->adminPage           = new AdminPage($scenario);
+		$this->articleManagerPage  = new ArticleManagerPage($scenario);
+		$this->categoryManagerPage = new CategoryManagerPage($scenario);
+		$this->userManagerPage     = new UserManagerPage($scenario);
+		$this->userGroupPage       = new UserGroupPage($scenario);
+		$this->userAclPage         = new UserAclPage($scenario);
+		$this->menuManagerPage     = new MenuManagerPage($scenario);
 	}
 
 	/**
