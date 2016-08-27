@@ -247,7 +247,7 @@ class RoboFile extends \Robo\Tasks
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
-	 * @return void
+	 * @return  void
 	 */
 	private function getComposer()
 	{
@@ -378,7 +378,7 @@ class RoboFile extends \Robo\Tasks
 			->run()
 			->stopOnFail();
 
-		/**
+		/*
 		// Uncomment this lines if you need to debug selenium errors
 		$seleniumErrors = file_get_contents('selenium.log');
 
