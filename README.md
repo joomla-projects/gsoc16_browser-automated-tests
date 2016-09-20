@@ -106,10 +106,10 @@ For Example `- Step\Acceptance\Administrator\Content`
 2. Install `composer` in your system. Read more about [how to install composer](https://getcomposer.org/doc/00-intro.md) here.
 
 3. Install composer packages using following steps from root directory of this project.
-_We are using `composer.json` file for `tests` folder, so that you will have to run composer install from tests directory._
+_We are using `composer.json` file for `tests/codeception` folder, so that you will have to run composer install from tests directory._
 
     ```bash
-    $ cd tests && composer install
+    $ cd tests/codeception && composer install
     ```
 
 4. Copy `tests/acceptance.suite.dist.yml` to `tests/acceptance.suite.yml` and change settings according to your webserver.
@@ -133,13 +133,13 @@ $ tests/vendor/bin/robo run:tests
 #### You can individual run `feature` using following command.
 
 ```bash
-$ tests/vendor/bin/robo run:test
+$ tests/codeception/vendor/bin/robo run:test
 ```
 
 Or you can manually run them using codecept command. Check the following example:
 
 ```bash
-$ tests/vendor/bin/codecept run tests/acceptance/users.feature
+$ ./tests/codeception/vendor/bin/codecept run tests/acceptance/users.feature
 ```
 
 If you want to see steps then you can use `--steps` option of codeception. Check [full codecept command list here](http://codeception.com/docs/reference/Commands#Run)_
