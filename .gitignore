@@ -8,7 +8,6 @@
 
 # Local System Files (i.e. cache, logs, etc.) #
 /administrator/cache
-/administrator/cache/index.html
 /administrator/logs
 /cache
 /installation/cache
