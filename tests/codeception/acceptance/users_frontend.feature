@@ -18,7 +18,7 @@ Feature: Users Frontend
 
   Scenario: check the created user in the backend
     Given I am on the User Manager page
-    And I search the user with user name "user2"
+    When I search the user with user name "user2"
     Then I should see the user "user2"
 
   Scenario: User can not login, if the account has not been activated
@@ -50,3 +50,8 @@ Feature: Users Frontend
     And User "User Three" did login at least once
     When I login as a super admin from backend
     Then I should see last login date for "User Three"
+
+  Scenario: Delete user
+    Given I have a user with user name "User Three"
+    When I Delete the user "User Three"
+    Then I should see "No Matching Results" for deleted user "User Three"
