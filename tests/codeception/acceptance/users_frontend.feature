@@ -52,6 +52,7 @@ Feature: Users Frontend
     Then I should see last login date for "User Three"
 
 Scenario: 
-	Delete user Given I have a user with user name "User Three" 
+	Delete user 
+	Given I have a user with user name "User Three" 
 	When I Delete the user "User Three" 
 	Then I should see "No Matching Results" for deleted user "User Three"
