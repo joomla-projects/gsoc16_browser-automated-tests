@@ -55,3 +55,4 @@ Feature: Users Frontend
     Given I have a user with user name "User Three" 
     When I Delete the user "User Three" 
     Then I should see "No Matching Results" for deleted user "User Three"
+
