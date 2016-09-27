@@ -17,10 +17,9 @@ class UserCest
 	 */
 	public function __construct()
 	{
-		$this->faker    = Faker\Factory::create();
-		$this->name     = 'User' . $this->faker->randomNumber();
-		$this->username = 'uname' . $this->faker->randomNumber();
-		$this->email    = 'test@joomla.org';
+		$this->name     = 'TestUser';
+		$this->username = 'testuname';
+		$this->email    = 'testuname@joomla.org';
 		$this->password = 'test';
 	}
 
@@ -62,5 +61,17 @@ class UserCest
 		$I->waitForText('Users', '30', ['css' => 'h1']);
 		$I->expectTo('see a success message and the user added after saving the user');
 		$I->see('User successfully saved', ['id' => 'system-message-container']);
+
+		$I->amGoingTo('delete the created user so that this test is repeatable');
+		$I->amGoingTo('search for "' . $this->username . '"');
+		$I->fillField(['id' => 'filter_search'], $this->username);
+		$I->click(['class' => 'icon-search']);
+
+		$I->comment("Selecting Checkall button");
+		$I->click(['xpath' => "//thead//input[@name='checkall-toggle' or @name='toggle']"]);
+
+		$I->comment("Click Delete button");
+		$I->click(['xpath' => "//div[@id='toolbar-delete']//button"]);
+		$I->acceptPopup();
 	}
 }
