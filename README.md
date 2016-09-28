@@ -122,7 +122,7 @@ _We are using `composer.json` file for `tests/codeception` folder, so that you w
 
 ### Run tests
 
-To run the tests please execute the following commands. We are using [Robo.li](http://robo.li/) to execute [PhpUnit](https://phpunit.de/) based [Codeception](http://codeception.com/for/joomla) test suits. (As we are using Selenium Webdriver 53 at the moment, a Firefox version above 47 might be causing issues.)
+To run the tests please execute the following commands. We are using [Robo.li](http://robo.li/) to execute [PhpUnit](https://phpunit.de/) based [Codeception](http://codeception.com/for/joomla) test suits. (As we are using Selenium WebDriver 2.53.1 at the moment, a Firefox version above 45.0.2 might be causing issues.)
 
 #### To execute all the test features you should use.
 
