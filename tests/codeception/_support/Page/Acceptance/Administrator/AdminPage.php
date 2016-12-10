@@ -43,6 +43,14 @@ class AdminPage extends \AcceptanceTester
 	public static $title = ['id' => 'jform_title'];
 
 	/**
+	 * Locator for contact name
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
+	public static $name = ['id' => 'jform_name'];
+
+	/**
 	 * Locator for search input field
 	 *
 	 * @var    array

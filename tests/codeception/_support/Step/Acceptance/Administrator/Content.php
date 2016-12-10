@@ -170,7 +170,7 @@ class Content extends Admin
 	{
 		$I = $this;
 
-		$I->adminPage->selectOptionInChosenById('jform_access', $accessLevel);
+		$I->adminPage->selectOptionInChosenByIdUsingJs('jform_access', $accessLevel);
 	}
 
 	/**
