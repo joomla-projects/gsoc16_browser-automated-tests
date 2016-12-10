@@ -269,11 +269,11 @@ class RoboFile extends \Robo\Tasks
 	{
 		if (!$this->isWindows())
 		{
-			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone >> selenium.log 2>&1 &");
+			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone -D" . implode('=', $this->getWebDriver()) .  ' >> selenium.log 2>&1 &');
 		}
 		else
 		{
-			$this->_exec("START java.exe -jar .\\tests\\codeception\\vendor\\joomla-projects\\selenium-server-standalone\\bin\\selenium-server-standalone.jar");
+			$this->_exec("START java.exe -jar -D" . implode('=', $this->getWebDriver()) .  ' tests\codeception\vendor\joomla-projects\selenium-server-standalone\bin\selenium-server-standalone.jar ');
 		}
 
 		if ($this->isWindows())
@@ -347,15 +347,6 @@ class RoboFile extends \Robo\Tasks
 			->arg('--fail-fast')
 			->arg('--env ' . $opts['env'])
 			->arg($this->testsPath . 'acceptance/users.feature')
-			->run()
-			->stopOnFail();
-
-		$this->taskCodecept($pathToCodeception)
-			->arg('--steps')
-			->arg('--debug')
-			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
-			->arg($this->testsPath . 'acceptance/extensions.feature')
 			->run()
 			->stopOnFail();
 
@@ -541,5 +532,84 @@ class RoboFile extends \Robo\Tasks
 	private function getWindowsPath($path)
 	{
 		return str_replace('/', DIRECTORY_SEPARATOR, $path);
+	}
+
+	/**
+	 * Detect the correct driver for selenium
+	 *
+	 * @return  array[type => '', path => '']
+	 *
+	 * @since version
+	 */
+	public function getWebdriver()
+	{
+		$suiteConfig = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/acceptance.suite.yml'));
+		$codeceptMainConfig = \Codeception\Configuration::config();
+		$browser = $suiteConfig['modules']['config']['JoomlaBrowser']['browser'];
+
+		if($browser == 'chrome')
+		{
+			$driver['type'] = 'webdriver.chrome.driver';
+		}
+		else if($browser == 'firefox')
+		{
+			$driver['type'] = 'webdriver.gecko.driver';
+		}
+		else if($browser == 'MicrosoftEdge')
+		{
+			$driver['type'] = 'webdriver.edge.driver';
+
+			// Check if we are using Windows Insider builds
+			if($suiteConfig['modules']['config']['AcceptanceHelper']['MicrosoftEdgeInsiders']) {
+				$browser = 'MicrosoftEdgeInsiders';
+			}
+		}
+		else if($browser == 'internet explorer')
+		{
+			$driver['type'] = 'webdriver.ie.driver';
+		}
+
+		// Check if we have a path for this browser and OS in the codeception settings
+		if(isset($codeceptMainConfig['webdrivers'][$browser][$this->getOs()]))
+		{
+			$driverPath = $codeceptMainConfig['webdrivers'][$browser][$this->getOs()];
+		}
+		else
+		{
+			$this->yell('No driver for your browser. Check your browser in acceptance.suite.yml and the webDrivers in codeception.yml');
+
+			// We can't do anything without a driver, exit
+			exit(1);
+		}
+
+		$driver['path'] = $driverPath;
+
+		return $driver;
+	}
+
+	/**
+	 * Return the os name
+	 *
+	 * @return string
+	 *
+	 * @since version
+	 */
+	private function getOs()
+	{
+		$os = php_uname('s');
+
+		if(strpos(strtolower($os), 'windows') !== false)
+		{
+			$os = 'windows';
+		}
+		elseif(strpos(strtolower($os), 'mac') !== false)
+		{
+			$os = 'mac';
+		}
+		else {
+			$os = 'linux';
+		}
+
+		return $os;
 	}
 }
