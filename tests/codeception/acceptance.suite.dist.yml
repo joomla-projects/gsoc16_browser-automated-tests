@@ -41,3 +41,4 @@ gherkin:
             - Step\Acceptance\Administrator\Content
             - Step\Acceptance\Administrator\Category
             - Step\Acceptance\Administrator\Admin
+            - Step\Acceptance\Administrator\Contact
