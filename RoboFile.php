@@ -187,7 +187,7 @@ class RoboFile extends \Robo\Tasks
 			$this->_exec('sed -e "s,# RewriteBase /,RewriteBase /tests/codeception/joomla-cms3/,g" -in-place tests/codeception/joomla-cms3/.htaccess');
 		}
 
-		$this->taskExec('curl -I http://localhost/tests/joomla-cms3/')->printed(true)->run();
+		$this->taskExec('curl -I http://joomla.test:8088/tests/codeception/joomla-cms3/')->printed(true)->run();
 	}
 
 	/**
@@ -269,7 +269,10 @@ class RoboFile extends \Robo\Tasks
 	{
 		if (!$this->isWindows())
 		{
-			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone >> selenium.log 2>&1 &");
+//			$driver = './vendor/joomla-projects/selenium-server-standalone/bin/webdrivers/chrome/chromedriver_linux_64'; // Adjust for OS
+//			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone -Dwebdriver.chrome.driver=" . $driver . " >> selenium.log 2>&1 &");
+			$driver = '/usr/bin/firefox46'; // Adjust for OS
+			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone -Dwebdriver.firefox.driver=" . $driver . " >> selenium.log 2>&1 &");
 		}
 		else
 		{
