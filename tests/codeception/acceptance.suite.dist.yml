@@ -51,3 +51,5 @@ gherkin:
             - Step\Acceptance\Administrator\Admin
             - Step\Acceptance\Administrator\Extension
             - Step\Acceptance\Administrator\Banner
+            - Step\Acceptance\Administrator\Menu
+            - Step\Acceptance\Administrator\MenuItem
