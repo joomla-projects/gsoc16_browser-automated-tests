@@ -18,6 +18,8 @@ use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Administrator\UserAclPage;
 use Page\Acceptance\Administrator\UserGroupPage;
 use Page\Acceptance\Administrator\UserManagerPage;
+use Page\Acceptance\Administrator\ModuleManagerPage;
+use Page\Acceptance\Administrator\ModuleEditPage;
 
 /**
  * Acceptance Step object class for admin steps.
@@ -111,6 +113,8 @@ class Admin extends \AcceptanceTester
 		$this->userAclPage         = new UserAclPage($scenario);
 		$this->menuManagerPage     = new MenuManagerPage($scenario);
 		$this->extensionManagerPage = new ExtensionManagerPage($scenario);
+		$this->moduleManagerPage   = new ModuleManagerPage($scenario);
+		$this->moduleEditPage	   = new ModuleEditPage($scenario);
 	}
 
 	/**

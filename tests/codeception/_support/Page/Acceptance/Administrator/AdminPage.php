@@ -101,9 +101,11 @@ class AdminPage extends \AcceptanceTester
 	}
 
 	/**
-	 * Method to search user with username
+	 * Method to search item with name or title
+	 * We put the delay before the checkAllResults() because otherwise it 
+	 * does not work inside the module manager
 	 *
-	 * @param   string  $keyword  The username of user
+	 * @param   string  $keyword  The name or title of an item
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -115,6 +117,7 @@ class AdminPage extends \AcceptanceTester
 
 		$I->amOnPage(static::$url);
 		$I->search($keyword);
+		$I->wait(1);
 		$I->checkAllResults();
 		$I->wait(1);
 	}
@@ -227,6 +230,12 @@ class AdminPage extends \AcceptanceTester
 				break;
 			case "featured":
 				$I->click(['xpath' => "//div[@id='toolbar-featured']//button"]);
+				break;
+			case "duplicate":
+				$I->click(['xpath' => "//div[@id='toolbar-copy']//button"]);
+				break;
+			case "check-in":
+				$I->click(['xpath' => "//div[@id='toolbar-checkin']//button"]);
 				break;
 		}
 	}
@@ -388,8 +397,8 @@ class AdminPage extends \AcceptanceTester
                 $I->comment("Search tools button does not exist on this page, skipping");
                 return;
             }
-}
-            try {
+
+	    try {
                 $I->dontSeeElement(['class' => 'js-stools-container-filters']);
             } catch (Exception $e) {
                 $I->comment("Search tools already visible on the page, skipping");
@@ -398,4 +407,46 @@ class AdminPage extends \AcceptanceTester
                 
             $I->click('Search Tools');
         }
+
+	/**
+	 * Assure the item is unpublished.
+	 *
+	 * @param   string  $item       The item name
+	 * @param   string  $pageTitle  The page title
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeItemInUnpublished($item, $pageTitle)
+	{
+		$I = $this;
+
+		$I->click('Search Tools');
+		$I->wait(1);
+		$I->selectOptionInChosenById(static::$filterPublished, 'Unpublished');
+		$I->waitForPageTitle($pageTitle);
+		$I->see($item, static::$seeName);
+	}
+
+	/**
+	 * Assure the item is Published.
+	 *
+	 * @param   string  $item       The item name
+	 * @param   string  $pageTitle  The page title
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function seeItemInPublished($item, $pageTitle)
+	{
+		$I = $this;
+
+		$I->click('Search Tools');
+		$I->wait(1);
+		$I->selectOptionInChosenById(static::$filterPublished, 'Published');
+		$I->waitForPageTitle($pageTitle);
+		$I->see($item, static::$seeName);
+	}	
 }
