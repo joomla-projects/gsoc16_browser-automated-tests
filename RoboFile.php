@@ -288,7 +288,71 @@ class RoboFile extends \Robo\Tasks
 		}
 	}
 
+	public function createScreenshots($opts = ['use-htaccess' => false, 'env' => 'desktop'])
+	{
+		$this->say("Creating Screenshots");
+
+		$this->createScreenshotsSite();
+
+		$this->runSelenium();
+
+		// Make sure to run the build command to generate AcceptanceTester
+		$this->_exec('php ' . $this->testsPath . 'vendor/bin/codecept build');
+
+		$pathToCodeception = $this->testsPath . 'vendor/bin/codecept';
+
+		$this->taskCodecept($pathToCodeception)
+			->arg('--steps')
+			->arg('--debug')
+			->arg('--fail-fast')
+			->arg('--env ' . $opts['env'])
+			->arg($this->testsPath . 'screenshots/')
+			->run()
+			->stopOnFail();
+	}
+
 	/**
+	 * @return string
+	 */
+	private function createScreenshotsSite()
+	{
+		// Caching cloned installations locally
+		$this->say('Creating tests/codeception/joomla-snapshots site');
+
+		if (!is_dir('tests/codeception/snapcache') || (time() - filemtime('tests/codeception/snapcache') > 60 * 60 * 24))
+		{
+			if (file_exists('tests/codeception/snapcache'))
+			{
+				$this->taskDeleteDir('tests/codeception/snapcache')->run();
+			}
+
+			$branch = empty($this->configuration->branch) ? 'staging' : $this->configuration->branch;
+
+			$this->_exec("git clone -b $branch --single-branch --depth 1 https://github.com/joomla/joomla-cms.git tests/codeception/snapcache");
+		}
+
+		$snapshotInstallationDir = "tests/codeception/joomla-snapshots";
+
+		// Get Joomla Clean Testing sites
+		if (is_dir($snapshotInstallationDir))
+		{
+			try
+			{
+				$this->taskDeleteDir($snapshotInstallationDir)->run();
+			}
+			catch (Exception $e)
+			{
+				// Sorry, we tried :(
+				$this->say('Sorry, you will have to delete ' . $snapshotInstallationDir . ' manually. ');
+				exit(1);
+			}
+		}
+		$this->_copyDir('tests/codeception/snapcache', $snapshotInstallationDir);
+
+		$this->say('Joomla snapshot site created at ' . $snapshotInstallationDir);
+	}
+
+		/**
 	 * Executes all the Selenium System Tests in a suite on your machine
 	 *
 	 * @param   array  $opts  Array of configuration options:
