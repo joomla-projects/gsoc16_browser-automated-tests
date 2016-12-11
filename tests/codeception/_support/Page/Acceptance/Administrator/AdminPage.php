@@ -392,6 +392,7 @@ class AdminPage extends \AcceptanceTester
 
 			return;
 		}
+
 		try
 		{
 			$I->dontSeeElement(['class' => 'js-stools-container-filters']);
