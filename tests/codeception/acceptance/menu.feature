@@ -39,6 +39,6 @@ Feature: menu
   Scenario: Create menu without Title fails
     Given There is an menu link
     When I create new menu without field title
-    And I set Type as "Menu Type"
+    And I set menu Type as "Menu Type"
     And I save the menu
     Then I should see the "Invalid field:  Title"

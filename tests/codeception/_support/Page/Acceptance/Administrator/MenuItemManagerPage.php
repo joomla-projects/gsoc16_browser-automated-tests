@@ -26,4 +26,12 @@ class MenuItemManagerPage extends AdminPage
      */
     public static $url = 'administrator/index.php?option=com_menus&view=items';
 
+    /**
+     * Locator for invalid category alert
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+    public static $invalidTitle = ['class' => 'alert-error'];
+
 }

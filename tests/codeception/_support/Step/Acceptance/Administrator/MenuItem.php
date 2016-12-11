@@ -13,6 +13,7 @@ use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\MenuItemManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
 use Behat\Gherkin\Node\TableNode;
+use Page\Acceptance\Site\FrontPage;
 
 /**
  * Acceptance Step object class contains suits for Menu Manager.
@@ -36,9 +37,9 @@ class MenuItem extends Admin
     }
 
     /**
-     * @When I check available tabs in menu
+     * @When I check available tabs in menu item
      */
-    public function iCheckAvailableTabsInMenu()
+    public function iCheckAvailableTabsInMenuItem()
     {
         $I = $this;
 
@@ -64,9 +65,9 @@ class MenuItem extends Admin
     }
 
     /**
-     * @When I fill mandatory fields for creating menu
+     * @When I fill mandatory fields for creating menu item
      */
-    public function iFillMandatoryFieldsForCreatingMenu(TableNode $title)
+    public function iFillMandatoryFieldsForCreatingMenuItem(TableNode $title)
     {
         $I = $this;
 
@@ -101,7 +102,7 @@ class MenuItem extends Admin
     {
         $I = $this;
 
-        $I->MenuManagerPage->seeItemIsCreated($menu);
+        $I->menuManagerPage->seeItemIsCreated($menu);
     }
 
     /**
@@ -109,23 +110,38 @@ class MenuItem extends Admin
      */
     public function iSaveTheMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I save the menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->waitForPageTitle('Menus: Add');
+        $I->adminPage->clickToolbarButton('save & close');
     }
 
     /**
      * @When I should see :arg1
      */
-    public function iShouldSee($arg1)
+    public function iShouldSee($menuItem)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see :arg1` is not defined");
+        $I = $this;
+
+        $I->menuItemManagerPage->seeItemIsCreated($menuItem);
     }
 
     /**
-     * @Given I have a menu with title :arg1 which needs to be unpublish
+     * @When I should see error :arg1
      */
-    public function iHaveAMenuWithTitleWhichNeedsToBeUnpublish($arg1)
+    public function iShouldSeeError($error)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu with title :arg1 which needs to be unpublish` is not defined");
+        $I = $this;
+
+        $I->see($error, MenuItemManagerPage::$invalidTitle);
+    }
+
+    /**
+     * @Given I have a menu with title :arg1 which needs to be unpublished
+     */
+    public function iHaveAMenuWithTitleWhichNeedsToBeUnpublished($title)
+    {
+        $this->categoryManagerPage->haveItemUsingSearch($title);
     }
 
     /**
@@ -133,23 +149,9 @@ class MenuItem extends Admin
      */
     public function iUnpublishTheMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I unpublish the menu` is not defined");
-    }
+        $I = $this;
 
-    /**
-     * @Then I should see the menu is now unpublished
-     */
-    public function iShouldSeeTheMenuIsNowUnpublished()
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu is now unpublished` is not defined");
-    }
-
-    /**
-     * @Given I have a menu with title :arg1 which needs to be trash
-     */
-    public function iHaveAMenuWithTitleWhichNeedsToBeTrash($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu with title :arg1 which needs to be trash` is not defined");
+        $I->adminPage->clickToolbarButton('unpublish');
     }
 
     /**
@@ -157,31 +159,19 @@ class MenuItem extends Admin
      */
     public function iTrashTheMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I trash the menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('trash');
     }
 
     /**
      * @Then I should see the menu :arg1 in trash
      */
-    public function iShouldSeeTheMenuInTrash($arg1)
+    public function iShouldSeeTheMenuInTrash($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu :arg1 in trash` is not defined");
-    }
+        $I = $this;
 
-    /**
-     * @When I create new menu without field title
-     */
-    public function iCreateNewMenuWithoutFieldTitle()
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I create new menu without field title` is not defined");
-    }
-
-    /**
-     * @When I set Type as :arg1
-     */
-    public function iSetTypeAs($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I set Type as :arg1` is not defined");
+        $I->menuManagerPage->seeItemInTrash($title, 'Articles: Categories');
     }
 
     /**
@@ -189,31 +179,18 @@ class MenuItem extends Admin
      */
     public function thereIsAnMenuItemLink()
     {
-        throw new \Codeception\Exception\Incomplete("Step `There is an menu item link` is not defined");
+        $I = $this;
+
+        $I->amOnPage(MenuItemManagerPage::$url);
+        $I->adminPage->clickToolbarButton('New');
     }
 
     /**
-     * @When I check available tabs in menu item
+     * @Given I have a menu item with title :arg1 which needs to be unpublished
      */
-    public function iCheckAvailableTabsInMenuItem()
+    public function iHaveAMenuItemWithTitleWhichNeedsToBeUnpublished($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I check available tabs in menu item` is not defined");
-    }
-
-    /**
-     * @When I fill mandatory fields for creating menu item
-     */
-    public function iFillMandatoryFieldsForCreatingMenuItem(TableNode $title)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I fill mandatory fields for creating menu item` is not defined");
-    }
-
-    /**
-     * @Given I have a menu item with title :arg1 which needs to be unpublish
-     */
-    public function iHaveAMenuItemWithTitleWhichNeedsToBeUnpublish($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu item with title :arg1 which needs to be unpublish` is not defined");
+        $this->menuItemManagerPage->haveItemUsingSearch($title);
     }
 
     /**
@@ -221,7 +198,9 @@ class MenuItem extends Admin
      */
     public function iUnpublishTheMenuItem()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I unpublish the menu item` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('unpublish');
     }
 
     /**
@@ -243,9 +222,9 @@ class MenuItem extends Admin
     /**
      * @When I trash the menu item
      */
-    public function iTrashTheMenuItem()
+    public function iTrashTheMenuItem($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I trash the menu item` is not defined");
+        $this->menuItemManagerPage->haveItemUsingSearch($title);
     }
 
     /**
@@ -253,7 +232,13 @@ class MenuItem extends Admin
      */
     public function iCreateNewMenuItemWithoutFieldTitle()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I create new menu item without field title` is not defined");
+        $I = $this;
+
+        $I->amOnPage(MenuItemManagerPage::$url);
+        $I->adminPage->clickToolbarButton('New');
+
+        $I->waitForText('Menus: New Item');
+        $I->adminPage->clickToolbarButton('Save');
     }
 
     /**
@@ -277,7 +262,9 @@ class MenuItem extends Admin
      */
     public function iGoToJoomlaHomePage()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I go to joomla home page` is not defined");
+        $I = $this;
+
+        $I->amOnPage(FrontPage::$url);
     }
 
     /**

@@ -137,15 +137,16 @@ class Menu extends Admin
      */
     public function iShouldSeeTheMenuIsNowUnpublished()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu is now unpublished` is not defined");
+        $I = $this;
+        $I->seeNumberOfElements(MenuItemManagerPage::$seeUnpublished, 1);
     }
 
     /**
      * @Given I have a menu with title :arg1 which needs to be trash
      */
-    public function iHaveAMenuWithTitleWhichNeedsToBeTrash($arg1)
+    public function iHaveAMenuWithTitleWhichNeedsToBeTrash($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu with title :arg1 which needs to be trash` is not defined");
+        $this->menuManagerPage->haveItemUsingSearch($title);
     }
 
     /**
@@ -169,7 +170,13 @@ class Menu extends Admin
      */
     public function iCreateNewMenuWithoutFieldTitle()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I create new menu without field title` is not defined");
+        $I = $this;
+
+        $I->amOnPage(MenuManagerPage::$url);
+        $I->adminPage->clickToolbarButton('New');
+
+        $I->waitForText('Menus: New Item');
+        $I->adminPage->clickToolbarButton('Save');
     }
 
     /**
@@ -186,5 +193,13 @@ class Menu extends Admin
     public function iShouldSeeTheMenuLanguageAs($arg1)
     {
         throw new \Codeception\Exception\Incomplete("Step `I should see the menu language as :arg1` is not defined");
+    }
+
+    /**
+     * @When I set menu Type as :arg1
+     */
+    public function iSetMenuTypeAs($arg1)
+    {
+        throw new \Codeception\Exception\Incomplete("Step `I set menu Type as :arg1` is not defined");
     }
 }

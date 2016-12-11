@@ -27,7 +27,7 @@ Feature: menu Item
     Then I should see the menu item "Modify_menuItem_1" is created
 
   Scenario: Unpublish menu item
-    Given I have a menu item with title "Modify_menuItem_1" which needs to be unpublish
+    Given I have a menu item with title "Modify_menuItem_1" which needs to be unpublished
     When I unpublish the menu item
     Then I should see the menu item is now unpublished
 
@@ -41,7 +41,7 @@ Feature: menu Item
     When I create new menu item without field title
     And I choose menu item type "Archived Articles" and Menu "Main Menu"
     And I save the menu item
-    Then I should see the "Invalid field:  Title"
+    Then I should see error "Invalid field:  Title"
 
   Scenario: Create menu item for newly created menu
     Given There is an menu link
