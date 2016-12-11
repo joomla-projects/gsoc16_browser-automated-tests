@@ -62,10 +62,9 @@ services:
   - redis-server
 
 before_script:
-  - sudo add-apt-repository ppa:webupd8team/java -y
-  - export CHROME_BIN=/usr/bin/google-chrome
-  - sudo apt-get update && sudo apt-get install -y  chromium-browser
+  - google-chrome --version
   # Forcing localhost in hosts file
+  - sudo add-apt-repository ppa:webupd8team/java -y
   - sudo apt-get update
   - sudo apt-get install oracle-java8-installer
   - sudo update-java-alternatives --set java-8-oracle
