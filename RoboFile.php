@@ -611,7 +611,7 @@ class RoboFile extends \Robo\Tasks
 	 */
 	public function getWebdriver()
 	{
-		$suiteConfig        = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/acceptance.suite.yml'));
+		$suiteConfig        = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/screenshots.suite.yml'));
 		$codeceptMainConfig = \Codeception\Configuration::config();
 		$browser            = $suiteConfig['modules']['config']['JoomlaBrowser']['browser'];
 
