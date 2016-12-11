@@ -7,9 +7,9 @@
 class_name: AcceptanceTester
 modules:
     enabled:
+        - Asserts
         - JoomlaBrowser
         - Helper\Acceptance
-        - Asserts
         - Helper\JoomlaDb
     config:
         JoomlaBrowser:
