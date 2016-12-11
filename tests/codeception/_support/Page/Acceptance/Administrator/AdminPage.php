@@ -93,7 +93,7 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Method to search using given keyword
 	 *
-	 * @param   string  $keyword  The keyword to search
+	 * @param   string $keyword The keyword to search
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -111,7 +111,7 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Method to search user with username
 	 *
-	 * @param   string  $keyword  The username of user
+	 * @param   string $keyword The username of user
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -130,8 +130,8 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Method is used to see system message after waiting for page title.
 	 *
-	 * @param   string  $title    The webpage title
-	 * @param   string  $message  The unpublish successful message
+	 * @param   string $title   The webpage title
+	 * @param   string $message The unpublish successful message
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -148,7 +148,7 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Method is to Wait for page title until default timeout.
 	 *
-	 * @param   string  $title  Page Title text
+	 * @param   string $title Page Title text
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -163,7 +163,7 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Function to select Toolbar buttons in Joomla! Admin Toolbar Panel
 	 *
-	 * @param   string  $button  The full name of the button
+	 * @param   string $button The full name of the button
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -259,8 +259,8 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Selects an option in a Chosen Selector based on its id
 	 *
-	 * @param   string  $selectId  The id of the <select> element
-	 * @param   string  $option    The text in the <option> to be selected in the chosen selector
+	 * @param   string $selectId The id of the <select> element
+	 * @param   string $option   The text in the <option> to be selected in the chosen selector
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -315,8 +315,8 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Function to Verify the Tabs on a Joomla! screen
 	 *
-	 * @param   array  $expectedTabs  Expected Tabs on the Page
-	 * @param   array  $tabsLocator   Locator for the Tabs in Edit View
+	 * @param   array $expectedTabs Expected Tabs on the Page
+	 * @param   array $tabsLocator  Locator for the Tabs in Edit View
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -343,7 +343,7 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Method to see that item is saved
 	 *
-	 * @param   string  $item  The item Name
+	 * @param   string $item The item Name
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -361,8 +361,8 @@ class AdminPage extends \AcceptanceTester
 	/**
 	 * Assure the item is trashed.
 	 *
-	 * @param   string  $item       The item name
-	 * @param   string  $pageTitle  The page title
+	 * @param   string $item      The item name
+	 * @param   string $pageTitle The page title
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -377,5 +377,41 @@ class AdminPage extends \AcceptanceTester
 		$I->selectOptionInChosenById(static::$filterPublished, 'Trashed');
 		$I->waitForPageTitle($pageTitle);
 		$I->see($item, static::$seeName);
+	}
+
+	/**
+	 * Assure the search tools are displayed
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function displaySearchTools()
+	{
+		$I = $this;
+
+		try
+		{
+			$I->seeElement(['class' => 'js-stools-btn-filter']);
+		}
+		catch (Exception $e)
+		{
+			$I->comment("Search tools button does not exist on this page, skipping");
+
+			return;
+		}
+
+		try
+		{
+			$I->dontSeeElement(['class' => 'js-stools-container-filters']);
+		}
+		catch (Exception $e)
+		{
+			$I->comment("Search tools already visible on the page, skipping");
+
+			return;
+		}
+
+		$I->click('Search Tools');
 	}
 }
