@@ -62,7 +62,7 @@ services:
   - redis-server
 
 before_script:
-  - google-chrome --version
+  - chromium-browser --product-version
   # Forcing localhost in hosts file
   - sudo add-apt-repository ppa:webupd8team/java -y
   - sudo apt-get update
