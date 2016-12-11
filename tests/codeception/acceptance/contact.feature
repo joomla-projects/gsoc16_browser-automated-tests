@@ -19,6 +19,11 @@ Feature: contact
     And I save the contact "Contact One"
     Then I should see the "Registered" as contact access level
 
+  Scenario: Featured an contact
+    Given I have "Contact One" contact which will be featured
+    When I feature the contact
+    Then I should see the contact is now featured
+
   Scenario: Unpublish an contact
     Given I have contact with name "Contact One"
     When I unpublish the contact

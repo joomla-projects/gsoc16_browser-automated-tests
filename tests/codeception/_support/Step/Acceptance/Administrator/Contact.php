@@ -201,4 +201,38 @@ class Contact extends Admin
 		$I->searchForItem($name);
 		$I->dontSee($name);
 	}
+
+	/**
+	 * @Given I have :arg1 contact which will be featured
+	 */
+	public function iHaveContactWhichWillBeFeatured($name)
+	{
+		$I = $this;
+
+		$I->amOnPage(ContactManagerPage::$url);
+		$I->waitForText(ContactManagerPage::$contactTitle);
+		$I->searchForItem($name);
+		$I->checkExistenceOf($name);
+	}
+
+	/**
+	 * @When I feature the contact
+	 */
+	public function iFeatureTheContact()
+	{
+		$I = $this;
+
+		$I->adminPage->checkAllResults();
+		$I->adminPage->clickToolbarButton('featured');
+	}
+
+	/**
+	 * @Then I should see the contact is now featured
+	 */
+	public function iShouldSeeTheContactIsNowFeatured()
+	{
+		$I = $this;
+
+		$I->seeNumberOfElements(ContactManagerPage::$seeFeatured, 1);
+	}
 }

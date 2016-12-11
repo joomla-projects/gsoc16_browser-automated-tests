@@ -48,6 +48,14 @@ class ContactManagerPage extends AdminPage
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
 	 */
+	public static $seeFeatured = ['xpath' => "//table[@id='contactList']//*//span[@class='icon-featured']"];
+
+	/**
+	 * Locator for contact's unfeatured icon
+	 *
+	 * @var    array
+	 * @since  __DEPLOY_VERSION__
+	 */
 	public static $seeUnfeatured = ['xpath' => "//table[@id='contactList']//*//span[@class='icon-unfeatured']"];
 
 	/**
