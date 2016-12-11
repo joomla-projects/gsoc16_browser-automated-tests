@@ -388,7 +388,6 @@ class AdminPage extends \AcceptanceTester
                 $I->comment("Search tools button does not exist on this page, skipping");
                 return;
             }
-}
             try {
                 $I->dontSeeElement(['class' => 'js-stools-container-filters']);
             } catch (Exception $e) {
