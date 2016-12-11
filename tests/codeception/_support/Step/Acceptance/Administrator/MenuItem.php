@@ -178,9 +178,11 @@ class MenuItem extends Admin
     /**
      * @When I set the menu as :arg1
      */
-    public function iSetTheMenuAs($arg1)
+    public function iSetTheMenuAs($name)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I set the menu as :arg1` is not defined");
+        $I = $this;
+
+        $I->adminPage->selectOptionInChosenById('jform_menutype', $name);
     }
 
     /**

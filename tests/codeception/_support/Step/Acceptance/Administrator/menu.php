@@ -162,8 +162,9 @@ class Menu extends Admin
     /**
      * @When I set menu Type as :arg1
      */
-    public function iSetMenuTypeAs($arg1)
+    public function iSetMenuTypeAs($menuType)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I set menu Type as :arg1` is not defined");
-    }
+        $I = $this;
+
+        $I->adminPage->selectOptionInChosenById('jform_menutype', $menuType);    }
 }
