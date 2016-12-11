@@ -33,7 +33,7 @@ modules:
         AcceptanceHelper:
             url: 'http://localhost/tests/codeception/joomla-cms3' # the url that points to the joomla installation at /tests/system/joomla-cms - we need it twice here
             MicrosoftEdgeInsiders: false                  # set this to true, if you are on Windows Insiders
-        JoomlaDb:                                               # http://codeception.com/docs/modules/Db
+        \Helper\JoomlaDb:                                 # http://codeception.com/docs/modules/Db
           dsn: 'mysql:host=localhost;dbname=test_joomla'  # PDO DSN
           user: 'root'                                    # MySQL Server user
           password: ''                                    # MySQL Server password
