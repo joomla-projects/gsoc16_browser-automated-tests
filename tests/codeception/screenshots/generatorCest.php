@@ -40,6 +40,7 @@ class generatorCest
 		$I->amOnPage('administrator/');
 		$I->doAdministratorLogin();
 
+		// @todo Improve
 		$target = dirname(dirname(dirname(__DIR__))) . "/screenshots/";
 
 		$this->makeScreenshots($I, $this->adminSuites, $target);
@@ -68,23 +69,28 @@ class generatorCest
 
 				$parts = explode("/", $fileName);
 
+				if (!is_dir($outputFolder))
+				{
+					mkdir($outputFolder, 0777, true);
+				}
+
+				// @todo improve
 				if (count($parts) > 1)
 				{
-					$path = "";
+					array_pop($parts);
 
-					for ($i = 0; $i < count($parts) - 1; $i++)
+					$path = implode('/', $parts);
+
+					if (!is_dir($outputFolder . $path))
 					{
-						$path .= $parts[$i] . "/";
-
-						if (!is_dir($outputFolder . $path))
-						{
-							mkdir($outputFolder . $path);
-						}
+						mkdir($outputFolder . $path, 0777, true);
 					}
 				}
 
 				$I->amOnPage($url);
-				$I->makeScreenshot('../../../../screenshots/' . $folder . $fileName);
+
+				// @todo improve
+				$I->makeScreenshot(JPATH_SCREENSHOTS . $folder . $fileName);
 			}
 		}
 	}
