@@ -412,18 +412,6 @@ class RoboFile extends \Robo\Tasks
 			->run()
 			->stopOnFail();
 
-		/*
-		// Uncomment this lines if you need to debug selenium errors
-		$seleniumErrors = file_get_contents('selenium.log');
-
-		if ($seleniumErrors)
-		{
-			$this->say('Printing Selenium Log files');
-			$this->say('------ selenium.log (start) ---------');
-			$this->say($seleniumErrors);
-			$this->say('------ selenium.log (end) -----------');
-		}
-		*/
 	}
 
 	/**
