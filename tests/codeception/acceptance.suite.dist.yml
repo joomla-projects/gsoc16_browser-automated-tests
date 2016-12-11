@@ -31,7 +31,7 @@ modules:
             language: 'English (United Kingdom)'   # Language in which you want the Application to be Installed
         AcceptanceHelper:
             url: 'http://localhost/tests/codeception/joomla-cms3' # the url that points to the joomla installation at /tests/system/joomla-cms - we need it twice here
-             MicrosoftEdgeInsiders: false           # set this to true, if you are on Windows Insiders
+            MicrosoftEdgeInsiders: false           # set this to true, if you are on Windows Insiders
 error_level: "E_ALL & ~E_STRICT & ~E_DEPRECATED"
 gherkin:
     contexts:
