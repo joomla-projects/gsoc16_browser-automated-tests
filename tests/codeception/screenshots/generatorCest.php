@@ -7,9 +7,20 @@ class generatorCest
 {
 	protected $urlConfig;
 
+	protected $adminSuites;
+
+	protected $adminFrontendSuites;
+
+	protected $frontendSuites;
+
 	public function _before(ScreenshotsTester $I)
 	{
 		$this->urlConfig = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/screenshots/screenshot.urls.yml'));
+
+		// @todo improve
+		$this->adminSuites = $this->urlConfig['Administrator Backend'];
+		$this->adminFrontendSuites = $this->urlConfig['Administrator Frontend'];
+		$this->frontendSuites = $this->urlConfig['Guest'];
 	}
 
 	public function _after(ScreenshotsTester $I)
@@ -19,51 +30,68 @@ class generatorCest
 	// tests
 	public function installationScreenshots(ScreenshotsTester $I)
 	{
-		var_dump($this->urlConfig);
-		var_dump($this->urlConfig['Administrator']['Article Manager (com_content)']);
-
-		return;
-
 		$I->comment('I open Joomla Installation Configuration Page');
 
-		//$I->comment('creating screenshots folder at:' . JPATH_SCREENSHOTS . "installation");
-		//mkdir(JPATH_SCREENSHOTS . "installation");
-
-		$I->amOnPage('/installation/index.php');
-		$I->makeScreenshot(JPATH_SCREENSHOTS . 'intallation-language');
 		$I->installJoomlaRemovingInstallationFolder();
 	}
 
 	public function administratorScreenshots(ScreenshotsTester $I)
 	{
-
 		$I->amOnPage('administrator/');
-		$I->makeScreenshot(JPATH_SCREENSHOTS . 'administrator Login');
 		$I->doAdministratorLogin();
 
-		return;
+		// @todo Improve
+		$target = dirname(dirname(dirname(__DIR__))) . "/screenshots/";
 
-		$realPath = dirname(dirname(dirname(__DIR__))) . "/screenshots/";
+		$this->makeScreenshots($I, $this->adminSuites, $target);
+	}
 
-		$I->comment($realPath);
+	protected function makeScreenshots($I, $suites, $target)
+	{
+		foreach ($suites as $suite)
+		{
+			$folder = $suite['folder'];
+			$urls   = $suite['screenshots'];
 
-		foreach ($pages as $url => $pageName) {
-			$parts = explode("/", $pageName);
+			$outputFolder = $target . $folder;
 
-			if (count($parts) > 1) {
-				$path = "";
+			$I->comment('Output ' . $outputFolder);
 
-				for ($i = 0; $i < count($parts) - 1; $i++) {
-					$path .= $parts[$i] . "/";
-
-					if (!is_dir($realPath . $path)) {
-						mkdir($realPath . $path);
-					}
-				}
+			if (!is_dir($outputFolder))
+			{
+				mkdir($outputFolder, 0777, true);
 			}
 
-			$I->amOnPage($url);
-			$I->makeScreenshot(JPATH_SCREENSHOTS . $pageName);
+			foreach ($urls as $url => $fileName)
+			{
+				$I->comment('URL ' . $url);
+				$I->comment('Filename ' . $fileName);
+
+				$parts = explode("/", $fileName);
+
+				if (!is_dir($outputFolder))
+				{
+					mkdir($outputFolder, 0777, true);
+				}
+
+				// @todo improve
+				if (count($parts) > 1)
+				{
+					array_pop($parts);
+
+					$path = implode('/', $parts);
+
+					if (!is_dir($outputFolder . $path))
+					{
+						mkdir($outputFolder . $path, 0777, true);
+					}
+				}
+
+				$I->amOnPage($url);
+
+				// @todo improve
+				$I->makeScreenshot(JPATH_SCREENSHOTS . $folder . $fileName);
+			}
 		}
 	}
 }
