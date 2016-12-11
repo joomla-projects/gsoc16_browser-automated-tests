@@ -208,16 +208,17 @@ class MenuItem extends Admin
      */
     public function iShouldSeeTheMenuItemIsNowUnpublished()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu item is now unpublished` is not defined");
+        $I = $this;
+
+        $I->seeNumberOfElements(MenuItemManagerPage::$seeUnpublished, 1);
     }
 
     /**
      * @Given I have a menu item with title :arg1 which needs to be trash
      */
-    public function iHaveAMenuItemWithTitleWhichNeedsToBeTrash($arg1)
+    public function iHaveAMenuItemWithTitleWhichNeedsToBeTrash($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu item with title :arg1 which needs to be trash` is not defined");
-    }
+        $this->menuItemManagerPage->haveItemUsingSearch($title);    }
 
     /**
      * @When I trash the menu item
@@ -270,9 +271,12 @@ class MenuItem extends Admin
     /**
      * @Then I should see the menu item language as :arg1
      */
-    public function iShouldSeeTheMenuItemLanguageAs($arg1)
+    public function iShouldSeeTheMenuItemLanguageAs($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu item language as :arg1` is not defined");
+        $I = $this;
+
+        $I->amOnPage(MenuItemManagerPage::$url);
+        $I->see($title, MenuItemManagerPage::$seeLanguage);
     }
 
     /**

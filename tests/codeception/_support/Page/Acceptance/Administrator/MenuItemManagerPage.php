@@ -34,4 +34,20 @@ class MenuItemManagerPage extends AdminPage
      */
     public static $invalidTitle = ['class' => 'alert-error'];
 
+    /**
+     * Locator for Menu Item unpublished icon
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+    public static $seeUnpublished = ['xpath' => "//table[@id='itemList']//*//span[@class='icon-unpublish']"];
+
+    /**
+     * Locator for menu Item language field
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+    public static $seeLanguage = ['xpath' => "//table[@id='itemList']//tr[1]//td[10]"];
+
 }
