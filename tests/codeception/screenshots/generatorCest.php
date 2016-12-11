@@ -5,67 +5,65 @@ define("JPATH_SCREENSHOTS", "../../../../screenshots/");
 
 class generatorCest
 {
-    public function _before(ScreenshotsTester $I)
-    {
-    }
+	protected $urlConfig;
 
-    public function _after(ScreenshotsTester $I)
-    {
-    }
+	public function _before(ScreenshotsTester $I)
+	{
+		$this->urlConfig = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/screenshots/screenshot.urls.yml'));
+	}
 
-    // tests
-    public function installationScreenshots(ScreenshotsTester $I)
-    {
-        $I->comment('I open Joomla Installation Configuration Page');
+	public function _after(ScreenshotsTester $I)
+	{
+	}
 
-        //$I->comment('creating screenshots folder at:' . JPATH_SCREENSHOTS . "installation");
-        //mkdir(JPATH_SCREENSHOTS . "installation");
+	// tests
+	public function installationScreenshots(ScreenshotsTester $I)
+	{
+		var_dump($this->urlConfig);
+		var_dump($this->urlConfig['Administrator']['Article Manager (com_content)']);
 
-        $I->amOnPage('/installation/index.php');
-        $I->makeScreenshot(JPATH_SCREENSHOTS . 'intallation-language');
-        $I->installJoomlaRemovingInstallationFolder();
-   }
+		return;
 
-   public function administratorScreenshots(ScreenshotsTester $I)
-   {
-       $I->amOnPage('administrator/');
-       $I->makeScreenshot(JPATH_SCREENSHOTS . 'administrator Login');
-       $I->doAdministratorLogin();
+		$I->comment('I open Joomla Installation Configuration Page');
 
-       $pages = [
-           'administrator/'                                         => 'administrator/dashboard/Dashboard',
-           'administrator/index.php?option=com_config'              => 'administrator - Global Configuration - Site',
-           'administrator/index.php?option=com_users&view=users'    => 'administrator - Global Configuration - Users',
-           'administrator/index.php?option=com_users&view=users'    => 'administrator/global Configuration - Users'
-       ];
+		//$I->comment('creating screenshots folder at:' . JPATH_SCREENSHOTS . "installation");
+		//mkdir(JPATH_SCREENSHOTS . "installation");
 
-       $realPath = dirname(dirname(dirname(__DIR__))) . "/screenshots/";
+		$I->amOnPage('/installation/index.php');
+		$I->makeScreenshot(JPATH_SCREENSHOTS . 'intallation-language');
+		$I->installJoomlaRemovingInstallationFolder();
+	}
 
-       $I->comment($realPath);
+	public function administratorScreenshots(ScreenshotsTester $I)
+	{
 
-       foreach ($pages as $url => $pageName)
-       {
-           $parts = explode("/", $pageName);
+		$I->amOnPage('administrator/');
+		$I->makeScreenshot(JPATH_SCREENSHOTS . 'administrator Login');
+		$I->doAdministratorLogin();
 
-           if (count($parts) > 1)
-           {
-               $path = "";
+		return;
 
-               for ($i = 0; $i < count($parts) - 1; $i++)
-               {
-                   $path .= $parts[$i] . "/";
+		$realPath = dirname(dirname(dirname(__DIR__))) . "/screenshots/";
 
+		$I->comment($realPath);
 
-                   if (!is_dir($realPath . $path))
-                   {
-                       $I->comment("Wtf: " . $realPath . $path);
-                       mkdir($realPath . $path);
-                   }
-               }
-           }
+		foreach ($pages as $url => $pageName) {
+			$parts = explode("/", $pageName);
 
-           $I->amOnPage($url);
-           $I->makeScreenshot(JPATH_SCREENSHOTS . $pageName);
-       }
-   }
+			if (count($parts) > 1) {
+				$path = "";
+
+				for ($i = 0; $i < count($parts) - 1; $i++) {
+					$path .= $parts[$i] . "/";
+
+					if (!is_dir($realPath . $path)) {
+						mkdir($realPath . $path);
+					}
+				}
+			}
+
+			$I->amOnPage($url);
+			$I->makeScreenshot(JPATH_SCREENSHOTS . $pageName);
+		}
+	}
 }
