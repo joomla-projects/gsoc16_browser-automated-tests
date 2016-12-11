@@ -41,7 +41,7 @@ class Menu extends Admin
         $I = $this;
 
         $I->adminPage->clickToolbarButton('New');
-        $I->waitForText('Articles: New Category');
+        $I->waitForText('Menus: Add');
     }
 
     /**
@@ -142,7 +142,7 @@ class Menu extends Admin
     {
         $I = $this;
 
-        $I->menuManagerPage->seeItemInTrash($title, 'Articles: Categories');
+        $I->menuManagerPage->seeItemInTrash($title, 'Menus');
     }
 
     /**

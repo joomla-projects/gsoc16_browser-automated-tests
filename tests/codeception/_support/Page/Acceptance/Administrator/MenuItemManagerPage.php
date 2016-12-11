@@ -10,7 +10,7 @@
 namespace Page\Acceptance\Administrator;
 
 /**
- * Acceptance Page object class to define menu manager page objects.
+ * Acceptance Page object class to define menu item manager page objects.
  *
  * @package  Page\Acceptance\Administrator
  *
@@ -19,7 +19,7 @@ namespace Page\Acceptance\Administrator;
 class MenuItemManagerPage extends AdminPage
 {
     /**
-     * Link to the article category listing url.
+     * Link to the menu item listing url.
      *
      * @var    string
      * @since  __DEPLOY_VERSION__
