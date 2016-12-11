@@ -150,6 +150,7 @@ tests/codeception/_output
 tests/codeception/vendor
 tests/codeception/joomla-snapshots
 tests/codeception/snapcache
+screenshots/
 composer.phar
 
 # Build related
