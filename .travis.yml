@@ -63,6 +63,7 @@ services:
 
 before_script:
   # Forcing localhost in hosts file
+  - sudo apt-get update && sudo apt-get install -y chromium-browser
   - sudo sed -i '1s/^/127.0.0.1 localhost\n/' /etc/hosts
   # JavaScript tests
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/javascript-tests.sh $PWD; fi
