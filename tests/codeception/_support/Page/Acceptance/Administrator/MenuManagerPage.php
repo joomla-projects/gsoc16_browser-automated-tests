@@ -59,6 +59,14 @@ class MenuManagerPage extends AdminPage
 	 */
 	public static $article = ['link' => 'Article'];
 
+    /**
+     * Locator for category unpublished icon
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+    public static $seeUnpublished = ['xpath' => "//table[@id='categoryList']//*//span[@class='icon-unpublish']"];
+
 	/**
 	 * This method is to set page object to choose an article dynamically.
 	 *

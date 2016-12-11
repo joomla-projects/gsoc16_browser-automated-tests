@@ -51,14 +51,7 @@ class Menu extends Admin
     {
         $I = $this;
 
-        $I->adminPage->verifyAvailableTabs([$tab1, $tab2]);        }
-
-    /**
-     * @When I Login into Joomla administrator with username :arg1 and password :arg1
-     */
-    public function iLoginIntoJoomlaAdministratorWithUsernameAndPassword($arg1, $arg2)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I Login into Joomla administrator with username :arg1 and password :arg1` is not defined");
+        $I->adminPage->verifyAvailableTabs([$tab1, $tab2]);
     }
 
     /**
@@ -95,17 +88,22 @@ class Menu extends Admin
     /**
      * @Then I should see the menu :arg1 is created
      */
-    public function iShouldSeeTheMenuIsCreated($arg1)
+    public function iShouldSeeTheMenuIsCreated($menu)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu :arg1 is created` is not defined");
+        $I = $this;
+
+        $I->menuManagerPage->seeItemIsCreated($menu);
     }
 
     /**
      * @When I search and select menu with title :arg1
      */
-    public function iSearchAndSelectMenuWithTitle($arg1)
+    public function iSearchAndSelectMenuWithTitle($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I search and select menu with title :arg1` is not defined");
+        $I = $this;
+
+        $I->menuManagerPage->haveItemUsingSearch($title);
+        $I->adminPage->clickToolbarButton('edit');
     }
 
     /**
@@ -113,32 +111,10 @@ class Menu extends Admin
      */
     public function iSaveTheMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I save the menu` is not defined");
-    }
-
-    /**
-     * @Given I have a menu with title :arg1 which needs to be unpublish
-     */
-    public function iHaveAMenuWithTitleWhichNeedsToBeUnpublish($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I have a menu with title :arg1 which needs to be unpublish` is not defined");
-    }
-
-    /**
-     * @When I unpublish the menu
-     */
-    public function iUnpublishTheMenu()
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I unpublish the menu` is not defined");
-    }
-
-    /**
-     * @Then I should see the menu is now unpublished
-     */
-    public function iShouldSeeTheMenuIsNowUnpublished()
-    {
         $I = $this;
-        $I->seeNumberOfElements(MenuItemManagerPage::$seeUnpublished, 1);
+
+        $I->adminPage->waitForPageTitle('Menus: Add');
+        $I->adminPage->clickToolbarButton('save & close');
     }
 
     /**
@@ -154,15 +130,19 @@ class Menu extends Admin
      */
     public function iTrashTheMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I trash the menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('trash');
     }
 
     /**
      * @Then I should see the menu :arg1 in trash
      */
-    public function iShouldSeeTheMenuInTrash($arg1)
+    public function iShouldSeeTheMenuInTrash($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu :arg1 in trash` is not defined");
+        $I = $this;
+
+        $I->menuManagerPage->seeItemInTrash($title, 'Articles: Categories');
     }
 
     /**
@@ -177,22 +157,6 @@ class Menu extends Admin
 
         $I->waitForText('Menus: New Item');
         $I->adminPage->clickToolbarButton('Save');
-    }
-
-    /**
-     * @Then I choose menu item type :arg1 and Menu :arg2
-     */
-    public function iChooseMenuItemTypeAndMenu($arg1, $arg2)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I choose menu item type :arg1 and Menu :arg2` is not defined");
-    }
-
-    /**
-     * @Then I should see the menu language as :arg1
-     */
-    public function iShouldSeeTheMenuLanguageAs($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu language as :arg1` is not defined");
     }
 
     /**

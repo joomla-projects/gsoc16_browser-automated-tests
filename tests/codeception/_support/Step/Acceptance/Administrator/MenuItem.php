@@ -26,17 +26,6 @@ class MenuItem extends Admin
 {
 
     /**
-     * @Given There is an menu link
-     */
-    public function thereIsAnMenuLink()
-    {
-        $I = $this;
-
-        $I->amOnPage(MenuItemManagerPage::$url);
-        $I->adminPage->clickToolbarButton('New');
-    }
-
-    /**
      * @When I check available tabs in menu item
      */
     public function iCheckAvailableTabsInMenuItem()
@@ -54,14 +43,7 @@ class MenuItem extends Admin
     {
         $I = $this;
 
-        $I->adminPage->verifyAvailableTabs([$arg1, $arg2, $arg3, $arg4, $arg5]);    }
-
-    /**
-     * @When I Login into Joomla administrator with username :arg1 and password :arg1
-     */
-    public function iLoginIntoJoomlaAdministratorWithUsernameAndPassword($arg1, $arg2)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I Login into Joomla administrator with username :arg1 and password :arg1` is not defined");
+        $I->adminPage->verifyAvailableTabs([$arg1, $arg2, $arg3, $arg4, $arg5]);
     }
 
     /**
@@ -96,27 +78,6 @@ class MenuItem extends Admin
     }
 
     /**
-     * @Then I should see the menu :arg1 is created
-     */
-    public function iShouldSeeTheMenuIsCreated($menu)
-    {
-        $I = $this;
-
-        $I->menuManagerPage->seeItemIsCreated($menu);
-    }
-
-    /**
-     * @When I save the menu
-     */
-    public function iSaveTheMenu()
-    {
-        $I = $this;
-
-        $I->adminPage->waitForPageTitle('Menus: Add');
-        $I->adminPage->clickToolbarButton('save & close');
-    }
-
-    /**
      * @When I should see :arg1
      */
     public function iShouldSee($menuItem)
@@ -134,44 +95,6 @@ class MenuItem extends Admin
         $I = $this;
 
         $I->see($error, MenuItemManagerPage::$invalidTitle);
-    }
-
-    /**
-     * @Given I have a menu with title :arg1 which needs to be unpublished
-     */
-    public function iHaveAMenuWithTitleWhichNeedsToBeUnpublished($title)
-    {
-        $this->categoryManagerPage->haveItemUsingSearch($title);
-    }
-
-    /**
-     * @When I unpublish the menu
-     */
-    public function iUnpublishTheMenu()
-    {
-        $I = $this;
-
-        $I->adminPage->clickToolbarButton('unpublish');
-    }
-
-    /**
-     * @When I trash the menu
-     */
-    public function iTrashTheMenu()
-    {
-        $I = $this;
-
-        $I->adminPage->clickToolbarButton('trash');
-    }
-
-    /**
-     * @Then I should see the menu :arg1 in trash
-     */
-    public function iShouldSeeTheMenuInTrash($title)
-    {
-        $I = $this;
-
-        $I->menuManagerPage->seeItemInTrash($title, 'Articles: Categories');
     }
 
     /**
@@ -245,9 +168,11 @@ class MenuItem extends Admin
     /**
      * @When I choose menu item type :arg1 and Menu :arg2
      */
-    public function iChooseMenuItemTypeAndMenu($arg1, $arg2)
+    public function iChooseMenuItemTypeAndMenu($type, $menu)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I choose menu item type :arg1 and Menu :arg2` is not defined");
+        $I = $this;
+
+        $I->menuItemManagerPage->selectTypeAndMenu($type, $menu);
     }
 
     /**

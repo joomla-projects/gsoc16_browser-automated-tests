@@ -50,4 +50,34 @@ class MenuItemManagerPage extends AdminPage
      */
     public static $seeLanguage = ['xpath' => "//table[@id='itemList']//tr[1]//td[10]"];
 
+    public function selectMenuItemType($menuCategory, $menuItem)
+    {
+
+
+        // Open the category
+        $I->wait(1);
+        $I->waitForElement(['link' => $menuCategory], '60');
+        $I->click(['link' => $menuCategory]);
+
+        $I->comment("Choose the menu item type: $menuItem");
+        $I->wait(1);
+        $I->waitForElement(['xpath' => "//a[contains(text()[normalize-space()], '$menuItem')]"], '60');
+        $I->click(['xpath' => "//div[@id='collapseTypes']//a[contains(text()[normalize-space()], '$menuItem')]"]);
+        $I->comment('I switch back to the main window');
+    }
+
+    public function selectTypeAndMenu($type, $menu){
+
+        $I = $this;
+
+        $I->comment("Open the menu types iframe");
+        $I->click(['link' => "Select"]);
+        $I->waitForElement(['id' => 'menuTypeModal'], '60');
+        $I->wait(1);
+        $I->switchToIFrame("Menu Item Type");
+
+        $I->comment("Open the menu category: $type");
+
+
+    }
 }
