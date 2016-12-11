@@ -56,11 +56,11 @@ class Contact extends Admin
 	/**
 	 * @Then I should see the contact :arg1 is created
 	 */
-	public function iShouldSeeTheContactIsCreated($contact)
+	public function iShouldSeeTheContactIsCreated($name)
 	{
 		$I = $this;
 
-		$I->contactManagerPage->seeItemIsCreated($contact);
+		$I->contactManagerPage->seeItemIsCreated($name);
 	}
 
 	/**

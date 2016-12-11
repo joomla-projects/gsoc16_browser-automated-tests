@@ -43,7 +43,7 @@ class ContactManagerPage extends AdminPage
 	public static $seeName = ['xpath' => "//table[@id='contactList']//tr[1]//td[4]"];
 
 	/**
-	 * Locator for contact's featured icon
+	 * Locator for contact's unfeatured icon
 	 *
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
