@@ -14,6 +14,7 @@ use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 use Page\Acceptance\Administrator\CategoryManagerPage;
 use Page\Acceptance\Administrator\ExtensionManagerPage;
+use Page\Acceptance\Administrator\MenuItemManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Administrator\UserAclPage;
 use Page\Acceptance\Administrator\UserGroupPage;
@@ -91,6 +92,15 @@ class Admin extends \AcceptanceTester
 	 */
 	protected $menuManagerPage = null;
 
+    /**
+     * Menu Item Manager Page Object for this class
+     *
+     * @var     null|MenuItemManagerPage
+     *
+     * @since   __DEPLOY_VERSION__
+     */
+    protected $menuItemManagerPage = null;
+
 	/**
 	 * User constructor.
 	 *
@@ -111,6 +121,7 @@ class Admin extends \AcceptanceTester
 		$this->userAclPage         = new UserAclPage($scenario);
 		$this->menuManagerPage     = new MenuManagerPage($scenario);
 		$this->extensionManagerPage = new ExtensionManagerPage($scenario);
+        $this->menuItemManagerPage = new MenuItemManagerPage($scenario);
 	}
 
 	/**

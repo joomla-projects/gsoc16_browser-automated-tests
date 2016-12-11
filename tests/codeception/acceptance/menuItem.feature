@@ -52,18 +52,18 @@ Feature: menu Item
     And I create menu item with title "menuItem_2"
     And I choose menu item type "Archived Articles" and Menu "Menu_1"
     And I save the menu item
-    Then I should see the menu item "menuItem_1" is created
+    Then I should see the menu item "menuItem_2" is created
 
   Scenario: Change menu Item's Menu
     Given There is an menu item link
-    When I search and select menu Item with title "menuItem_1"
+    When I search and select menu Item with title "menuItem_2"
     And I set the menu as "Main Menu"
     And I go to joomla home page
-    Then I should see "menuItem_1"
+    Then I should see "menuItem_2"
 
-  Scenario: Menu Language settings     // it should be of the menu item
+  Scenario: Menu item Language settings
     Given There is an menu item link
-    When I search and select menu with title "menu_1"
+    When I search and select menu Item with title "menuItem_2"
     And I set language as a "English (en-GB)"
     And I save the menu item
     Then I should see the menu item language as "English (en-GB)"

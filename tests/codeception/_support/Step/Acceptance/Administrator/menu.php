@@ -11,6 +11,7 @@ namespace Step\Acceptance\Administrator;
 
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
+use Behat\Gherkin\Node\TableNode;
 
 /**
  * Acceptance Step object class contains suits for Menu Manager.
@@ -29,7 +30,8 @@ class Menu extends Admin
         $I = $this;
 
         $I->amOnPage(MenuManagerPage::$url);
-        $I->adminPage->clickToolbarButton('New');    }
+        $I->adminPage->clickToolbarButton('New');
+    }
 
     /**
      * @When I check available tabs in menu
@@ -62,9 +64,32 @@ class Menu extends Admin
     /**
      * @When I fill mandatory fields for creating menu
      */
-    public function iFillMandatoryFieldsForCreatingMenu()
+    public function iFillMandatoryFieldsForCreatingMenu(TableNode $title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I fill mandatory fields for creating menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('New');
+
+        $totalRows = count($title->getRows());
+        $lastIndex = ($totalRows - 1);
+
+        // Iterate over all rows
+        foreach ($title->getRows() as $index => $row)
+        {
+            if ($index !== 0)
+            {
+                $I->fillField(MenuManagerPage::$title, $row[0]);
+
+                if ($index == $lastIndex)
+                {
+                    $I->adminPage->clickToolbarButton('Save');
+                }
+                else
+                {
+                    $I->adminPage->clickToolbarButton('Save & New');
+                }
+            }
+        }
     }
 
     /**

@@ -26,11 +26,6 @@ Feature: menu
     And I save the menu
     Then I should see the menu "Modify_menu_1" is created
 
-
-  Scenario: Check menu if exist in frontend
-    Given There is joomla home page
-    When I should see "Modify_menu_1"
-
   Scenario: Unpublish menu
     Given I have a menu with title "Modify_menu_1" which needs to be unpublish
     When I unpublish the menu

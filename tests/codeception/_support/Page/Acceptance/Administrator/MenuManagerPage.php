@@ -19,7 +19,7 @@ namespace Page\Acceptance\Administrator;
 class MenuManagerPage extends AdminPage
 {
 	/**
-	 * Link to the article category listing url.
+	 * Link to the menu listing url.
 	 *
 	 * @var    string
 	 * @since  __DEPLOY_VERSION__

@@ -10,7 +10,9 @@
 namespace Step\Acceptance\Administrator;
 
 use Page\Acceptance\Administrator\AdminPage;
+use Page\Acceptance\Administrator\MenuItemManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
+use Behat\Gherkin\Node\TableNode;
 
 /**
  * Acceptance Step object class contains suits for Menu Manager.
@@ -27,7 +29,10 @@ class MenuItem extends Admin
      */
     public function thereIsAnMenuLink()
     {
-        throw new \Codeception\Exception\Incomplete("Step `There is an menu link` is not defined");
+        $I = $this;
+
+        $I->amOnPage(MenuItemManagerPage::$url);
+        $I->adminPage->clickToolbarButton('New');
     }
 
     /**
@@ -35,16 +40,20 @@ class MenuItem extends Admin
      */
     public function iCheckAvailableTabsInMenu()
     {
-        throw new \Codeception\Exception\Incomplete("Step `I check available tabs in menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('New');
+        $I->waitForText('Menus: New Item');
     }
 
     /**
-     * @Then I see available tabs :arg1, :arg2
+     * @Then I see the available tabs :arg1, :arg2, :arg3, :arg4, :arg5
      */
-    public function iSeeAvailableTabs($arg1, $arg2)
+    public function iSeeTheAvailableTabs($arg1, $arg2, $arg3, $arg4, $arg5)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I see available tabs :arg1, :arg2` is not defined");
-    }
+        $I = $this;
+
+        $I->adminPage->verifyAvailableTabs([$arg1, $arg2, $arg3, $arg4, $arg5]);    }
 
     /**
      * @When I Login into Joomla administrator with username :arg1 and password :arg1
@@ -57,25 +66,42 @@ class MenuItem extends Admin
     /**
      * @When I fill mandatory fields for creating menu
      */
-    public function iFillMandatoryFieldsForCreatingMenu()
+    public function iFillMandatoryFieldsForCreatingMenu(TableNode $title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I fill mandatory fields for creating menu` is not defined");
+        $I = $this;
+
+        $I->adminPage->clickToolbarButton('New');
+
+        $totalRows = count($title->getRows());
+        $lastIndex = ($totalRows - 1);
+
+        // Iterate over all rows
+        foreach ($title->getRows() as $index => $row)
+        {
+            if ($index !== 0)
+            {
+                $I->fillField(MenuItemManagerPage::$title, $row[0]);
+
+                if ($index == $lastIndex)
+                {
+                    $I->adminPage->clickToolbarButton('Save');
+                }
+                else
+                {
+                    $I->adminPage->clickToolbarButton('Save & New');
+                }
+            }
+        }
     }
 
     /**
      * @Then I should see the menu :arg1 is created
      */
-    public function iShouldSeeTheMenuIsCreated($arg1)
+    public function iShouldSeeTheMenuIsCreated($menu)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I should see the menu :arg1 is created` is not defined");
-    }
+        $I = $this;
 
-    /**
-     * @When I search and select menu with title :arg1
-     */
-    public function iSearchAndSelectMenuWithTitle($arg1)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I search and select menu with title :arg1` is not defined");
+        $I->MenuManagerPage->seeItemIsCreated($menu);
     }
 
     /**
@@ -177,7 +203,7 @@ class MenuItem extends Admin
     /**
      * @When I fill mandatory fields for creating menu item
      */
-    public function iFillMandatoryFieldsForCreatingMenuItem()
+    public function iFillMandatoryFieldsForCreatingMenuItem(TableNode $title)
     {
         throw new \Codeception\Exception\Incomplete("Step `I fill mandatory fields for creating menu item` is not defined");
     }
@@ -263,18 +289,13 @@ class MenuItem extends Admin
     }
 
     /**
-     * @Then I see the available tabs :arg1, :arg2, :arg3, :arg4, :arg5
-     */
-    public function iSeeTheAvailableTabs($arg1, $arg2, $arg3, $arg4, $arg5)
-    {
-        throw new \Codeception\Exception\Incomplete("Step `I see the available tabs :arg1, :arg2, :arg3, :arg4, :arg5` is not defined");
-    }
-
-    /**
      * @When I search and select menu Item with title :arg1
      */
-    public function iSearchAndSelectMenuItemWithTitle($arg1)
+    public function iSearchAndSelectMenuItemWithTitle($title)
     {
-        throw new \Codeception\Exception\Incomplete("Step `I search and select menu Item with title :arg1` is not defined");
+        $I = $this;
+
+        $I->menuItemManagerPage->haveItemUsingSearch($title);
+        $I->adminPage->clickToolbarButton('edit');
     }
 }
