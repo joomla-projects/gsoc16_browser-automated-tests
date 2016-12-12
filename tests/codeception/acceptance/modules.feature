@@ -4,7 +4,7 @@ Feature: modules
   I need to create edit publish unpublish duplicate checkin trash restore module
 
   Background:
-    When I Login into Joomla administrator with username "admin" and password "admin"
+    When I Login into Joomla administrator
     And I see the administrator dashboard
     And I am in the module manager
 

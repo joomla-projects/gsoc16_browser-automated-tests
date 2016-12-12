@@ -22,7 +22,7 @@ use Page\Acceptance\Administrator\ModuleEditPage;
  *
  * @since    __DEPLOY_VERSION__
  */
-class Module extends Admin {
+class Modules extends Admin {
 
     protected static $moduleTitle = "My Title for the custom Module";
     protected static $moduleTitle_Edit = "My Title for the new custom Module for editing";
