@@ -63,10 +63,6 @@ services:
   - redis-server
 
 before_script:
-  # Install Chrome
-  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  - sudo dpkg -i google-chrome*.deb
-  - export CHROME_BIN=/usr/bin/google-chrome
   # Forcing localhost in hosts file
   - sudo sed -i '1s/^/127.0.0.1 localhost\n/' /etc/hosts
   # JavaScript tests
