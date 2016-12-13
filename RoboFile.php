@@ -279,11 +279,9 @@ class RoboFile extends \Robo\Tasks
 			$this->_exec("START java.exe -jar " . $this->getWebDriver() . ' tests\codeception\vendor\joomla-projects\selenium-server-standalone\bin\selenium-server-standalone.jar ');
 		}
 
-		if ($this->isWindows())
-		{
-			sleep(3);
-		}
-		else
+		sleep(3);
+
+		if (!$this->isWindows())
 		{
 			$this->taskWaitForSeleniumStandaloneServer()
 				->run()
