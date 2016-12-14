@@ -38,6 +38,7 @@ fluxbox &
 sleep 3 # give fluxbox some time to start
 
 # Composer in tests folder
+sudo chmod -R 777 tests/codeception/composer.phar
 cd tests/codeception
 composer install
 cd $BASE
