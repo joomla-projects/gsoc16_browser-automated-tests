@@ -71,6 +71,8 @@ before_script:
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
   # Codeception system tests
   - if [[ $RUN_CODECEPTION == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/codeception-tests.sh $(pwd); fi
+  - ls -al
+  - ls -al tests/codeption/joomla-cms3
 
 script:
   - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
