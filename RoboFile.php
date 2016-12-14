@@ -257,7 +257,7 @@ class RoboFile extends \Robo\Tasks
 		// Make sure we have Composer
 		if (!file_exists($this->testsPath . 'composer.phar'))
 		{
-			$this->_exec('sudo curl -o --retry 3 --retry-delay 5 -sS https://getcomposer.org/installer | php sudo mv composer.phar ' . $this->testsPath);
+			$this->_exec('curl -o --retry 3 --retry-delay 5 -sS https://getcomposer.org/installer | php sudo mv composer.phar ' . $this->testsPath);
 		}
 	}
 
