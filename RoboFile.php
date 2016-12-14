@@ -336,7 +336,7 @@ class RoboFile extends \Robo\Tasks
 			->run()
 			->stopOnFail();
 
-		/*$this->taskCodecept($pathToCodeception)
+		$this->taskCodecept($pathToCodeception)
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
@@ -406,7 +406,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--env ' . $opts['env'])
 			->arg($this->testsPath . 'acceptance/frontend/')
 			->run()
-			->stopOnFail();*/
+			->stopOnFail();
 	}
 
 	/**
