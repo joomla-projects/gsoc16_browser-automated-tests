@@ -152,6 +152,11 @@ To run the tests please execute the following commands. We are using [Robo.li](h
 $ tests/codeception/vendor/bin/robo run:tests
 ```
 
+**_Windows_**
+```cmd
+$ tests\codeception\vendor\bin\robo run:tests
+```
+
 #### You can individual run `feature` using following command.
 
 **_Linux & Mac_**
@@ -164,7 +169,9 @@ $ tests/codeception/vendor/bin/robo run:test
 $ tests\codeception\vendor\bin\robo run:test
 ```
 
-Or you can manually run them using codecept command. Check the following example:
+####Or you can manually run them using codecept command
+
+Check the following example:
 
 **_Linux & Mac_**
 ```bash
@@ -180,7 +187,19 @@ If you want to see steps then you can use `--steps` option of codeception. Check
 
 **Note**:You can modify the timeout time by setting the value of **TIMEOUT** constant lower for fast machines and higher for slow computers. The constant located in the file `tests/codeception/acceptance/_bootstrap.php`
 
-Changing the browser the tests are running with?
+#### You can run an install before individual run `feature` using following command.
+
+**_Linux & Mac_**
+```bash
+$ tests/codeception/vendor/bin/robo run:install-and-test
+```
+
+**_Windows_**
+```cmd
+$ tests\codeception\vendor\bin\robo run:install-and-test
+```
+
+###Changing the browser the tests are running with?
 ---
 In your acceptance.suite.yml just change the browser name. Possible values are firefox, chrome, internet explorer and MicrosoftEdge. 
 
