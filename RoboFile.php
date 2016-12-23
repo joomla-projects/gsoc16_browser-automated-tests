@@ -599,11 +599,7 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Return the correct path for Windows
 	 *
-<<<<<<< HEAD
 	 * @param   string  $path  - The linux path
-=======
-	 * @param   string $path - The linux path
->>>>>>> staging
 	 *
 	 * @return string
 	 */
