@@ -3,6 +3,9 @@
 define("JPATH_SCREENSHOTS", "../../../../screenshots/");
 
 
+/**
+ * Simple test runner for screenshots for the marketing team
+ */
 class generatorCest
 {
 	protected $urlConfig;
@@ -17,7 +20,7 @@ class generatorCest
 
 	public function _before(ScreenshotsTester $I)
 	{
-		$this->baseDir = dirname(dirname(dirname(__DIR__)));
+		$this->baseDir = dirname(dirname(dirname(__DIR__))) . '/screenshots/';
 
 		$this->urlConfig = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/screenshots/screenshot.urls.yml'));
 
@@ -33,7 +36,6 @@ class generatorCest
 	{
 	}
 
-	// tests
 	/**
 	 * Screenshots of the installation
 	 *
@@ -44,6 +46,8 @@ class generatorCest
 		$I->comment('I open Joomla Installation Configuration Page');
 
 		$I->installJoomlaRemovingInstallationFolder();
+		$I->doAdministratorLogin();
+		$I->disableStatistics();
 	}
 
 	/**
@@ -57,9 +61,9 @@ class generatorCest
 		$I->doAdministratorLogin();
 
 		// @todo Improve
-		$target = $this->baseDir . "/screenshots/administrator";
+		$target = $this->baseDir . 'administrator/';
 
-		$this->makeScreenshots($I, $this->adminSuites, $target);
+		$this->makeScreenshots($I, $this->adminSuites, $target, 'administrator/');
 	}
 
 	/**
@@ -72,13 +76,13 @@ class generatorCest
 		$I->amOnPage('index.php');
 		$I->doFrontEndLogin();
 
-		$target = $this->baseDir . "/screenshots/frontendadmin";
+		$target = $this->baseDir . 'frontendAdmin/';
 
-		$this->makeScreenshots($I, $this->frontendAdminSuites, $target);
+		$this->makeScreenshots($I, $this->frontendAdminSuites, $target, 'frontendAdmin/');
 	}
 
 	/**
-	 * Frontend Scrreenshots as guest
+	 * Frontend Screenshots as guest
 	 *
 	 * @param ScreenshotsTester $I
 	 */
@@ -86,9 +90,9 @@ class generatorCest
 	{
 		$I->amOnPage('index.php');
 
-		$target = $this->baseDir . "/screenshots/frontend";
+		$target = $this->baseDir . 'frontend/';
 
-		$this->makeScreenshots($I, $this->frontendSuites, $target);
+		$this->makeScreenshots($I, $this->frontendSuites, $target, 'frontend/');
 	}
 
 	/**
@@ -98,7 +102,7 @@ class generatorCest
 	 * @param $suites
 	 * @param $target
 	 */
-	protected function makeScreenshots($I, $suites, $target)
+	protected function makeScreenshots($I, $suites, $target, $base = '')
 	{
 		foreach ($suites as $suite)
 		{
@@ -106,8 +110,6 @@ class generatorCest
 			$urls   = $suite['screenshots'];
 
 			$outputFolder = $target . $folder;
-
-			$I->comment('Output ' . $outputFolder);
 
 			if (!is_dir($outputFolder))
 			{
@@ -141,8 +143,23 @@ class generatorCest
 
 				$I->amOnPage($url);
 
+				// Tab support
+				$tabs = explode('#', $url);
+
+				if (count($tabs) > 1)
+				{
+					$tab = $tabs[count($tabs) - 1];
+
+					$I->comment('Selecting tab ' . $tab);
+
+					$I->wait(1);
+					$I->click('a[href="#' . $tab . '"]');
+				}
+
+				$I->comment(JPATH_SCREENSHOTS . $base . $folder . $fileName);
+
 				// @todo improve
-				$I->makeScreenshot(JPATH_SCREENSHOTS . $folder . $fileName);
+				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $fileName);
 			}
 		}
 	}

@@ -1,9 +1,11 @@
 # Screenshots for Joomla configuration
 
+Version: 3.7
+
 # Page that requires login
 Administrator Backend:
   Article Manager (com_content):
-    folder: administrator/com_content/
+    folder: com_content/
     screenshots:
       # URL : Screenshot path (under folder)
       "administrator/index.php?option=com_content&view=article&layout=edit": "edit/article"
@@ -11,7 +13,7 @@ Administrator Backend:
       "administrator/index.php?option=com_content&view=article&layout=edit#attrib-basic": "edit/article-options-tab"
 
   Contacts (com_contacts):
-    folder: administrator/com_contacts/
+    folder: com_contacts/
     screenshots:
       "administrator/index.php?option=com_content&view=article&layout=edit": "edit/contact"
 
