@@ -51,6 +51,12 @@ class RoboFile extends \Robo\Tasks
 	private $configuration = array();
 
 	/**
+	 * @var array | null
+	 * @since  __DEPLOY_VERSION__
+	 */
+	private $suiteConfig;
+
+	/**
 	 * Path to the local CMS test folder
 	 *
 	 * @var    string
@@ -142,7 +148,7 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Creates a testing Joomla site for running the tests (use it before run:test)
 	 *
-	 * @param   bool  $useHtaccess  (1/0) Rename and enable embedded Joomla .htaccess file
+	 * @param   bool $useHtaccess (1/0) Rename and enable embedded Joomla .htaccess file
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -185,15 +191,13 @@ class RoboFile extends \Robo\Tasks
 			$this->_copy('./htaccess.txt', $this->cmsPath . '/.htaccess');
 			$this->_exec('sed -e "s,# RewriteBase /,RewriteBase /tests/codeception/joomla-cms3/,g" -in-place tests/codeception/joomla-cms3/.htaccess');
 		}
-
-		$this->taskExec('curl -I http://localhost/tests/joomla-cms3/')->printed(true)->run();
 	}
 
 	/**
 	 * Copy the joomla installation excluding folders
 	 *
-	 * @param   string  $dst      Target folder
-	 * @param   array   $exclude  Exclude list of folders
+	 * @param   string $dst     Target folder
+	 * @param   array  $exclude Exclude list of folders
 	 *
 	 * @throws  Exception
 	 *
@@ -354,7 +358,7 @@ class RoboFile extends \Robo\Tasks
 		/**
 	 * Executes all the Selenium System Tests in a suite on your machine
 	 *
-	 * @param   array  $opts  Array of configuration options:
+	 * @param   array $opts   Array of configuration options:
 	 *                        - 'use-htaccess': renames and enable embedded Joomla .htaccess file
 	 *                        - 'env': set a specific environment to get configuration from
 	 *
@@ -367,6 +371,7 @@ class RoboFile extends \Robo\Tasks
 		$this->say("Running tests");
 
 		$this->createTestingSite($opts['use-htaccess']);
+		$this->createDatabase();
 
 		$this->getComposer();
 		$this->taskComposerInstall($this->testsPath . 'composer.phar')->run();
@@ -471,8 +476,8 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Executes a specific Selenium System Tests in your machine
 	 *
-	 * @param   string  $pathToTestFile  Optional name of the test to be run
-	 * @param   string  $suite           Optional name of the suite containing the tests, Acceptance by default.
+	 * @param   string $pathToTestFile Optional name of the test to be run
+	 * @param   string $suite          Optional name of the suite containing the tests, Acceptance by default.
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 *
@@ -508,7 +513,8 @@ class RoboFile extends \Robo\Tasks
 			{
 				if (strripos($iterator->getSubPathName(), 'cept.php')
 					|| strripos($iterator->getSubPathName(), 'cest.php')
-					|| strripos($iterator->getSubPathName(), '.feature'))
+					|| strripos($iterator->getSubPathName(), '.feature')
+				)
 				{
 					$this->say('[' . $i . '] ' . $iterator->getSubPathName());
 
@@ -593,7 +599,11 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Return the correct path for Windows
 	 *
+<<<<<<< HEAD
 	 * @param   string  $path  - The linux path
+=======
+	 * @param   string $path - The linux path
+>>>>>>> staging
 	 *
 	 * @return string
 	 */
@@ -611,7 +621,7 @@ class RoboFile extends \Robo\Tasks
 	 */
 	public function getWebdriver()
 	{
-		$suiteConfig        = Symfony\Component\Yaml\Yaml::parse(file_get_contents('tests/codeception/screenshots.suite.yml'));
+		$suiteConfig        = $this->getSuiteConfig();
 		$codeceptMainConfig = \Codeception\Configuration::config();
 		$browser            = $suiteConfig['modules']['config']['JoomlaBrowser']['browser'];
 
@@ -682,5 +692,51 @@ class RoboFile extends \Robo\Tasks
 		}
 
 		return $os;
+	}
+
+	/**
+	 * Get the suite configuration
+	 *
+	 * @param string $suite
+	 *
+	 * @return array
+	 */
+	private function getSuiteConfig($suite = 'acceptance')
+	{
+		if (!$this->suiteConfig)
+		{
+			$this->suiteConfig = Symfony\Component\Yaml\Yaml::parse(file_get_contents("tests/codeception/{$suite}.suite.yml"));
+		}
+
+		return $this->suiteConfig;
+	}
+
+	private function createDatabase()
+	{
+		$suiteConfig = $this->getSuiteConfig();
+
+		$host   = $suiteConfig['modules']['config']['JoomlaBrowser']['database host'];
+		$user   = $suiteConfig['modules']['config']['JoomlaBrowser']['database user'];
+		$pass   = $suiteConfig['modules']['config']['JoomlaBrowser']['database password'];
+		$dbName = $suiteConfig['modules']['config']['JoomlaBrowser']['database name'];
+
+		// Create connection
+		$connection = new mysqli($host, $user, $pass);
+		// Check connection
+		if ($connection->connect_error)
+		{
+			$this->yell("Connection failed: " . $connection->connect_error);
+		}
+
+		// Create database
+		$sql = "CREATE DATABASE IF NOT EXISTS {$dbName}";
+		if ($connection->query($sql) === true)
+		{
+			$this->say("Database {$dbName} created successfully");
+		}
+		else
+		{
+			$this->yell("Error creating database: " . $connection->error);
+		}
 	}
 }
