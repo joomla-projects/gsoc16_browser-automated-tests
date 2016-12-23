@@ -1,8 +1,9 @@
 # Screenshots for Joomla configuration
 
+# To include in path
 Version: 3.7
 
-# Page that requires login
+# Backend as super administrator
 Administrator Backend:
   Article Manager (com_content):
     folder: com_content/
@@ -17,6 +18,7 @@ Administrator Backend:
     screenshots:
       "administrator/index.php?option=com_content&view=article&layout=edit": "edit/contact"
 
+# Frontend as super administrator
 Administrator Frontend:
   Article Manager (com_content):
       folder: com_content/
@@ -24,6 +26,7 @@ Administrator Frontend:
         # URL : Screenshot path (under folder)
         "index.php?option=com_content&view=article&layout=edit": "edit/article"
 
+# Frontend as Guest
 Guest:
   Article Manager (com_content):
       folder: com_content/

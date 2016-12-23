@@ -156,8 +156,6 @@ class generatorCest
 					$I->click('a[href="#' . $tab . '"]');
 				}
 
-				$I->comment(JPATH_SCREENSHOTS . $base . $folder . $fileName);
-
 				// @todo improve
 				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $fileName);
 			}
