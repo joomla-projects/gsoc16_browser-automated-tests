@@ -292,7 +292,7 @@ class RoboFile extends \Robo\Tasks
 		}
 	}
 
-        /**
+	/**
 	 * Executes all the Selenium System Tests in a suite on your machine
 	 *
 	 * @param   array  $opts  Array of configuration options:
@@ -386,7 +386,7 @@ class RoboFile extends \Robo\Tasks
 		$this->loadFeatures($pathToTestFile, $suite);
 	}
 
-        /**
+	/**
 	 * Executes a specific Selenium System Tests in your machine
 	 *
 	 * @param   string  $pathToTestFile  Optional name of the test to be run
@@ -568,17 +568,10 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Load features
 	 *
-<<<<<<< HEAD
 	 * @param   string  $pathToTestFile  Optional name of the test to be run
 	 * @param   string  $suite           Optional name of the suite containing the tests, Acceptance by default.
 	 *
 	 * @since   __DEPLOY_VERSION__
-=======
-	 * @param   string $pathToTestFile Optional name of the test to be run
-	 * @param   string $suite          Optional name of the suite containing the tests, Acceptance by default.
-
-         * @since   __DEPLOY_VERSION__
->>>>>>> 02642571b205135bee00072d575e0ea6ec69b509
 	 *
 	 * @return  void
 	 */
@@ -680,13 +673,10 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Prepare tests.
 	 *
-<<<<<<< HEAD
 	 * @param   array  $opts  Array of configuration options:
 	 *                        - 'use-htaccess': renames and enable embedded Joomla .htaccess file
 	 *                        - 'env': set a specific environment to get configuration from
 	 * 
-=======
->>>>>>> 02642571b205135bee00072d575e0ea6ec69b509
 	 * @since   __DEPLOY_VERSION__
 	 *
 	 * @return  String  $pathToCodeception
@@ -726,4 +716,3 @@ class RoboFile extends \Robo\Tasks
 		return $pathToCodeception;
 	}
 }
-
