@@ -291,7 +291,7 @@ class RoboFile extends \Robo\Tasks
 		}
 	}
 
-	/**
+        /**
 	 * Executes all the Selenium System Tests in a suite on your machine
 	 *
 	 * @param   array $opts   Array of configuration options:
@@ -305,37 +305,9 @@ class RoboFile extends \Robo\Tasks
 	public function runTests($opts = ['use-htaccess' => false, 'env' => 'desktop'])
 	{
 		$this->say("Running tests");
-
-		$this->createTestingSite($opts['use-htaccess']);
-		$this->createDatabase();
-
-		$this->getComposer();
-		$this->taskComposerInstall($this->testsPath . 'composer.phar')->run();
-
-		$this->runSelenium();
-
-		// Make sure to run the build command to generate AcceptanceTester
-		if ($this->isWindows())
-		{
-			$this->_exec('php ' . $this->getWindowsPath($this->testsPath . 'vendor/bin/codecept') . ' build');
-			$pathToCodeception = $this->getWindowsPath($this->testsPath . 'vendor/bin/codecept');
-		}
-		else
-		{
-			$this->_exec('php ' . $this->testsPath . 'vendor/bin/codecept build');
-
-			$pathToCodeception = $this->testsPath . 'vendor/bin/codecept';
-		}
-
-		$this->taskCodecept($pathToCodeception)
-			->arg('--steps')
-			->arg('--debug')
-			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
-			->arg($this->testsPath . 'acceptance/install/')
-			->run()
-			->stopOnFail();
-
+                
+                $pathToCodeception = $this->prepareTests($opts);
+                
 		$this->taskCodecept($pathToCodeception)
 			->arg('--steps')
 			->arg('--debug')
@@ -389,27 +361,31 @@ class RoboFile extends \Robo\Tasks
 			->arg($this->testsPath . 'acceptance/category.feature')
 			->run()
 			->stopOnFail();
-
-		$this->taskCodecept($pathToCodeception)
-			->arg('--steps')
-			->arg('--debug')
-			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
-			->arg($this->testsPath . 'acceptance/administrator/')
-			->run()
-			->stopOnFail();
-
-		$this->taskCodecept($pathToCodeception)
-			->arg('--steps')
-			->arg('--debug')
-			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
-			->arg($this->testsPath . 'acceptance/frontend/')
-			->run()
-			->stopOnFail();
 	}
 
 	/**
+	 * Executes the install test and after that specific Selenium System Tests in your machine
+	 *
+	 * @param   string $pathToTestFile Optional name of the test to be run
+	 * @param   string $suite          Optional name of the suite containing the tests, Acceptance by default.
+	 * @param   array  $opts           Array of configuration options:
+	 *                                 - 'use-htaccess': renames and enable embedded Joomla .htaccess file
+	 *                                 - 'env': set a specific environment to get configuration from
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function runInstallAndTest($pathToTestFile = null, $suite = 'acceptance', $opts = ['use-htaccess' => false, 'env' => 'desktop'])
+	{
+		$this->say("Running install before test");
+                
+                $this->prepareTests($opts);
+
+                $this->loadFeatures($pathToTestFile,$suite);
+	}
+
+        /**
 	 * Executes a specific Selenium System Tests in your machine
 	 *
 	 * @param   string $pathToTestFile Optional name of the test to be run
@@ -427,99 +403,8 @@ class RoboFile extends \Robo\Tasks
 
 		$path = 'tests/codeception/vendor/bin/codecept';
 		$this->_exec('php ' . $this->isWindows() ? $this->getWindowsPath($path) : $path . ' build');
-
-		if (!$pathToTestFile)
-		{
-			$this->say('Available tests in the system:');
-
-			$iterator = new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator(
-					$this->testsPath . $suite,
-					RecursiveDirectoryIterator::SKIP_DOTS
-				),
-				RecursiveIteratorIterator::SELF_FIRST
-			);
-
-			$tests = array();
-			$i     = 1;
-
-			$iterator->rewind();
-
-			while ($iterator->valid())
-			{
-				if (strripos($iterator->getSubPathName(), 'cept.php')
-					|| strripos($iterator->getSubPathName(), 'cest.php')
-					|| strripos($iterator->getSubPathName(), '.feature')
-				)
-				{
-					$this->say('[' . $i . '] ' . $iterator->getSubPathName());
-
-					$tests[$i] = $iterator->getSubPathName();
-					$i++;
-				}
-
-				$iterator->next();
-			}
-
-			$this->say('');
-			$testNumber = $this->ask('Type the number of the test in the list that you want to run...');
-			$test       = $tests[$testNumber];
-		}
-
-		$pathToTestFile = $this->testsPath . $suite . '/' . $test;
-
-		// Loading the class to display the methods in the class
-
-		// Logic to fetch the class name from the file name
-		$fileName = explode("/", $test);
-
-		// If the selected file is cest only then we will give the option to execute individual methods, we don't need this in cept or feature files
-		$i = 1;
-
-		if (isset($fileName[1]) && strripos($fileName[1], 'cest'))
-		{
-			require $this->testsPath . $suite . '/' . $test;
-
-			$className     = explode(".", $fileName[1]);
-			$class_methods = get_class_methods($className[0]);
-
-			$this->say('[' . $i . '] ' . 'All');
-
-			$methods[$i] = 'All';
-			$i++;
-
-			foreach ($class_methods as $method_name)
-			{
-				$reflect = new ReflectionMethod($className[0], $method_name);
-
-				if (!$reflect->isConstructor() && $reflect->isPublic())
-				{
-					$this->say('[' . $i . '] ' . $method_name);
-
-					$methods[$i] = $method_name;
-
-					$i++;
-				}
-			}
-
-			$this->say('');
-			$methodNumber = $this->ask('Please choose the method in the test that you would want to run...');
-			$method       = $methods[$methodNumber];
-		}
-
-		if (isset($method) && $method != 'All')
-		{
-			$pathToTestFile = $pathToTestFile . ':' . $method;
-		}
-
-		$testPathCodecept = $this->testsPath . 'vendor/bin/codecept';
-
-		$this->taskCodecept($this->isWindows() ? $this->getWindowsPath($testPathCodecept) : $testPathCodecept)
-			->test($pathToTestFile)
-			->arg('--steps')
-			->arg('--debug')
-			->run()
-			->stopOnFail();
+                
+                $this->loadFeatures($pathToTestFile,$suite);
 	}
 
 	/**
@@ -671,4 +556,153 @@ class RoboFile extends \Robo\Tasks
 			$this->yell("Error creating database: " . $connection->error);
 		}
 	}
+
+	/**
+	 * Load features
+	 *
+	 * @param   string $pathToTestFile Optional name of the test to be run
+	 * @param   string $suite          Optional name of the suite containing the tests, Acceptance by default.
+
+         * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	private function loadFeatures($pathToTestFile,$suite)
+	{
+		if (!$pathToTestFile)
+		{
+			$this->say('Available tests in the system:');
+
+			$iterator = new RecursiveIteratorIterator(
+				new RecursiveDirectoryIterator(
+					$this->testsPath . $suite,
+					RecursiveDirectoryIterator::SKIP_DOTS
+				),
+				RecursiveIteratorIterator::SELF_FIRST
+			);
+
+			$tests = array();
+			$i     = 1;
+
+			$iterator->rewind();
+
+			while ($iterator->valid())
+			{
+				if (strripos($iterator->getSubPathName(), 'cept.php')
+					|| strripos($iterator->getSubPathName(), 'cest.php')
+					|| strripos($iterator->getSubPathName(), '.feature')
+				)
+				{
+					$this->say('[' . $i . '] ' . $iterator->getSubPathName());
+
+					$tests[$i] = $iterator->getSubPathName();
+					$i++;
+				}
+
+				$iterator->next();
+			}
+
+			$this->say('');
+			$testNumber = $this->ask('Type the number of the test in the list that you want to run...');
+			$test       = $tests[$testNumber];
+		}
+
+		$pathToTestFile = $this->testsPath . $suite . '/' . $test;
+
+		// Loading the class to display the methods in the class
+
+		// Logic to fetch the class name from the file name
+		$fileName = explode("/", $test);
+
+		// If the selected file is cest only then we will give the option to execute individual methods, we don't need this in cept or feature files
+		$i = 1;
+
+		if (isset($fileName[1]) && strripos($fileName[1], 'cest'))
+		{
+			require $this->testsPath . $suite . '/' . $test;
+
+			$className     = explode(".", $fileName[1]);
+			$class_methods = get_class_methods($className[0]);
+
+			$this->say('[' . $i . '] ' . 'All');
+
+			$methods[$i] = 'All';
+			$i++;
+
+			foreach ($class_methods as $method_name)
+			{
+				$reflect = new ReflectionMethod($className[0], $method_name);
+
+				if (!$reflect->isConstructor() && $reflect->isPublic())
+				{
+					$this->say('[' . $i . '] ' . $method_name);
+
+					$methods[$i] = $method_name;
+
+					$i++;
+				}
+			}
+
+			$this->say('');
+			$methodNumber = $this->ask('Please choose the method in the test that you would want to run...');
+			$method       = $methods[$methodNumber];
+		}
+
+		if (isset($method) && $method != 'All')
+		{
+			$pathToTestFile = $pathToTestFile . ':' . $method;
+		}
+
+		$testPathCodecept = $this->testsPath . 'vendor/bin/codecept';
+
+		$this->taskCodecept($this->isWindows() ? $this->getWindowsPath($testPathCodecept) : $testPathCodecept)
+			->test($pathToTestFile)
+			->arg('--steps')
+			->arg('--debug')
+			->run()
+			->stopOnFail();
+	}
+
+	/**
+	 * Prepare tests.
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  String  $pathToCodeception
+	 */
+	private function prepareTests($opts)
+	{
+		$this->createTestingSite($opts['use-htaccess']);
+		$this->createDatabase();
+
+		$this->getComposer();
+		$this->taskComposerInstall($this->testsPath . 'composer.phar')->run();
+
+		$this->runSelenium();
+
+		// Make sure to run the build command to generate AcceptanceTester
+		if ($this->isWindows())
+		{
+			$this->_exec('php ' . $this->getWindowsPath($this->testsPath . 'vendor/bin/codecept') . ' build');
+			$pathToCodeception = $this->getWindowsPath($this->testsPath . 'vendor/bin/codecept');
+		}
+		else
+		{
+			$this->_exec('php ' . $this->testsPath . 'vendor/bin/codecept build');
+
+			$pathToCodeception = $this->testsPath . 'vendor/bin/codecept';
+		}
+
+		$this->taskCodecept($pathToCodeception)
+			->arg('--steps')
+			->arg('--debug')
+			->arg('--fail-fast')
+			->arg('--env ' . $opts['env'])
+			->arg($this->testsPath . 'acceptance/install/')
+			->run()
+			->stopOnFail();
+                
+                return $pathToCodeception;
+	}	
 }
+
