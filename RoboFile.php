@@ -308,7 +308,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'screenshots/')
 			->run()
 			->stopOnFail();
