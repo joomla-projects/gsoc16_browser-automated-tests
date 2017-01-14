@@ -40,6 +40,7 @@ sleep 3 # give fluxbox some time to start
 # Composer in tests folder
 cd tests/codeception
 composer install
+composer update
 cd $BASE
 
 sudo cp RoboFile.dist.ini RoboFile.ini
