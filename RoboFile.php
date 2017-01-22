@@ -331,7 +331,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/install/')
 			->run()
 			->stopOnFail();
@@ -340,6 +340,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
+			->env($opts['env'])
 			->arg('--env ' . $opts['env'])
 			->arg($this->testsPath . 'acceptance/contact.feature')
 			->run()
@@ -358,7 +359,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/users.feature')
 			->run()
 			->stopOnFail();
@@ -367,16 +368,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
-			->arg($this->testsPath . 'acceptance/extensions.feature')
-			->run()
-			->stopOnFail();
-
-		$this->taskCodecept($pathToCodeception)
-			->arg('--steps')
-			->arg('--debug')
-			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/users_frontend.feature')
 			->run()
 			->stopOnFail();
@@ -385,7 +377,16 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
+			->arg($this->testsPath . 'acceptance/banner.feature')
+			->run()
+			->stopOnFail();
+
+		$this->taskCodecept($pathToCodeception)
+			->arg('--steps')
+			->arg('--debug')
+			->arg('--fail-fast')
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/extensions.feature')
 			->run()
 			->stopOnFail();
@@ -394,7 +395,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/category.feature')
 			->run()
 			->stopOnFail();
@@ -403,7 +404,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/administrator/')
 			->run()
 			->stopOnFail();
@@ -412,7 +413,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/frontend/')
 			->run()
 			->stopOnFail();
