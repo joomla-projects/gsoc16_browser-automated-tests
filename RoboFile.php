@@ -341,7 +341,6 @@ class RoboFile extends \Robo\Tasks
 			->arg('--debug')
 			->arg('--fail-fast')
 			->env($opts['env'])
-			->arg('--env ' . $opts['env'])
 			->arg($this->testsPath . 'acceptance/contact.feature')
 			->run()
 			->stopOnFail();
@@ -350,7 +349,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/content.feature')
 			->run()
 			->stopOnFail();
