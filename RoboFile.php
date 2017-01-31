@@ -57,12 +57,11 @@ class RoboFile extends \Robo\Tasks
 			->setCodeStyleStandardsFolder($sniffersPath)
 			->setCodeStyleCheckFolders(
 				array(
-					'src'
+					'tests/codeception/joomla-cms3'
 				)
 			)
 			->checkCodeStyle()
-			->run()
-			->stopOnFail();
+			->run();
 	}
 
 	/**
