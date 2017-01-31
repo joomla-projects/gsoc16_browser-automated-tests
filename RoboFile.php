@@ -336,6 +336,7 @@ class RoboFile extends \Robo\Tasks
 		if ($this->isWindows())
 		{
 			$this->taskSeleniumStandaloneServer()
+				->setBinary('tests/codeception/vendor/bin/selenium-server-standalone.bat')
 				->setWebdriver($this->getWebDriver())
 				->runSelenium()
 				->setTimeOut(3)
@@ -345,6 +346,7 @@ class RoboFile extends \Robo\Tasks
 		else
 		{
 			$this->taskSeleniumStandaloneServer()
+				->setBinary('tests/codeception/vendor/bin/selenium-server-standalone')
 				->setWebdriver($this->getWebDriver())
 				->runSelenium()
 				->waitForSelenium()
