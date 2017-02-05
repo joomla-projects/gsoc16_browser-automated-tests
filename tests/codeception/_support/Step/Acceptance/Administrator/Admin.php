@@ -18,6 +18,10 @@ use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Administrator\UserAclPage;
 use Page\Acceptance\Administrator\UserGroupPage;
 use Page\Acceptance\Administrator\UserManagerPage;
+use Page\Acceptance\Administrator\FieldGroupsManagerPage_New;
+use Page\Acceptance\Administrator\FieldGroupsManagerPage;
+use Page\Acceptance\Administrator\FieldsManagerPage_New;
+use Page\Acceptance\Administrator\FieldsManagerPage;
 
 /**
  * Acceptance Step object class for admin steps.
@@ -111,6 +115,10 @@ class Admin extends \AcceptanceTester
 		$this->userAclPage         = new UserAclPage($scenario);
 		$this->menuManagerPage     = new MenuManagerPage($scenario);
 		$this->extensionManagerPage = new ExtensionManagerPage($scenario);
+		$this->fieldgroupsManagerPage = new ExtensionManagerPage($scenario);
+		$this->fieldsManagerPage = new FieldsManagerPage($scenario);
+		$this->fieldgroupsManagerPage_New = new FieldgroupsManagerPage_New($scenario);
+		$this->fieldsManagerPage_New = new FieldsManagerPage_New($scenario);
 	}
 
 	/**
@@ -130,5 +138,22 @@ class Admin extends \AcceptanceTester
 
 		$I->waitForText($message, TIMEOUT, AdminPage::$systemMessageContainer);
 		$I->see($message, AdminPage::$systemMessageContainer);
+	}
+
+	/**
+	 * Function to select Toolbar buttons in Joomla! Admin Toolbar Panel
+	 *
+	 * @param   string  $button  The full name of the button
+	 *
+	 * @Given I click toolbar button :arg1
+	 * 
+	 * @since   __DEPLOY_VERSION__
+	 *
+	 * @return  void
+	 */
+	public function iclickToolbarButton($button)
+	{
+		$I = $this;
+		$I->adminPage->clickToolbarButton($button);
 	}
 }
