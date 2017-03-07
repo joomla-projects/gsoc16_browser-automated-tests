@@ -922,12 +922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla-projects/joomla-browser.git",
-                "reference": "5ed1a4ddb96f89906dbdc752d937a04eef18dcb9"
+                "reference": "5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-projects/joomla-browser/zipball/5ed1a4ddb96f89906dbdc752d937a04eef18dcb9",
-                "reference": "5ed1a4ddb96f89906dbdc752d937a04eef18dcb9",
+                "url": "https://api.github.com/repos/joomla-projects/joomla-browser/zipball/5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7",
+                "reference": "5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7",
                 "shasum": ""
             },
             "require": {
@@ -953,7 +953,7 @@
                     "email": "puneet.kala@community.joomla.org"
                 },
                 {
-                    "name": "Javier Gómez",
+                    "name": "Javier Gomez",
                     "email": "javier.gomez@community.joomla.org"
                 }
             ],
@@ -965,7 +965,7 @@
                 "acceptance testing",
                 "joomla"
             ],
-            "time": "2016-12-30 23:33:22"
+            "time": "2017-03-07T19:10:30+00:00"
         },
         {
             "name": "joomla-projects/joomla-testing",
@@ -1064,7 +1064,7 @@
                 "task",
                 "tests"
             ],
-            "time": "2017-03-07T18:38:12+00:00"
+            "time": "2017-03-07 18:38:12"
         },
         {
             "name": "joomla-projects/selenium-server-standalone",
