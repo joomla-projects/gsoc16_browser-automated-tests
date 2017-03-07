@@ -922,12 +922,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla-projects/joomla-browser.git",
-                "reference": "5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7"
+                "reference": "38c77b3106de829dc4dc21d02225950b64e280d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-projects/joomla-browser/zipball/5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7",
-                "reference": "5a20ed433fd9ae9c5f4e6b37c21da75cf5b8b6b7",
+                "url": "https://api.github.com/repos/joomla-projects/joomla-browser/zipball/38c77b3106de829dc4dc21d02225950b64e280d2",
+                "reference": "38c77b3106de829dc4dc21d02225950b64e280d2",
                 "shasum": ""
             },
             "require": {
@@ -965,7 +965,7 @@
                 "acceptance testing",
                 "joomla"
             ],
-            "time": "2017-03-07T19:10:30+00:00"
+            "time": "2017-03-07T20:51:31+00:00"
         },
         {
             "name": "joomla-projects/joomla-testing",
