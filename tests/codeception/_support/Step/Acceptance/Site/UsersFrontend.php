@@ -474,7 +474,9 @@ class UsersFrontend extends \AcceptanceTester
 	 */
 	public function iSearchTheUserWithName($name)
 	{
-		$this->adminPage->search($name);
+		$I = $this;
+
+		$I->adminPage->search($name);
 	}
 
 	/**

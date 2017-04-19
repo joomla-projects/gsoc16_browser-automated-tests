@@ -51,7 +51,9 @@ class Content extends Admin
 	 */
 	public function iCreateNewContent($title, $content)
 	{
-		$this->articleManagerPage->fillContentCreateForm($title, $content);
+		$I = $this;
+
+		$I->articleManagerPage->fillContentCreateForm($title, $content);
 	}
 
 	/**
@@ -101,7 +103,9 @@ class Content extends Admin
 	 */
 	public function iSearchAndSelectContentArticleWithTitle($title)
 	{
-		$this->articleManagerPage->haveItemUsingSearch($title);
+		$I = $this;
+
+		$I->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -220,7 +224,9 @@ class Content extends Admin
 	 */
 	public function iHaveArticleWithName($title)
 	{
-		$this->articleManagerPage->haveItemUsingSearch($title);
+		$I = $this;
+
+		$I->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
@@ -268,7 +274,9 @@ class Content extends Admin
 	 */
 	public function iHaveContentArticleWhichNeedsToBeTrash($title)
 	{
-		$this->articleManagerPage->haveItemUsingSearch($title);
+		$I = $this;
+
+		$I->articleManagerPage->haveItemUsingSearch($title);
 	}
 
 	/**
