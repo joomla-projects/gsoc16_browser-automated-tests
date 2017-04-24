@@ -2,7 +2,7 @@
 /**
  * @package     Joomla.Test
  * @subpackage  AcceptanceTester.Page
- *
+ *m
  * @copyright   Copyright (C) 2005 - 2016 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
@@ -19,12 +19,12 @@ namespace Page\Acceptance\Administrator;
 class MenuManagerPage extends AdminPage
 {
 	/**
-	 * Link to the article category listing url.
+	 * Link to the menu listing url.
 	 *
 	 * @var    string
 	 * @since  __DEPLOY_VERSION__
 	 */
-	public static $url = 'administrator/index.php?option=com_menus&view=items&menutype=mainmenu';
+	public static $url = 'administrator/index.php?option=com_menus&view=menus';
 
 	/**
 	 * Locator for menu item name field
@@ -32,7 +32,7 @@ class MenuManagerPage extends AdminPage
 	 * @var    array
 	 * @since  __DEPLOY_VERSION__
 	 */
-	public static $seeName = ['xpath' => "//table[@id='itemList']//tr[1]//td[4]"];
+	public static $seeName = ['xpath' => "//table[@id='menuList']/tbody/tr/td[2]"];
 
 	/**
 	 * Locator for select article for menu item
@@ -58,6 +58,14 @@ class MenuManagerPage extends AdminPage
 	 * @since  __DEPLOY_VERSION__
 	 */
 	public static $article = ['link' => 'Article'];
+
+	/**
+     * Locator for category unpublished icon
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+   public static $seeUnpublished = ['xpath' => "//table[@id='categoryList']//*//span[@class='icon-unpublish']"];
 
 	/**
 	 * This method is to set page object to choose an article dynamically.
@@ -135,3 +143,4 @@ class MenuManagerPage extends AdminPage
 		$I->comment('I switch back to the main window');
 	}
 }
+
