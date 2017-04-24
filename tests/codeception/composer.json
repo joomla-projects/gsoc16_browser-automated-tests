@@ -2,7 +2,10 @@
   "name": "joomla/joomla-cms",
   "type": "project",
   "description": "Joomla CMS",
-  "keywords": ["joomla", "cms"],
+  "keywords": [
+	"joomla",
+	"cms"
+  ],
   "homepage": "https://github.com/joomla/joomla-cms",
   "license": "GPL-2.0+",
   "config": {
@@ -11,21 +14,34 @@
 	}
   },
   "support": {
-	"issues":"https://issues.joomla.org",
-	"irc":"http://irc.lc/freenode/joomla/",
-	"forum":"http://forum.joomla.org/",
-	"docs":"https://docs.joomla.org"
+	"issues": "https://issues.joomla.org",
+	"irc": "http://irc.lc/freenode/joomla/",
+	"forum": "http://forum.joomla.org/",
+	"docs": "https://docs.joomla.org"
   },
   "require": {
-	"php": ">=5.3.10"
+	"php": ">=5.5.21"
   },
   "require-dev": {
+	"consolidation/robo": "~1",
+	"squizlabs/php_codesniffer": "~2",
 	"codeception/codeception": "~2.2",
-	"joomla-projects/joomla-browser": "v3.6.5.1",
-	"joomla-projects/selenium-server-standalone": "v3.3.0",
-	"codegyre/robo": "~0.6",
-	"joomla-projects/robo": "dev-master",
-	"fzaninotto/faker": "^1.5",
-	"joomla-projects/jorobo": "~0.6"
-  }
+	"joomla-projects/joomla-browser": "dev-container-test",
+	"joomla-projects/selenium-server-standalone": "dev-master",
+	"joomla-projects/joomla-testing-robo": "dev-container-test",
+	"Behat/Gherkin": "^4.4.5",
+	"phing/phing": "2.*",
+	"codeception/specify": "*",
+	"codeception/verify": "*",
+	"pdepend/pdepend": "*",
+	"phploc/phploc": "*",
+	"phpmd/phpmd": "*",
+	"phpseclib/phpseclib": "*",
+	"sebastian/phpcpd": "*",
+	"symfony/dependency-injection": "*",
+	"symfony/http-kernel": "*",
+	"symfony/phpunit-bridge": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

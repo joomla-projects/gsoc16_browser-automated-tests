@@ -2,7 +2,6 @@ language: php
 
 env:
   global:
-    - RUN_PHPCS="no"
     - RUN_CODECEPTION="no"
     - RUN_UNIT_TESTS="yes"
     - RUN_JAVASCRIPT_TESTS="no"
@@ -14,13 +13,13 @@ matrix:
   fast_finish: true
   include:
     - php: 5.6
-      env: RUN_PHPCS="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
-    - php: 5.6
       env: RUN_CODECEPTION="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
       sudo: true
+      dist: trusty
     - php: 5.5
       env: RUN_CODECEPTION="yes" RUN_UNIT_TESTS="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no"
       sudo: true
+      dist: trusty
     - php: 5.3
       env: INSTALL_APC="yes"
     - php: 5.4
@@ -70,10 +69,13 @@ before_script:
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
   # Codeception system tests
   - if [[ $RUN_CODECEPTION == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/codeception-tests.sh $(pwd); fi
+  - if [[ $RUN_CODECEPTION == "yes" ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
+  - if [[ $RUN_CODECEPTION == "yes" ]]; then sudo dpkg -i google-chrome*.deb; fi
+  - if [[ $RUN_CODECEPTION == "yes" ]]; then export CHROME_BIN=/usr/bin/google-chrome; fi
 
 script:
-  - if [[ $RUN_PHPCS == "yes" ]]; then libraries/vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla .; fi
   - if [[ $RUN_CODECEPTION == "yes" ]]; then tests/codeception/vendor/bin/robo run:tests --use-htaccess; fi
+  - if [[ $RUN_CODECEPTION == "yes" ]]; then tests/codeception/vendor/bin/robo check:codestyle; fi
   - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then tests/javascript/node_modules/karma/bin/karma start karma.conf.js --single-run ; fi
 
