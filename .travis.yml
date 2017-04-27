@@ -46,9 +46,9 @@ matrix:
   allow_failures:
     - php: hhvm
     - php: 7.0
-        env: RUN_PHPCS="yes"
-        sudo: true
-        dist: trusty
+      env: RUN_PHPCS="yes"
+      sudo: true
+      dist: trusty
 
 services:
   - memcache
