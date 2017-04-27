@@ -56,8 +56,10 @@ services:
   - redis-server
 
 before_script:
+  # Forcing localhost in hosts file
+  - sudo sed -i '1s/^/127.0.0.1 localhost\n/' /etc/hosts
   # Make sure all dev dependencies are installed
-  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then bash build/travis/unit-tests.sh $PWD; fi
+  - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
   # Codeception system tests
   - if [[ $RUN_CODECEPTION == "yes" ]]; then export DISPLAY=:99.0; bash build/travis/codeception-tests.sh $(pwd); fi
   - if [[ $RUN_CODECEPTION == "yes" ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
@@ -65,9 +67,9 @@ before_script:
   - if [[ $RUN_CODECEPTION == "yes" ]]; then export CHROME_BIN=/usr/bin/google-chrome; fi
 
 script:
-  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
   - if [[ $RUN_CODECEPTION == "yes" ]]; then tests/codeception/vendor/bin/robo run:tests --use-htaccess; fi
   - if [[ $RUN_CS == "yes" ]]; then tests/codeception/vendor/bin/robo check:codestyle; fi
+  - if [[ $RUN_UNIT_TESTS == "yes" ]]; then libraries/vendor/bin/phpunit --configuration travisci-phpunit.xml; fi
   - if [[ $RUN_JAVASCRIPT_TESTS == "yes" ]]; then tests/javascript/node_modules/karma/bin/karma start karma.conf.js --single-run ; fi
 
 branches:
