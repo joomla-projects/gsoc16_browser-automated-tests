@@ -56,8 +56,6 @@ services:
   - redis-server
 
 before_script:
-  # Forcing localhost in hosts file
-  - sudo sed -i '1s/^/127.0.0.1 localhost\n/' /etc/hosts
   # Make sure all dev dependencies are installed
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
   # Codeception system tests
