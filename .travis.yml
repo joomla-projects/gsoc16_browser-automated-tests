@@ -25,6 +25,8 @@ matrix:
       env: INSTALL_APCU="yes"
     - php: 7.0
       env: INSTALL_APCU="yes" RUN_CODECEPTION="yes" RUN_UNIT_TESTS="no" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
+      sudo: true
+      dist: trusty
     - php: 7.1
       env: INSTALL_APCU="yes" RUN_UNIT_TESTS="no" INSTALL_APCU_BC_BETA="no" INSTALL_MEMCACHE="no" INSTALL_MEMCACHED="no" INSTALL_REDIS="no" # Disabled apcu_bc install until https://github.com/travis-ci/travis-ci/issues/5207 is resolved
     - php: hhvm
