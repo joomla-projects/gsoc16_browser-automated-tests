@@ -32,8 +32,37 @@ if (!defined('JPATH_BASE'))
 class RoboFile extends \Robo\Tasks
 {
 	// Load tasks from composer, see composer.json
-	use \joomla_projects\robo\loadTasks;
-	use \Joomla\Jorobo\Tasks\loadTasks;
+	use Joomla\Testing\Robo\Tasks\loadTasks;
+
+	/**
+	 * Check the code style of the project against a passed sniffers using PHP_CodeSniffer_CLI
+	 *
+	 * @param   string  $sniffersPath  Path to the sniffers. If not provided Joomla Coding Standards will be used.
+	 *
+	 * @return  void
+	 *
+	 * @since   3.7.0
+	 */
+	public function checkCodestyle($sniffersPath = null)
+	{
+		if (is_null($sniffersPath))
+		{
+			$sniffersPath = __DIR__ . '/.tmp/coding-standards';
+		}
+
+		$this->taskCodeChecks()
+			->setBaseRepositoryPath(__DIR__)
+			->setCodeStyleStandardsRepo('joomla/coding-standards')
+			->setCodeStyleStandardsBranch('master')
+			->setCodeStyleStandardsFolder($sniffersPath)
+			->setCodeStyleCheckFolders(
+				array(
+					'tests/codeception/joomla-cms3'
+				)
+			)
+			->checkCodeStyle()
+			->run();
+	}
 
 	/**
 	 * Path to the codeception tests folder
@@ -65,6 +94,14 @@ class RoboFile extends \Robo\Tasks
 	protected $cmsPath = null;
 
 	/**
+	 * File extension for executables
+	 *
+	 * @var string
+	 * @since  __DEPLOY_VERSION__
+	 */
+	private $executableExtension = '';
+
+	/**
 	 * RoboFile constructor.
 	 *
 	 * @since   __DEPLOY_VERSION__
@@ -72,11 +109,28 @@ class RoboFile extends \Robo\Tasks
 	 */
 	public function __construct()
 	{
-		$this->configuration = $this->getConfiguration();
-		$this->cmsPath       = $this->getTestingPath();
+		$this->configuration       = $this->getConfiguration();
+		$this->cmsPath             = $this->getTestingPath();
+		$this->executableExtension = $this->getExecutableExtension();
 
 		// Set default timezone (so no warnings are generated if it is not set)
 		date_default_timezone_set('UTC');
+	}
+
+	/**
+	 * Get the executable extension according to Operating System
+	 *
+	 * @return string
+	 * @since  __DEPLOY_VERSION__
+	 */
+	private function getExecutableExtension()
+	{
+		if ($this->isWindows())
+		{
+			return '.exe';
+		}
+
+		return '';
 	}
 
 	/**
@@ -257,8 +311,17 @@ class RoboFile extends \Robo\Tasks
 		// Make sure we have Composer
 		if (!file_exists($this->testsPath . 'composer.phar'))
 		{
-			$this->_exec('curl -o ' . $this->testsPath . 'composer.phar  --retry 3 --retry-delay 5 -sS https://getcomposer.org/installer | php');
+			if ($this->isWindows())
+			{
+				$this->_exec('php -r "readfile(\'https://getcomposer.org/installer\');" | php');
+				$this->_copy('./composer.phar', $this->cmsPath . '/composer.phar');
+			}
+			else
+			{
+				$this->_exec('curl -o ' . $this->testsPath . 'composer.phar  --retry 3 --retry-delay 5 -sS https://getcomposer.org/installer | php');
+			}
 		}
+
 	}
 
 	/**
@@ -270,24 +333,24 @@ class RoboFile extends \Robo\Tasks
 	 */
 	public function runSelenium()
 	{
-		if (!$this->isWindows())
-		{
-			$this->_exec($this->testsPath . "vendor/bin/selenium-server-standalone " . $this->getWebDriver() . ' >> selenium.log 2>&1 &');
-		}
-		else
-		{
-			$this->_exec("START java.exe -jar " . $this->getWebDriver() . ' tests\codeception\vendor\joomla-projects\selenium-server-standalone\bin\selenium-server-standalone.jar ');
-		}
-
 		if ($this->isWindows())
 		{
-			sleep(3);
+			$this->taskSeleniumStandaloneServer()
+				->setBinary('tests/codeception/vendor/bin/selenium-server-standalone.bat')
+				->setWebdriver($this->getWebDriver())
+				->runSelenium()
+				->setTimeOut(3)
+				->waitForSelenium()
+				->run();
 		}
 		else
 		{
-			$this->taskWaitForSeleniumStandaloneServer()
-				->run()
-				->stopOnFail();
+			$this->taskSeleniumStandaloneServer()
+				->setBinary('tests/codeception/vendor/bin/selenium-server-standalone')
+				->setWebdriver($this->getWebDriver())
+				->runSelenium()
+				->waitForSelenium()
+				->run();
 		}
 	}
 
@@ -310,6 +373,7 @@ class RoboFile extends \Robo\Tasks
 		$this->createDatabase();
 
 		$this->getComposer();
+
 		$this->taskComposerInstall($this->testsPath . 'composer.phar')->run();
 
 		$this->runSelenium();
@@ -323,7 +387,6 @@ class RoboFile extends \Robo\Tasks
 		else
 		{
 			$this->_exec('php ' . $this->testsPath . 'vendor/bin/codecept build');
-
 			$pathToCodeception = $this->testsPath . 'vendor/bin/codecept';
 		}
 
@@ -427,6 +490,7 @@ class RoboFile extends \Robo\Tasks
 
 		$path = 'tests/codeception/vendor/bin/codecept';
 		$this->_exec('php ' . $this->isWindows() ? $this->getWindowsPath($path) : $path . ' build');
+		$test = '';
 
 		if (!$pathToTestFile)
 		{
