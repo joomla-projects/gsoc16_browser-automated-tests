@@ -55,8 +55,6 @@ services:
 before_script:
   # Make sure all dev dependencies are installed
   - if [[ ( $RUN_UNIT_TESTS == "yes" ) || ( $RUN_PHPCS == "yes" ) ]]; then bash build/travis/unit-tests.sh $PWD; fi
-  # Forcing localhost in hosts file
-  - if [[ ( $RUN_CODECEPTION == "yes" ) ]]; then sudo sed -i '1s/^/127.0.0.1 localhost\n/' /etc/hosts; fi
   # Codeception system tests
   - if [[ ( $RUN_CODECEPTION == "yes" ) ]]; then wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb; fi
   - if [[ ( $RUN_CODECEPTION == "yes" ) ]]; then sudo dpkg -i google-chrome*.deb; fi
