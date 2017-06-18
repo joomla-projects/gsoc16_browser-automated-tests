@@ -40,6 +40,7 @@ class User extends Admin
 
 		$I->amOnPage(UserManagerPage::$url);
 		$I->adminPage->clickToolbarButton('New');
+                $I->click('Account Details');
 	}
 
 	/**
