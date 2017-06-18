@@ -19,7 +19,7 @@ namespace Page\Acceptance\Administrator;
 class MenuManagerPage extends AdminPage
 {
 	/**
-	 * Link to the article category listing url.
+	 * Link to the menu listing url.
 	 *
 	 * @var    string
 	 * @since  __DEPLOY_VERSION__
@@ -58,6 +58,14 @@ class MenuManagerPage extends AdminPage
 	 * @since  __DEPLOY_VERSION__
 	 */
 	public static $article = ['link' => 'Article'];
+
+    /**
+     * Locator for category unpublished icon
+     *
+     * @var    array
+     * @since  __DEPLOY_VERSION__
+     */
+    public static $seeUnpublished = ['xpath' => "//table[@id='categoryList']//*//span[@class='icon-unpublish']"];
 
 	/**
 	 * This method is to set page object to choose an article dynamically.
