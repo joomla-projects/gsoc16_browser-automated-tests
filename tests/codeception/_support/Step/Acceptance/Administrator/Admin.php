@@ -13,6 +13,7 @@ use Codeception\Scenario;
 use Page\Acceptance\Administrator\AdminPage;
 use Page\Acceptance\Administrator\ArticleManagerPage;
 use Page\Acceptance\Administrator\CategoryManagerPage;
+use Page\Acceptance\Administrator\ContactManagerPage;
 use Page\Acceptance\Administrator\ExtensionManagerPage;
 use Page\Acceptance\Administrator\MenuManagerPage;
 use Page\Acceptance\Administrator\UserAclPage;
@@ -92,6 +93,15 @@ class Admin extends \AcceptanceTester
 	protected $menuManagerPage = null;
 
 	/**
+	 * Contact Manager Page Object for this class
+	 *
+	 * @var     null|ContactManagerPage
+	 *
+	 * @since   __DEPLOY_VERSION__
+	 */
+	protected $contactManagerPage = null;
+
+	/**
 	 * User constructor.
 	 *
 	 * @param   Scenario  $scenario  Scenario object
@@ -103,13 +113,14 @@ class Admin extends \AcceptanceTester
 		parent::__construct($scenario);
 
 		// Initialize Page Objects
-		$this->adminPage           = new AdminPage($scenario);
-		$this->articleManagerPage  = new ArticleManagerPage($scenario);
-		$this->categoryManagerPage = new CategoryManagerPage($scenario);
-		$this->userManagerPage     = new UserManagerPage($scenario);
-		$this->userGroupPage       = new UserGroupPage($scenario);
-		$this->userAclPage         = new UserAclPage($scenario);
-		$this->menuManagerPage     = new MenuManagerPage($scenario);
+		$this->adminPage            = new AdminPage($scenario);
+		$this->articleManagerPage   = new ArticleManagerPage($scenario);
+		$this->categoryManagerPage  = new CategoryManagerPage($scenario);
+		$this->userManagerPage      = new UserManagerPage($scenario);
+		$this->userGroupPage        = new UserGroupPage($scenario);
+		$this->userAclPage          = new UserAclPage($scenario);
+		$this->menuManagerPage      = new MenuManagerPage($scenario);
+		$this->contactManagerPage   = new ContactManagerPage($scenario);
 		$this->extensionManagerPage = new ExtensionManagerPage($scenario);
 	}
 

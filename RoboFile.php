@@ -341,6 +341,15 @@ class RoboFile extends \Robo\Tasks
 			->arg('--debug')
 			->arg('--fail-fast')
 			->env($opts['env'])
+			->arg($this->testsPath . 'acceptance/contact.feature')
+			->run()
+			->stopOnFail();
+
+		$this->taskCodecept($pathToCodeception)
+			->arg('--steps')
+			->arg('--debug')
+			->arg('--fail-fast')
+			->env($opts['env'])
 			->arg($this->testsPath . 'acceptance/content.feature')
 			->run()
 			->stopOnFail();
