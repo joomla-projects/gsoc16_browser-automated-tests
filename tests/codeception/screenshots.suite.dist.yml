@@ -10,8 +10,8 @@ modules:
     config:
         JoomlaBrowser:
             url: 'http://localhost/tests/codeception/joomla-snapshots'     # the url that points to the joomla installation at /tests/system/joomla-snapshots
-            browser: 'firefox'
-            window_size: 1024x768
+            browser: 'chrome'
+            window_size: 1366x768
             capabilities:
               unexpectedAlertBehaviour: 'accept'
             username: 'admin'                      # UserName for the Administrator
