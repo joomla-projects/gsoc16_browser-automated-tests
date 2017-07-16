@@ -10,7 +10,7 @@ modules:
     config:
         JoomlaBrowser:
             url: 'http://localhost/tests/codeception/joomla-snapshots'     # the url that points to the joomla installation at /tests/system/joomla-snapshots
-            browser: 'chrome'
+            browser: 'firefox'
             window_size: 1366x768
             capabilities:
               unexpectedAlertBehaviour: 'accept'

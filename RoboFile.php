@@ -32,7 +32,6 @@ if (!defined('JPATH_BASE'))
 class RoboFile extends \Robo\Tasks
 {
 	// Load tasks from composer, see composer.json
-	use \joomla_projects\robo\loadTasks;
 	use \Joomla\Jorobo\Tasks\loadTasks;
 
 	/**
@@ -285,9 +284,7 @@ class RoboFile extends \Robo\Tasks
 		}
 		else
 		{
-			$this->taskWaitForSeleniumStandaloneServer()
-				->run()
-				->stopOnFail();
+            sleep(3);
 		}
 	}
 
