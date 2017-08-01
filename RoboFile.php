@@ -32,7 +32,6 @@ if (!defined('JPATH_BASE'))
 class RoboFile extends \Robo\Tasks
 {
 	// Load tasks from composer, see composer.json
-	use \joomla_projects\robo\loadTasks;
 	use \Joomla\Jorobo\Tasks\loadTasks;
 
 	/**
@@ -285,9 +284,7 @@ class RoboFile extends \Robo\Tasks
 		}
 		else
 		{
-			$this->taskWaitForSeleniumStandaloneServer()
-				->run()
-				->stopOnFail();
+            sleep(3);
 		}
 	}
 
@@ -308,7 +305,7 @@ class RoboFile extends \Robo\Tasks
 			->arg('--steps')
 			->arg('--debug')
 			->arg('--fail-fast')
-			->arg('--env ' . $opts['env'])
+			->env($opts['env'])
 			->arg($this->testsPath . 'screenshots/')
 			->run()
 			->stopOnFail();
@@ -599,11 +596,7 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Return the correct path for Windows
 	 *
-<<<<<<< HEAD
 	 * @param   string  $path  - The linux path
-=======
-	 * @param   string $path - The linux path
->>>>>>> staging
 	 *
 	 * @return string
 	 */
