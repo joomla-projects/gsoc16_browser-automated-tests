@@ -46,9 +46,9 @@ class generatorCest
 		$I->comment('I open Joomla Installation Configuration Page');
 
 		// Comment these lines for not DOING THE INSTALLATION
-		/*$I->installJoomlaRemovingInstallationFolder();
+		$I->installJoomlaRemovingInstallationFolder();
 		$I->doAdministratorLogin();
-		$I->disableStatistics();*/
+		$I->disableStatistics();
 	}
 
 	/**
