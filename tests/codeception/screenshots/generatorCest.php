@@ -46,9 +46,9 @@ class generatorCest
 		$I->comment('I open Joomla Installation Configuration Page');
 
 		// Comment these lines for not DOING THE INSTALLATION
-		$I->installJoomlaRemovingInstallationFolder();
+		/*$I->installJoomlaRemovingInstallationFolder();
 		$I->doAdministratorLogin();
-		$I->disableStatistics();
+		$I->disableStatistics();*/
 	}
 
 	/**
@@ -123,28 +123,35 @@ $I->comment('Write something in the terminal ' + print_r($urls, true));
 				$I->comment('URL ' . $url);
 				$I->comment('Filename ' . $fileName);
 				parse_str(parse_url($url, PHP_URL_QUERY), $params);
+				$frag = parse_url($url, PHP_URL_FRAGMENT);
+				$I->comment($frag);
 				if($params['option'])
 				{
-					$par = explode("_",$params['option']);
-					$par = ucfirst($par[1]);
-					$fil = 'Help4x-Component-' . $par;
-					$I->comment($fil);
+					$part = explode("_",$params['option']); //Splting com_componentname 
+					$part = ucfirst($part[1]); // Selecting and Making it to Upper case
+					$imagename = 'Help4x-Component-' . $part;
+					$I->comment($imagename);
 
 					$I->comment($params['option']);
 					
-					if(isset($params['view']))
+					if(isset($params['view'])) // Fetching the View Parameter
 					{
-						$fil = $fil . '-' . ucfirst($params['view']);
-											
-						if(isset($params['layout']))
-						{ 
-							$fil = $fil . '-' . ucfirst($params['layout']);
-					
-						}
-
+						$imagename = $imagename . '-' . ucfirst($params['view']);
 					}
-					$fil = $fil . '-en';
-					$I->comment('Final ' . $fil);
+					if(isset($params['layout'])) // Fetching the Layout Paramtere
+					{ 
+						$imagename = $imagename . '-' . ucfirst($params['layout']);			
+					}	
+					if(isset($params['extension']))
+					{
+						$extens = explode("_",$params['extension']);
+						$I->comment('Extension' . $extens[1]);
+						$imagename = $imagename . '-' . ucfirst($extens[1]);
+					}
+
+
+					$imagename = $imagename . '-en';// Preparing image name.
+					$I->comment('Final ' . $imagename);
 
 				}
 				$parts = explode("/", $fileName);
@@ -187,7 +194,7 @@ $I->comment('Write something in the terminal ' + print_r($urls, true));
 				}
 
 				// @todo improve
-				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $fileName);
+				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $imagename);
 			}
 		}
 	}
