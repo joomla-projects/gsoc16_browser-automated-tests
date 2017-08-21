@@ -117,7 +117,7 @@ class generatorCest
 				mkdir($outputFolder, 0777, true);
 			}
 
-$I->comment('Write something in the terminal ' + print_r($urls, true));
+			$I->comment('Write something in the terminal ' + print_r($urls, true));
 			foreach ($urls as $url => $fileName)
 			{
 				$I->comment('URL ' . $url);
@@ -125,33 +125,98 @@ $I->comment('Write something in the terminal ' + print_r($urls, true));
 				parse_str(parse_url($url, PHP_URL_QUERY), $params);
 				$frag = parse_url($url, PHP_URL_FRAGMENT);
 				$I->comment($frag);
-				if($params['option'])
+				if(isset($params))
 				{
-					$part = explode("_",$params['option']); //Splting com_componentname 
-					$part = ucfirst($part[1]); // Selecting and Making it to Upper case
-					$imagename = 'Help4x-Component-' . $part;
-					$I->comment($imagename);
-
-					$I->comment($params['option']);
-					
-					if(isset($params['view'])) // Fetching the View Parameter
-					{
-						$imagename = $imagename . '-' . ucfirst($params['view']);
-					}
-					if(isset($params['layout'])) // Fetching the Layout Paramtere
-					{ 
-						$imagename = $imagename . '-' . ucfirst($params['layout']);			
-					}	
-					if(isset($params['extension']))
+					if(isset($params['extension'])) //Case for the Extension Presence
 					{
 						$extens = explode("_",$params['extension']);
 						$I->comment('Extension' . $extens[1]);
-						$imagename = $imagename . '-' . ucfirst($extens[1]);
+						$imagename = ucfirst($extens[1]);
+
+						if($params['option'])
+						{
+							$part = explode("_",$params['option']); //Splting com_componentname
+							$part = $imagename . '-' . ucfirst($part[1]); // Selecting and Making it to Upper case
+							$imagename =  $part;
+							// $I->comment($imagename);
+
+							$I->comment($params['option']);
+						}
+						if(isset($params['view'])) // Fetching the View Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst($params['view']);
+						}
+						if(isset($params['layout'])) // Fetching the Layout Paramtere
+						{
+							$imagename = $imagename . '-' . ucfirst($params['layout']);
+						}
+
+						if(isset($frag))
+						{
+							$imagename = $imagename . '-' . $fileName . '-Tab';
+							$I->comment('Fragment File Name' . $imagename);
+						}
+
+
 					}
+					else{ //Simple case
 
+						if($params['option'])
+						{
+							if(strcmp($params['option'], 'com_contact') == 0){ //Contact component case
+								$imagename =  'Contacts';
 
-					$imagename = $imagename . '-en';// Preparing image name.
+							}
+							else{
+								$part = explode("_",$params['option']); //Splting com_componentname
+								$part = ucfirst($part[1]); // Selecting and Making it to Upper case
+								$imagename =  $part;
+								// $I->comment($imagename);
+								$I->comment($params['option']);
+							}
+						}
+						if(isset($params['view'])) // Fetching the View Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst($params['view']);
+						}
+						if(isset($params['context'])) // Fetching the Context Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst(explode(".",$params['context'])[1]);
+						}
+						if(isset($params['layout'])) // Fetching the Layout Paramtere
+						{
+							$imagename = $imagename . '-' . ucfirst($params['layout']);
+						}
+
+						if(isset($frag))
+						{
+							// 	$dom = new DOMDocument();
+							// 	$dom->loadHTML($html);
+							// 	$urls = $dom->getElementsByTagName('a');
+
+							// 	foreach ($urls as $url)
+							// 	{
+							// 		$attributes = $url->attributes;
+							// 		echo"$url->nodeValue";
+							// 	}
+							// 	// preg_match('~>\K[^<>]*(?=<)~', $frag, $match)
+							// 	$I->grabTextFrom(['id' => $frag]);
+							// 	echo "<script type = \"text/javascript\">
+							// 	$(document).ready(function() {
+							// 	var texts = document.getElementByhref(\"$frag\");
+							// 	alert(texts.innerHTML);
+							// });
+							// </script>";
+							// $I->comment('Fragemt' . $texts);
+							// $I->comment('Fragment Tab' . $text);
+							$imagename = $imagename . '-' . $fileName . '-Tab';
+							$I->comment('Fragment File Name' . $imagename);
+						}
+
+					}
+					$imagename = 'Help4x-Components-' . $imagename . '-en';// Preparing image name.
 					$I->comment('Final ' . $imagename);
+
 
 				}
 				$parts = explode("/", $fileName);
@@ -192,7 +257,6 @@ $I->comment('Write something in the terminal ' + print_r($urls, true));
 					$I->wait(1);
 					$I->click('a[href="#' . $tab . '"]');
 				}
-
 				// @todo improve
 				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $imagename);
 			}
