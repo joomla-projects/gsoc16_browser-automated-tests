@@ -45,9 +45,10 @@ class generatorCest
 	{
 		$I->comment('I open Joomla Installation Configuration Page');
 
-		$I->installJoomlaRemovingInstallationFolder();
+		// Comment these lines for not DOING THE INSTALLATION
+		/*$I->installJoomlaRemovingInstallationFolder();
 		$I->doAdministratorLogin();
-		$I->disableStatistics();
+		$I->disableStatistics();*/
 	}
 
 	/**
@@ -116,17 +117,118 @@ class generatorCest
 				mkdir($outputFolder, 0777, true);
 			}
 
+			$I->comment('Write something in the terminal ' + print_r($urls, true));
 			foreach ($urls as $url => $fileName)
 			{
 				$I->comment('URL ' . $url);
 				$I->comment('Filename ' . $fileName);
+				parse_str(parse_url($url, PHP_URL_QUERY), $params);
+				$frag = parse_url($url, PHP_URL_FRAGMENT);
+				$I->comment($frag);
+				if(isset($params))
+				{
+					if(isset($params['extension'])) //Case for the Extension Presence
+					{
+						$extens = explode("_",$params['extension']);
+						$I->comment('Extension' . $extens[1]);
+						$imagename = ucfirst($extens[1]);
 
+						if($params['option'])
+						{
+							$part = explode("_",$params['option']); //Splting com_componentname
+							$part = $imagename . '-' . ucfirst($part[1]); // Selecting and Making it to Upper case
+							$imagename =  $part;
+							// $I->comment($imagename);
+
+							$I->comment($params['option']);
+						}
+						if(isset($params['view'])) // Fetching the View Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst($params['view']);
+						}
+						if(isset($params['layout'])) // Fetching the Layout Paramtere
+						{
+							$imagename = $imagename . '-' . ucfirst($params['layout']);
+						}
+
+						if(isset($frag))
+						{
+							$imagename = $imagename . '-' . $fileName . '-Tab';
+							$I->comment('Fragment File Name' . $imagename);
+						}
+
+
+					}
+					else{ //Simple case
+
+						if($params['option'])
+						{
+							if(strcmp($params['option'], 'com_contact') == 0){ //Contact component case
+								$imagename =  'Contacts';
+
+							}
+							else{
+								$part = explode("_",$params['option']); //Splting com_componentname
+								$part = ucfirst($part[1]); // Selecting and Making it to Upper case
+								$imagename =  $part;
+								// $I->comment($imagename);
+								$I->comment($params['option']);
+							}
+						}
+						if(isset($params['view'])) // Fetching the View Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst($params['view']);
+						}
+						if(isset($params['context'])) // Fetching the Context Parameter
+						{
+							$imagename = $imagename . '-' . ucfirst(explode(".",$params['context'])[1]);
+						}
+						if(isset($params['layout'])) // Fetching the Layout Paramtere
+						{
+							$imagename = $imagename . '-' . ucfirst($params['layout']);
+						}
+
+						if(isset($frag))
+						{
+							// 	$dom = new DOMDocument();
+							// 	$dom->loadHTML($html);
+							// 	$urls = $dom->getElementsByTagName('a');
+
+							// 	foreach ($urls as $url)
+							// 	{
+							// 		$attributes = $url->attributes;
+							// 		echo"$url->nodeValue";
+							// 	}
+							// 	// preg_match('~>\K[^<>]*(?=<)~', $frag, $match)
+							// 	$I->grabTextFrom(['id' => $frag]);
+							// 	echo "<script type = \"text/javascript\">
+							// 	$(document).ready(function() {
+							// 	var texts = document.getElementByhref(\"$frag\");
+							// 	alert(texts.innerHTML);
+							// });
+							// </script>";
+							// $I->comment('Fragemt' . $texts);
+							// $I->comment('Fragment Tab' . $text);
+							$imagename = $imagename . '-' . $fileName . '-Tab';
+							$I->comment('Fragment File Name' . $imagename);
+						}
+
+					}
+					$imagename = 'Help4x-Components-' . $imagename . '-en';// Preparing image name.
+					$I->comment('Final ' . $imagename);
+
+
+				}
 				$parts = explode("/", $fileName);
 
 				if (!is_dir($outputFolder))
 				{
 					mkdir($outputFolder, 0777, true);
 				}
+
+				// @todo Get the filename and add Help-3x (whatever) to it
+				// because we currently filename is edit/filename
+
 
 				// @todo improve
 				if (count($parts) > 1)
@@ -155,9 +257,8 @@ class generatorCest
 					$I->wait(1);
 					$I->click('a[href="#' . $tab . '"]');
 				}
-
 				// @todo improve
-				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $fileName);
+				$I->makeScreenshot(JPATH_SCREENSHOTS . $base . $folder . $imagename);
 			}
 		}
 	}

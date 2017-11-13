@@ -9,14 +9,196 @@ Administrator Backend:
     folder: com_content/
     screenshots:
       # URL : Screenshot path (under folder)
-      "administrator/index.php?option=com_content&view=article&layout=edit": "edit/article"
-      "administrator/index.php?option=com_content&view=article&layout=edit#images": "edit/article-image-tab"
-      "administrator/index.php?option=com_content&view=article&layout=edit#attrib-basic": "edit/article-options-tab"
+      "administrator/index.php?option=com_content&view=articles" : "DEFAULT"
+      "administrator/index.php?option=com_content&view=article&layout=edit#general" : "Content"
+      "administrator/index.php?option=com_content&view=article&layout=edit#images" : "Images-and-Links"
+      "administrator/index.php?option=com_content&view=article&layout=edit#attrib-basic" : "Options"
+      "administrator/index.php?option=com_content&view=article&layout=edit#publishing" : "Publishing"
+      "administrator/index.php?option=com_content&view=article&layout=edit#editor" : "Configure-Edit-Screen"
+      "administrator/index.php?option=com_content&view=article&layout=edit#permissions" : "Permissions"
+      "administrator/index.php?option=com_content&view=featured" : "DEFAULT"
 
   Contacts (com_contacts):
     folder: com_contacts/
     screenshots:
-      "administrator/index.php?option=com_content&view=article&layout=edit": "edit/contact"
+      "administrator/index.php?option=com_contact" : "DEFAULT"
+      "administrator/index.php?option=com_contact&view=contact&layout=edit#details" : "New-contact"
+      "administrator/index.php?option=com_contact&view=contact&layout=edit#misc" : "Miscellaneous-Information"
+      "administrator/index.php?option=com_contact&view=contact&layout=edit#attrib-display" : "Display"
+      "administrator/index.php?option=com_contact&view=contact&layout=edit#attrib-email" : "Form"
+      "administrator/index.php?option=com_contact&view=contact&layout=edit#publishing" : "Publishing"
+
+  Categories (com_categories):
+    folder: com_categories/
+    screenshots:
+      "administrator/index.php?option=com_categories&extension=com_content": "category/contact"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_content#general" : "Category"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_content#attrib-basic" : "Options"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_content#publishing" : "Publishing"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_content#rules" : "Permissions"
+      "administrator/index.php?option=com_categories&extension=com_banners" : "DEFAULT"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_banners#general" : "Category"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_banners#attrib-basic" : "Options"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_banners#publishing" : "Publishing"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_banners#rules" : "Permissions"
+      "administrator/index.php?option=com_categories&extension=com_newsfeeds" : "DEFAULT"
+      "administrator/index.php?option=com_categories&extension=com_contact" : "DEFAULT"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_contact#general" : "Category"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_contact#attrib-basic" : "Options"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_contact#publishing" : "Publishing"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_contact#rules" : "Permissions"
+
+  Fields (com_fields):
+    folder: com_fields/
+    screenshots:
+      "administrator/index.php?option=com_fields&context=com_content.article" : "fields/1"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_content.article#general" : "General"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_content.article#attrib-basic" : "Options"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_content.article#publishing" : "Publishing"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_content.article#rules" : "Permissions"
+      "administrator/index.php?option=com_fields&view=groups&context=com_content.article" : "fields/9"
+      "administrator/index.php?option=com_fields&view=group&layout=edit#general" : "General"
+      "administrator/index.php?option=com_fields&view=group&layout=edit#publishing" : "Publishing"
+      "administrator/index.php?option=com_fields&view=group&layout=edit#rules" : "Permissions"
+      "administrator/index.php?option=com_fields&context=com_contact.contact" : "DEFAULT"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_contact.contact#general" : "General"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_contact.contact#attrib-basic" : "Options"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_contact.contact#publishing" : "Publishing"
+      "administrator/index.php?option=com_fields&view=field&layout=edit&context=com_contact.contact#rules" : "Permissions"
+      "administrator/index.php?option=com_fields&view=groups&context=com_contact.contact" : "DEFAULT"
+      "administrator/index.php?option=com_categories&extension=com_newsfeeds" : "DEFAULT"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_newsfeeds#general" : "General"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_newsfeeds#attrib-basic" : "Options"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_newsfeeds#publishing" : "Publishing"
+      "administrator/index.php?option=com_categories&view=category&layout=edit&extension=com_newsfeeds#rules" : "Permissions"
+
+
+  Installer (com_installer):
+    folder: com_installer/
+    screenshots:
+      "administrator/index.php?option=com_installer" : "edit/contact1"
+      "administrator/index.php?option=com_installer&view=update" : "edit/contact2"
+      "administrator/index.php?option=com_installer&view=manage" : "edit/contact3"
+      "administrator/index.php?option=com_installer&view=discover" : "edit/contact4"
+      "administrator/index.php?option=com_installer&view=database" : "edit/contact5"
+      "administrator/index.php?option=com_installer&view=languages" : "edit/contact6"
+      "administrator/index.php?option=com_installer&view=updatesites" : "edit/contact7"
+
+  Modules (com_modules):
+    folder: com_modules/
+    screenshots:
+      "administrator/index.php?option=com_modules" : "edit/contact1"
+      "administrator/index.php?option=com_modules&view=select" : "edit/contact2"
+
+  Plugins (com_plugins):
+    folder: com_plugins/
+    screenshots:
+      "administrator/index.php?option=com_plugins" : "edit/contact"
+
+  Templates (com_templates):
+    folder: com_templates/
+    screenshots:
+      "administrator/index.php?option=com_templates&view=styles" : "edit/contact"
+      "administrator/index.php?option=com_templates&view=templates" : "edit/contact1"
+
+  Languages (com_languages):
+    folder: com_languages/
+    screenshots:
+      "administrator/index.php?option=com_languages&view=installed" : "edit/contact"
+      "administrator/index.php?option=com_languages&view=languages" : "edit/contact1"
+      "administrator/index.php?option=com_languages&view=overrides" : "edit/contact2"
+
+  Banners (com_banners):
+    folder: com_banners/
+    screenshots:
+      "administrator/index.php?option=com_banners" : "DEFAULT"
+      "administrator/index.php?option=com_banners&view=banner&layout=edit#details" : "Details"
+      "administrator/index.php?option=com_banners&view=banner&layout=edit#otherparams" : "Banner-Details"
+      "administrator/index.php?option=com_banners&view=banner&layout=edit#publishing" : "Publishing"
+      "administrator/index.php?option=com_banners&view=clients" : "DEFAULT"
+      "administrator/index.php?option=com_banners&view=client&layout=edit#general" : "New-Client"
+      "administrator/index.php?option=com_banners&view=client&layout=edit#metadata" : "Metadata"
+      "administrator/index.php?option=com_banners&view=tracks" : "DEFAULT"
+
+  Message (com_message):
+    folder: com_message/
+    screenshots:
+      "administrator/index.php?option=com_messages&view=message&layout=edit" : "edit/contact"
+
+  Associations (com_associations):
+    folder: com_associations/
+    screenshots:
+      "administrator/index.php?option=com_associations" : "edit/contact2"
+
+
+  Newsfeeds (com_newsfeeds):
+    folder: com_newsfeeds/
+    screenshots:
+      "administrator/index.php?option=com_newsfeeds" : "DEFAULT"
+      "administrator/index.php?option=com_newsfeeds&view=newsfeed&layout=edit#details" : "New-News-Feed"
+      "administrator/index.php?option=com_newsfeeds&view=newsfeed&layout=edit#images" : "Images"
+      "administrator/index.php?option=com_newsfeeds&view=newsfeed&layout=edit#attrib-jbasic" : "Display"
+      "administrator/index.php?option=com_newsfeeds&view=newsfeed&layout=edit#publishing" : "Publishing"
+
+
+  PostInstall (com_postinstall):
+    folder: com_postinstall/
+    screenshots:
+      "administrator/index.php?option=com_postinstall" : "edit/contact"
+
+
+  Redirect (com_redirect):
+    folder: com_redirect/
+    screenshots:
+      "administrator/index.php?option=com_redirect" : "edit/contact"
+      "administrator/index.php?option=com_redirect&view=link&layout=edit" : "edit/contact2"
+
+  Search (com_search):
+    folder: com_search/
+    screenshots:
+      "administrator/index.php?option=com_search" : "edit/contact"
+
+  Finder (com_finder):
+    folder: com_finder/
+    screenshots:
+      "administrator/index.php?option=com_finder" : "edit/contact"
+      "administrator/index.php?option=com_finder&view=maps" : "edit/contact1"
+      "administrator/index.php?option=com_finder&view=filters" : "edit/contact2"
+
+  Tags (com_tags):
+    folder: com_tags/
+    screenshots:
+      "administrator/index.php?option=com_tags" : "DEFAULT"
+      "administrator/index.php?option=com_tags&view=tag&layout=edit#details" : "Tag-Details"
+      "administrator/index.php?option=com_tags&view=tag&layout=edit#attrib-basic" : "Options"
+      "administrator/index.php?option=com_tags&view=tag&layout=edit#attrib-images" : "Images"
+      "administrator/index.php?option=com_tags&view=tag&layout=edit#publishing" : "Publishing"
+
+  Media (com_media):
+    folder: com_media/
+    screenshots:
+      "administrator/index.php?option=com_media" : "edit/contact"
+
+  Menus (com_menus):
+    folder: com_menus/
+    screenshots:
+      "administrator/index.php?option=com_menus&view=menus" : "DEFAULT"
+      "administrator/index.php?option=com_menus&view=menu&layout=edit#details" : " Menu-Details"
+      "administrator/index.php?option=com_menus&view=menu&layout=edit#permissions" : "Permissions"
+      "administrator/index.php?option=com_menus&view=items" : "DEFAULT"
+      "administrator/index.php?option=com_menus&view=item&client_id=0&menutype=mainmenu&layout=edit#details" : "Details"
+      "administrator/index.php?option=com_menus&view=item&client_id=0&menutype=mainmenu&layout=edit#attrib-menu-options" : "Link-Type"
+      "administrator/index.php?option=com_menus&view=item&client_id=0&menutype=mainmenu&layout=edit#attrib-page-options" : "Page-Display"
+      "administrator/index.php?option=com_menus&view=item&client_id=0&menutype=mainmenu&layout=edit#attrib-metadata" : "Metadata"
+      "administrator/index.php?option=com_menus&view=item&client_id=0&menutype=mainmenu&layout=edit#modules" : "Module-Assignment"
+      "administrator/index.php?option=com_menus&view=items&menutype=" : "DEFAULT"
+      "administrator/index.php?option=com_menus&view=items&menutype=mainmenu" : "DEFAULT"
+
+
+  Users (com_users):
+    folder: com_users/
+    screenshots:
+      "administrator/index.php?option=com_users&view=users" : "edit/contact"
 
 # Frontend as super administrator
 Administrator Frontend:
@@ -24,11 +206,11 @@ Administrator Frontend:
       folder: com_content/
       screenshots:
         # URL : Screenshot path (under folder)
-        "index.php?option=com_content&view=article&layout=edit": "edit/article"
+        "index.php?option=com_content&view=article&layout=edit" : "edit/article"
 
 # Frontend as Guest
 Guest:
   Article Manager (com_content):
       folder: com_content/
       screenshots:
-        "index.php?option=com_content&view=article&id=1": "article"
+        "index.php?option=com_content&view=article&id=1" : "article"
